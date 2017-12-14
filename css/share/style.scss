@@ -1,0 +1,21 @@
+$gradientColor1: rgba(40, 40, 40, 0.9);
+$gradientColor2: rgba(40, 40, 40, 0.7);
+$gradientColor3: rgba(40, 40, 40, 0.6);
+$gradientColor4: rgba(40, 40, 40, 0);
+$purplishRed: rgb(175, 48, 27);
+$heartPink: rgb(233, 81, 81);
+$gray: rgb(102, 102, 102);
+.swal-footer {
+  text-align: center;
+}
+.swal-button {
+  background-color: $purplishRed;
+}
+.swal-button:active {
+  background-color: $purplishRed;
+}
+@media (max-width: 500px) {
+  .swal-modal {
+    width: calc(100% - 70px);
+  }
+}
