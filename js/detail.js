@@ -1,5 +1,5 @@
 //细览页
-(function detailPart() {
+(function detailPart($) {
   var sum = 3;
   var changeContent = function(id) {
     console.log(id);
@@ -120,8 +120,5 @@
     }, 800);
     return element;
   });
-  $("body").on("click", ".show-list .view", function() {
-    console.log("click");
-    detail.turn($(this).attr("viewId"));
-  });
-})();
+  $.detail = detail;
+})(jQuery);
