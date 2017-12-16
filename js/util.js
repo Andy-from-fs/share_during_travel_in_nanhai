@@ -11,7 +11,7 @@
 })(jQuery);
 
 //获取图片完整路径
-function tomedia(src) {
+function tomedia(src,quality) {
   if (typeof src != "string") return "";
   if (src.indexOf("http://") == 0 || src.indexOf("https://") == 0) {
     return src;
@@ -38,7 +38,7 @@ function tomedia(src) {
     return (
       "http://we7-1253788256.image.myqcloud.com" +
       imgurl +
-      "?imageMogr2/auto-orient/strip/thumbnail/300x/quality/60!"
+      "?imageMogr2/auto-orient/strip/thumbnail/300x/quality/"+quality+"!"
     );
   }
 }
