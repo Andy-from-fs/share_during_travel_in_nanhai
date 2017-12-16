@@ -111,21 +111,48 @@ $yzend=$temParams["captcha"];
   </head>
 
   <body>
-    <div></div>
-
-
+    <div class="container slideInDown animated">
+      <textarea name="words" class="words" id="" cols="30" rows="10" placeholder="分享此刻的心情……"></textarea>
+      <ul class="img-list" id="picsList">
+        <li class="pic">
+          <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test2.jpg">
+        </li>
+        <li class="pic">
+          <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test3.jpg">
+        </li>
+        <li>
+          <div class="word">
+            <p>
+              <span class="icon-plus"></span>
+            </p>
+          </div>
+        </li>
+      </ul>
+      <p class="location-wrapper">
+        <span class="icon-location"></span>
+        <span>地图选点</span>
+      </p>
+    </div>
 
 
     <script src="http://www.foshannews.net/js/jquery-3.2.1.min.js"></script>
     <script src="http://www.foshannews.net/js/vconsole.min.js" remote="yes" ignoreapd="1"></script>
     <script src="http://www.foshannews.net/js/sweetalert.min.js"></script>
-    <!-- <script>
-      window.onload = function () {
-        swal({
-          icon: "success",
-        });
-      }
-    </script> -->
+    <script src="http://www.foshannews.net/js/Sortable/Sortable.js"></script>
+    <script>
+      // window.onload = function () {
+      //   swal({
+      //     icon: "success",
+      //   });
+      // }
+      $('.img-list').height(($(window).width()-30) * 0.25);
+      $('.img-list .word').css('line-height', ($(window).width()-30) * 0.25 + 'px');
+
+
+      // var sortable = new Sortable('#picsList', {});
+      $("#picsList").sortable({ /* options */ });
+    </script>
+
   </body>
 
   </html>
