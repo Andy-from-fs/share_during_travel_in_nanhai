@@ -32,6 +32,16 @@ body > .container {
   font-size: 1.7rem;
 }
 
+button.btn-submit {
+  border: 1px solid #af301b;
+  background-color: #af301b;
+  width: 100%;
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
 .img-list {
   width: 100%;
   display: flex;
