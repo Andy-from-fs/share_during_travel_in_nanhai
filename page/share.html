@@ -114,10 +114,10 @@ $yzend=$temParams["captcha"];
     <div class="container slideInDown animated">
       <textarea name="words" class="words" id="" cols="30" rows="10" placeholder="分享此刻的心情……"></textarea>
       <ul class="img-list" id="picsList">
-        <li class="pic">
+        <li class="sortable-item">
           <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test2.jpg">
         </li>
-        <li class="pic">
+        <li class="sortable-item">
           <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test3.jpg">
         </li>
         <li>
@@ -145,12 +145,21 @@ $yzend=$temParams["captcha"];
       //     icon: "success",
       //   });
       // }
-      $('.img-list').height(($(window).width()-30) * 0.25);
-      $('.img-list .word').css('line-height', ($(window).width()-30) * 0.25 + 'px');
+      $('.img-list').height(($(window).width() - 30) * 0.25);
+      $('.img-list .word').css('line-height', ($(window).width() - 30) * 0.25 + 'px');
 
 
-      // var sortable = new Sortable('#picsList', {});
-      $("#picsList").sortable({ /* options */ });
+      var sortable = new Sortable(document.getElementById('picsList'), {
+        dragClass: "sortable-drag",
+        animation: 150,
+        // Element dragging ended
+        onEnd: function ( /**Event*/ evt) {
+          // var itemEl = evt.item; // dragged HTMLElement
+          console.log(evt);
+        },
+        // delay: 400,
+      });
+      // $("#picsList").sortable({ /* options */ });
     </script>
 
   </body>
