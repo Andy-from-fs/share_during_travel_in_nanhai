@@ -103,17 +103,17 @@ $gray: rgb(102, 102, 102);
   }
   .region-container {
     display: none;
-    padding: 0 10px 10px 10px;
+    padding: 0 10px;
     background-color: $purplishRed;
     .region-wrapper {
-      padding: 10px 0 0 0;
+      padding: 1rem 0 0 0;
       border-top: 1px solid #fff;
       flex-flow: row wrap;
       display: flex;
       justify-content: space-between;
       align-items: center;
       align-content: space-around;
-      height: 8rem;
+      // height: 8rem;
       .region-item {
         text-align: center;
         width: 21%;
@@ -122,6 +122,7 @@ $gray: rgb(102, 102, 102);
         border: 1px solid #fff;
         padding: 5px;
         border-radius: 5px;
+        margin-bottom: 1rem;
       }
     }
   }
