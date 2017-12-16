@@ -41,7 +41,7 @@
       }
     }
   };
-  var createDetail = $.single(function() {
+  var createDetail = $.singleton(function() {
     var html =
       ' <div id="detail" class="animated">\
         <div class="btn-back fadeIn animated">\

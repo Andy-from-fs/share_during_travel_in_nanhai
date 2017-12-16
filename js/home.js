@@ -34,16 +34,6 @@ $("body")
   .on("click", "#region,.top .icon-back", clickBtnRegions)
   .on("click", ".rule", clickBtnRule);
 
-(function($) {
-  $.extend({
-    single: function(fn) {
-      var result;
-      return function() {
-        return result || (result = fn.apply(this, arguments));
-      };
-    }
-  });
-})(jQuery);
 
 //排行榜
 (function rankListPart() {
@@ -67,7 +57,7 @@ $("body")
       }
     }
   };
-  var createRankList = $.single(function() {
+  var createRankList = $.singleton(function() {
     var html =
       ' <div id="rankList" class="animated slideInRight">\
           <div class="btn-group">\
