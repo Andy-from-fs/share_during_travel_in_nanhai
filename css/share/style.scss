@@ -105,3 +105,15 @@ button.btn-submit{
     color: $heartPink;
   }
 }
+
+section.map-input{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  #map{
+    width: 100%;
+    height: 100%;
+  }
+}
