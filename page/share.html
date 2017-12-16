@@ -114,13 +114,13 @@ $yzend=$temParams["captcha"];
     <div class="container slideInDown animated">
       <textarea name="words" class="words" id="" cols="30" rows="10" placeholder="分享此刻的心情……"></textarea>
       <ul class="img-list" id="picsList">
-        <li>
+        <li class="images">
           <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test2.jpg">
         </li>
-        <li>
+        <!-- <li class="images">
           <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test3.jpg">
-        </li>
-        <li>
+        </li> -->
+        <li class="btn-add">
           <div class="word">
             <p>
               <span class="icon-plus"></span>
@@ -134,7 +134,7 @@ $yzend=$temParams["captcha"];
       </p>
     </div>
 
-    <select class="map-select" id="mapSelect"></select>
+    <section class="map-input" id="mapSection"></section>
 
     <script src="http://www.foshannews.net/js/jquery-3.2.1.min.js"></script>
     <script src="http://www.foshannews.net/js/vconsole.min.js" remote="yes" ignoreapd="1"></script>
@@ -147,13 +147,14 @@ $yzend=$temParams["captcha"];
       //     icon: "success",
       //   });
       // }
-      $('.img-list').height(($(window).width() - 30) * 0.25);
-      $('.img-list .word').css('line-height', ($(window).width() - 30) * 0.25 + 'px');
+      $('.img-list').height(($(window).width() - 30) * 0.3);
+      $('.img-list .word').css('line-height', ($(window).width() - 30) * 0.3 + 'px');
 
 
       var sortable = new Sortable(document.getElementById('picsList'), {
         // dragClass: "sortable-item",
         // filter: ".ignore-elements",
+        // draggable: ".images",
         animation: 150,
         // Element dragging ended
         onEnd: function ( /**Event*/ evt) {
@@ -161,6 +162,12 @@ $yzend=$temParams["captcha"];
           console.log(evt);
         },
       });
+
+      $('#picsList .btn-add').before(
+        '<li class="images">\
+          <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test4.jpg">\
+        </li>'
+      );
     </script>
 
   </body>
