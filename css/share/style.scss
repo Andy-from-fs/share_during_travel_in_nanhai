@@ -126,26 +126,42 @@ section.map-input {
     // width: calc(100%-20px);
     width: calc(80% - 20px);
     box-shadow: 1px 1px 8px #a7a7a7;
-    border: 0px solid transparent;
+    border: 1px solid #cccccc;
     border-radius: 10px;
+    overflow: hidden;
     .region-select {
       width: 30%;
       height: $btn-height;
       background-color: #fff;
-      border: 1px solid #ccc;
-      border-right: 0;
+      // border: 1px solid #ccc;
+      // border-right: 0;
+      border: 0;
       border-bottom-left-radius: 10px;
       border-top-left-radius: 10px;
       float: left;
       text-align: center;
       line-height: $btn-height;
       font-size: 1.5rem;
+      position: relative;
+      &::after {
+        content: "";
+        width: 1px;
+        height: 2.4rem;
+        margin: -1.2rem 0 0 0;
+        background-color: #cccccc;
+        position: absolute;
+        top: 50%;
+        right: -1px;
+        border: 0;
+      }
     }
     .view-input {
       width: 70%;
       height: $btn-height;
       line-height: $btn-height;
-      border: 1px solid #ccc;
+      // border: 1px solid #ccc;
+      // border-left: 0;
+      border: 0;
       font-size: 2rem;
       padding: 0 10px;
       border-bottom-right-radius: 10px;
@@ -166,10 +182,10 @@ section.map-input {
     color: #fff;
     font-size: 1.5rem;
     text-align: center;
-    box-shadow: 1px 1px 8px #a7a7a7;
+    box-shadow: 2px 2px 5px #a7a7a7;
   }
-  .btn-back{
-    $backHeight:35px;
+  .btn-back {
+    $backHeight: 35px;
     width: $backHeight;
     height: $backHeight;
     background-color: #af301b;
@@ -181,6 +197,7 @@ section.map-input {
     bottom: 100px;
     line-height: $backHeight - 1px;
     text-align: center;
+    box-shadow: 2px 2px 5px #a7a7a7;
   }
 }
 

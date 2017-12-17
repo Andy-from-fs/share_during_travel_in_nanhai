@@ -127,29 +127,42 @@ section.map-input .btn-group {
   left: 10px;
   width: calc(80% - 20px);
   box-shadow: 1px 1px 8px #a7a7a7;
-  border: 0px solid transparent;
+  border: 1px solid #cccccc;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 section.map-input .btn-group .region-select {
   width: 30%;
   height: 4rem;
   background-color: #fff;
-  border: 1px solid #ccc;
-  border-right: 0;
+  border: 0;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
   float: left;
   text-align: center;
   line-height: 4rem;
   font-size: 1.5rem;
+  position: relative;
+}
+
+section.map-input .btn-group .region-select::after {
+  content: "";
+  width: 1px;
+  height: 2.4rem;
+  margin: -1.2rem 0 0 0;
+  background-color: #cccccc;
+  position: absolute;
+  top: 50%;
+  right: -1px;
+  border: 0;
 }
 
 section.map-input .btn-group .view-input {
   width: 70%;
   height: 4rem;
   line-height: 4rem;
-  border: 1px solid #ccc;
+  border: 0;
   font-size: 2rem;
   padding: 0 10px;
   border-bottom-right-radius: 10px;
@@ -169,7 +182,7 @@ section.map-input .btn-selected {
   color: #fff;
   font-size: 1.5rem;
   text-align: center;
-  box-shadow: 1px 1px 8px #a7a7a7;
+  box-shadow: 2px 2px 5px #a7a7a7;
 }
 
 section.map-input .btn-back {
@@ -184,6 +197,7 @@ section.map-input .btn-back {
   bottom: 100px;
   line-height: 34px;
   text-align: center;
+  box-shadow: 2px 2px 5px #a7a7a7;
 }
 
 .picker .picker-panel .picker-choose .confirm {
