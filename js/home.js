@@ -39,7 +39,7 @@ $("body")
 (function rankListPart() {
   var rankList = {
     isShow: false,
-    rankListTurn: function() {
+    turn: function() {
       var element = createRankList();
       if (!rankList.isShow) {
         //show
@@ -199,11 +199,11 @@ $("body")
           </div>\
         </div>';
     var element = $(html).appendTo("body");
-    $("body").on("click", "#rankList .icon-back,.title", rankList.rankListTurn);
+    $("body").on("click", "#rankList .icon-back,.title", rankList.turn);
     return element;
   });
 
-  $("body").on("click", ".footer .rankList", rankList.rankListTurn);
+  $("body").on("click", ".footer .rankList", rankList.turn);
 })();
 
 //活动规则
