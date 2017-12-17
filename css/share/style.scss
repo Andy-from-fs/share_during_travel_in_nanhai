@@ -25,7 +25,7 @@ $gray: rgb(102, 102, 102);
 
 body {
   background-color: #f0f0f0;
-  >.container {
+  > .container {
     padding: 15px 15px 0 15px;
     background-color: #fff;
     border-bottom: 1px solid #dddddd;
@@ -38,7 +38,7 @@ body {
   font-size: 1.7rem;
 }
 
-button.btn-submit{
+button.btn-submit {
   border: 1px solid rgb(175, 48, 27);
   background-color: rgb(175, 48, 27);
   width: 100%;
@@ -54,18 +54,18 @@ button.btn-submit{
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
-  justify-content:flex-start;
+  justify-content: flex-start;
   align-items: center;
   padding: 10px 0; // height: 6rem;
   margin: 10px 0;
-  .btn-add{
+  .btn-add {
     position: relative;
   }
   li {
     width: 30%;
-    height: 100%; 
+    height: 100%;
     margin-right: 5%;
-    &:last-of-type{
+    &:last-of-type {
       margin-right: 0;
     }
     img {
@@ -82,7 +82,7 @@ button.btn-submit{
       color: $purplishRed;
       border: 1px solid $purplishRed;
     }
-    .input-file{
+    .input-file {
       position: absolute;
       bottom: 0;
       left: 0;
@@ -106,14 +106,70 @@ button.btn-submit{
   }
 }
 
-section.map-input{
+section.map-input {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  #map{
+  #map {
     width: 100%;
     height: 100%;
+    cursor: pointer;
   }
+
+  $btn-height: 4rem;
+  .btn-group {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    // width: calc(100%-20px);
+    width: calc(80% - 20px);
+    box-shadow: 1px 1px 8px #a7a7a7;
+    border: 0px solid transparent;
+    border-radius: 10px;
+    .region-select {
+      width: 30%;
+      height: $btn-height;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-right: 0;
+      border-bottom-left-radius: 10px;
+      border-top-left-radius: 10px;
+      float: left;
+      text-align: center;
+      line-height: $btn-height;
+      font-size: 1.5rem;
+    }
+    .view-input {
+      width: 70%;
+      height: $btn-height;
+      line-height: $btn-height;
+      border: 1px solid #ccc;
+      font-size: 2rem;
+      padding: 0 10px;
+      border-bottom-right-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+  }
+  .btn-selected {
+    // width: calc(100%-20px);
+    width: calc(20% - 20px);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: $btn-height;
+    line-height: $btn-height;
+    background-color: $purplishRed;
+    border: 1px solid $purplishRed;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.5rem;
+    text-align: center;
+    box-shadow: 1px 1px 8px #a7a7a7;
+  }
+}
+
+.picker .picker-panel .picker-choose .confirm {
+  color: $purplishRed !important;
 }

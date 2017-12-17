@@ -81,17 +81,18 @@ $("#fileupload").fileupload({
   }
 });
 
+//地图--选择地点
 (function() {
   var map = new BMap.Map("map");
   var point = new BMap.Point(116.331398, 39.897445);
   map.centerAndZoom(point, 16);
   var navigation = new BMap.NavigationControl({
-    anchor:BMAP_ANCHOR_BOTTOM_RIGHT,
+    anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
     // offset:new BMap.Size(0,0),
-    type:BMAP_NAVIGATION_CONTROL_LARGE,
-    showZoomInfo:false,
-    enableGeolocation:true
-  }); 
+    type: BMAP_NAVIGATION_CONTROL_LARGE,
+    showZoomInfo: false,
+    enableGeolocation: true
+  });
   map.addControl(navigation);
 
   var geolocation = new BMap.Geolocation();
@@ -104,17 +105,13 @@ $("#fileupload").fileupload({
         map.panTo(r.point);
         swal(
           "定位成功",
-          '你的位置:'+r.address.province+" "+r.address.city,
-          'success'
-        )
-        
+          "你的位置:" + r.address.province + " " + r.address.city,
+          "success"
+        );
+
         console.log("您的位置：" + r.point.lng + "," + r.point.lat);
       } else {
-        swal(
-          "定位失败",
-          '请检查你的网路与允许网页获取你的位置信息',
-          'error'
-        )
+        swal("定位失败", "请检查你的网路与允许网页获取你的位置信息", "error");
         console.log("failed" + this.getStatus());
         //关于状态码
         //BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
@@ -130,5 +127,72 @@ $("#fileupload").fileupload({
     },
     { enableHighAccuracy: true }
   );
-})();
 
+  map.addEventListener(
+    "touchstart",
+    function() {
+      if($(".map-input .view-input").is(':focus')){
+        $(".map-input .view-input").trigger("blur");
+      }
+    },
+    false
+  );
+
+  //选择镇街框
+  var region = [
+    {
+      text: "桂城",
+      value: "桂城"
+    },
+    {
+      text: "西樵",
+      value: "西樵"
+    },
+    {
+      text: "九江",
+      value: "九江"
+    },
+    {
+      text: "丹灶",
+      value: "丹灶"
+    },
+    {
+      text: "狮山",
+      value: "狮山"
+    },
+    {
+      text: "大沥",
+      value: "大沥"
+    },
+    {
+      text: "里水",
+      value: "里水"
+    }
+  ];
+
+  var picker = new Picker({
+    data: [region],
+    title: "选择镇街"
+  });
+
+  picker.on("picker.select", function(selectedVal, selectedIndex) {
+    // nameEl.innerText = data1[selectedIndex[0]].text + ' ' + data2[selectedIndex[1]].text + ' ' + data3[selectedIndex[2]].text;
+    console.log(selectedVal);
+    var selectedRegion=selectedVal[0];
+    $('#region-name').html(selectedRegion);
+  });
+
+  // picker.on("picker.change", function(index, selectedIndex) {
+  //   console.log(index);
+  //   console.log(selectedIndex);
+  // });
+
+  // picker.on("picker.valuechange", function(selectedVal, selectedIndex) {
+  //   console.log(selectedVal);
+  //   console.log(selectedIndex);
+  // });
+
+  $("section.map-input .region-select").on("click", function() {
+    picker.show();
+  });
+})();

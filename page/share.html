@@ -108,7 +108,6 @@ $yzend=$temParams["captcha"];
     <link rel="stylesheet" href="http://www.foshannews.net/js/animate2.min.css">
     <link rel="stylesheet" href="http://www.foshannews.net/js/loading.css">
     <link rel="stylesheet" href="http://www.foshannews.net/js/weui-toptip/weui-toptip.css">
-
   </head>
 
   <body>
@@ -133,6 +132,17 @@ $yzend=$temParams["captcha"];
 
     <section class="map-input slideInLeft animated">
       <div id="map"></div>
+
+      <div class="btn-group">
+        <div class="region-select">
+          <p>
+            <span id="region-name">选择镇街</span>
+            <span class="icon-triangle-down"></span>
+          </p>
+        </div>
+        <input class="view-input" type="text" name="view-name">
+      </div>
+      <div class="btn-selected">确定</div>
     </section>
 
 
@@ -152,6 +162,7 @@ $yzend=$temParams["captcha"];
     <script src="http://www.foshannews.net/js/weui-toptip/weui-toptip.js"></script>
     <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/loading.js"></script>
     <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/util.js"></script>
+    <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/pick.min.js"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=URXRz3IMpd7Og1M1RCECuQT1DwKmNNaj"></script>
     <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/share.js"></script>
 
