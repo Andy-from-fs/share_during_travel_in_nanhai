@@ -21,7 +21,7 @@ var sortable = new Sortable(document.getElementById("picsList"), {
   animation: 150,
   // Element dragging ended
   onEnd: function(/**Event*/ evt) {
-    console.log(evt);
+    // console.log(evt);
     formList.imgUrlList = refreshList();
   }
 });
@@ -43,7 +43,7 @@ $("#fileupload").fileupload({
     data.submit();
   },
   done: function(e, result) {
-    console.log(result);
+    // console.log(result);
     function imgLoaded() {
       $.loading.off();
       $.toptip("成功上传图片");
@@ -106,7 +106,7 @@ var formList = {
     var geolocation = new BMap.Geolocation();
     geolocation.getCurrentPosition(
       function(r) {
-        console.log(r);
+        // console.log(r);
         if (this.getStatus() == BMAP_STATUS_SUCCESS) {
           var mk = new BMap.Marker(r.point);
           map.addOverlay(mk);
@@ -117,7 +117,7 @@ var formList = {
             "success"
           );
 
-          console.log("您的位置：" + r.point.lng + "," + r.point.lat);
+          // console.log("您的位置：" + r.point.lng + "," + r.point.lat);
         } else {
           swal("定位失败", "请检查你的网路与允许网页获取你的位置信息", "error");
           console.log("failed" + this.getStatus());
@@ -185,7 +185,7 @@ var formList = {
 
     picker.on("picker.select", function(selectedVal, selectedIndex) {
       // nameEl.innerText = data1[selectedIndex[0]].text + ' ' + data2[selectedIndex[1]].text + ' ' + data3[selectedIndex[2]].text;
-      console.log(selectedVal);
+      // console.log(selectedVal);
       var selectedRegion = selectedVal[0];
       $("#region-name").html(selectedRegion);
     });
@@ -220,7 +220,7 @@ var formList = {
     getData:function(){
       formList.region=$("#region-name").html();
       formList.view=$('input[name="view-name"]').val();
-      console.log(formList);
+      // console.log(formList);
       
     }
   };
