@@ -108,6 +108,7 @@ button.btn-submit {
 }
 
 section.map-input {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -144,6 +145,7 @@ section.map-input .btn-group .region-select {
   line-height: 4rem;
   font-size: 1.5rem;
   position: relative;
+  cursor: pointer;
 }
 
 section.map-input .btn-group .region-select::after {
@@ -183,6 +185,7 @@ section.map-input .btn-selected {
   font-size: 1.5rem;
   text-align: center;
   box-shadow: 2px 2px 5px #a7a7a7;
+  cursor: pointer;
 }
 
 section.map-input .btn-back {
@@ -198,6 +201,7 @@ section.map-input .btn-back {
   line-height: 34px;
   text-align: center;
   box-shadow: 2px 2px 5px #a7a7a7;
+  cursor: pointer;
 }
 
 .picker .picker-panel .picker-choose .confirm {
