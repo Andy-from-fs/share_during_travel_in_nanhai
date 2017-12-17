@@ -172,6 +172,20 @@ section.map-input .btn-selected {
   box-shadow: 1px 1px 8px #a7a7a7;
 }
 
+section.map-input .btn-back {
+  width: 35px;
+  height: 35px;
+  background-color: #af301b;
+  color: white;
+  border: 1px solid #af301b;
+  border-radius: 50%;
+  position: absolute;
+  right: 10px;
+  bottom: 100px;
+  line-height: 34px;
+  text-align: center;
+}
+
 .picker .picker-panel .picker-choose .confirm {
   color: #af301b !important;
 }

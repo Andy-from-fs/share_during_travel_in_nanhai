@@ -168,6 +168,20 @@ section.map-input {
     text-align: center;
     box-shadow: 1px 1px 8px #a7a7a7;
   }
+  .btn-back{
+    $backHeight:35px;
+    width: $backHeight;
+    height: $backHeight;
+    background-color: #af301b;
+    color: white;
+    border: 1px solid #af301b;
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    bottom: 100px;
+    line-height: $backHeight - 1px;
+    text-align: center;
+  }
 }
 
 .picker .picker-panel .picker-choose .confirm {
