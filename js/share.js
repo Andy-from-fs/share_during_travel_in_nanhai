@@ -56,7 +56,7 @@ $("#fileupload").fileupload({
         imgUrl +
         '">\
       <img src="' +
-        tomedia(imgUrl, 60) +
+        tomedia(imgUrl,'300x',60) +
         '">\
     </li>';
       imgCount++;
@@ -65,12 +65,14 @@ $("#fileupload").fileupload({
         $(newImg)
           .replaceAll(btnAdd)
           .on("load", imgLoaded)
-          .on("error", imgLoaded);
+          .on("error", imgLoaded)
+          .on("click", gallery.turn);
       } else {
         $(newImg)
           .insertBefore(btnAdd)
           .on("load", imgLoaded)
-          .on("error", imgLoaded);
+          .on("error", imgLoaded)
+          .on("click", gallery.turn);
       }
       formList.imgUrlList = refreshList();
     } else {
@@ -193,8 +195,8 @@ var formList = {
     $("body")
       .on("click", ".map-input .btn-selected", mapSelector.getData)
       .on("click", ".map-input .btn-selected", mapSelector.turn)
-      .on("click", "section.map-input .region-select", function(){
-        picker.show() 
+      .on("click", "section.map-input .region-select", function() {
+        picker.show();
       });
   }
 
@@ -217,11 +219,10 @@ var formList = {
         mapSelector.isShow = false;
       }
     },
-    getData:function(){
-      formList.region=$("#region-name").html();
-      formList.view=$('input[name="view-name"]').val();
+    getData: function() {
+      formList.region = $("#region-name").html();
+      formList.view = $('input[name="view-name"]').val();
       // console.log(formList);
-      
     }
   };
 
@@ -251,3 +252,56 @@ var formList = {
 
   $("body").on("click", ".btn-location", mapSelector.turn);
 })();
+
+var gallery = {
+  isShow: false,
+  url: "",
+  turn: function() {
+    var element = createGallery(),
+      url = $(this).attr("data-url");
+    gallery.url = url;
+    if (!gallery.isShow) {
+      //show
+      $(element).css("display", "block");
+      gallery.isShow = true;
+      $(element)
+        .children("img")
+        .attr("src", tomedia(url, '100p',100));
+    } else {
+      //hide
+      $(element).addClass("fadeOut");
+      setTimeout(function() {
+        $(element)
+          .removeClass("fadeOut")
+          .css("display", "none");
+      }, 400);
+      gallery.isShow = false;
+    }
+  }
+};
+
+var createGallery = $.singleton(function() {
+  var html =
+    '<div class="gallery fadeIn animated" id="gallery">\
+    <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test2.jpg" width="100%" height="100%" class="zoomIn animated">\
+    <div class="btn-del">\
+      <span class="icon-trashcan"></span>\
+    </div>\
+  </div>';
+  var element = $(html).appendTo("body");
+  function delImg() {
+    $("#picsList li.images").remove("[data-url=" + gallery.url + "]");
+    formList.imgUrlList.splice(
+      formList.imgUrlList.findIndex(function(val) {
+        return val === gallery.url;
+      }),
+      1
+    );
+    // console.log(formList);
+    gallery.turn();
+  }
+  $("body")
+    .on("click", "#gallery .btn-del", delImg)
+    .on("click", "#gallery img", gallery.turn);
+  return element;
+});

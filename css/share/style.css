@@ -209,6 +209,8 @@ section.map-input .btn-back {
 }
 
 .gallery {
+  animation-duration: 0.5s !important;
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -220,6 +222,8 @@ section.map-input .btn-back {
 
 .gallery > img {
   object-fit: contain;
+  cursor: pointer;
+  animation-duration: 0.5s !important;
 }
 
 .gallery .btn-del {
@@ -233,4 +237,5 @@ section.map-input .btn-back {
   background-color: #282828;
   color: white;
   font-size: 2rem;
+  cursor: pointer;
 }
