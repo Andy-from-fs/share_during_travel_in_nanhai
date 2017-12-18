@@ -46,6 +46,7 @@ $("#fileupload").fileupload({
   done: function(e, result) {
     // console.log(result);
     function imgLoaded() {
+      console.log('loading finish');
       $.loading.off();
       $.toptip("成功上传图片");
     }
@@ -65,22 +66,24 @@ $("#fileupload").fileupload({
         setTimeout(function() {
           $(newImg)
             .insertAfter(btnAdd)
+            .on("click", gallery.turn)
+            .children('img')
             .on("load", imgLoaded)
-            .on("error", imgLoaded)
-            .on("click", gallery.turn);
+            .on("error", imgLoaded);
         }, 500);
       } else {
         $(newImg)
           .insertBefore(btnAdd)
-          .on("load", imgLoaded)
-          .on("error", imgLoaded)
-          .on("click", gallery.turn);
+          .on("click", gallery.turn)
+            .children('img')
+            .on("load", imgLoaded)
+            .on("error", imgLoaded);
       }
       formList.imgUrlList = refreshList();
     } else {
       $.toptip("图片上传失败，请检查网络~", 2000, "warning");
     }
-    $.loading.off();
+    // $.loading.off();
   }
 });
 
@@ -316,3 +319,5 @@ var createGallery = $.singleton(function() {
     .on("click", "#gallery img", gallery.turn);
   return element;
 });
+
+// $.toptip("成功上传图片");
