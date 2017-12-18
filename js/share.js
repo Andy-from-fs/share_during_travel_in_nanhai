@@ -33,8 +33,8 @@ var sortable = new Sortable(document.getElementById("picsList"), {
 // );
 
 //图片上传
-var imgCount = 0,
-  imgLimit = 3;
+var imgLimit = 3,
+  btnAdd = $("#picsList .btn-add");
 $("#fileupload").fileupload({
   url: uploadImgApi,
   autoUpload: true,
@@ -51,23 +51,24 @@ $("#fileupload").fileupload({
     }
     var imgUrl = result.result.id;
     if (result.result.id != "id") {
-      var btnAdd = $("#picsList .btn-add");
       var newImg =
         '<li class="images"  data-url="' +
         imgUrl +
         '">\
       <img src="' +
-        tomedia(imgUrl,'300x',60) +
+        tomedia(imgUrl, "300x", 60) +
         '">\
     </li>';
-      imgCount++;
-      // console.log(formList.imgUrlList);
-      if (imgCount >= 3) {
-        $(newImg)
-          .replaceAll(btnAdd)
-          .on("load", imgLoaded)
-          .on("error", imgLoaded)
-          .on("click", gallery.turn);
+      // console.log(formList.imgUrlList.length);
+      if (formList.imgUrlList.length >= 2) {
+        $(btnAdd).fadeOut();
+        setTimeout(function() {
+          $(newImg)
+            .insertAfter(btnAdd)
+            .on("load", imgLoaded)
+            .on("error", imgLoaded)
+            .on("click", gallery.turn);
+        }, 500);
       } else {
         $(newImg)
           .insertBefore(btnAdd)
@@ -195,6 +196,7 @@ var formList = {
 
     $("body")
       .on("click", ".map-input .btn-selected", mapSelector.getData)
+      .on("click", ".map-input .btn-selected", mapSelector.setDataToView)
       .on("click", ".map-input .btn-selected", mapSelector.turn)
       .on("click", "section.map-input .region-select", function() {
         picker.show();
@@ -224,6 +226,9 @@ var formList = {
       formList.region = $("#region-name").html();
       formList.view = $('input[name="view-name"]').val();
       // console.log(formList);
+    },
+    setDataToView:function(){
+      $('.location-wrapper span:not(".icon-location")').html(formList.region+" "+formList.view);
     }
   };
 
@@ -239,8 +244,8 @@ var formList = {
             </p>\
           </div>\
           <input class="view-input" type="text" name="view-name">\
+          <div class="btn-selected"><span class="icon-plus"></span> </div>\
         </div>\
-        <div class="btn-selected">确定</div>\
         <div class="btn-back">\
           <span class="icon-back"></span>\
         </div>\
@@ -253,7 +258,6 @@ var formList = {
 
   $("body").on("click", ".btn-location", mapSelector.turn);
 })();
-
 
 //点击大图
 var gallery = {
@@ -269,7 +273,7 @@ var gallery = {
       gallery.isShow = true;
       $(element)
         .children("img")
-        .attr("src", tomedia(url, '100p',100));
+        .attr("src", tomedia(url, "100p", 100));
     } else {
       //hide
       $(element).addClass("fadeOut");
@@ -282,7 +286,6 @@ var gallery = {
     }
   }
 };
-
 var createGallery = $.singleton(function() {
   var html =
     '<div class="gallery fadeIn animated" id="gallery">\
@@ -293,13 +296,18 @@ var createGallery = $.singleton(function() {
   </div>';
   var element = $(html).appendTo("body");
   function delImg() {
-    $("#picsList li.images").remove("[data-url=" + gallery.url + "]");
-    formList.imgUrlList.splice(
-      formList.imgUrlList.findIndex(function(val) {
-        return val === gallery.url;
-      }),
-      1
-    );
+    if (formList.imgUrlList.length === 3) {
+      $("#picsList li.images[data-url='" + gallery.url + "']").remove();
+      btnAdd.fadeIn();
+    } else {
+      $("#picsList li.images").remove("[data-url='" + gallery.url + "']");
+      formList.imgUrlList.splice(
+        formList.imgUrlList.findIndex(function(val) {
+          return val === gallery.url;
+        }),
+        1
+      );
+    }
     // console.log(formList);
     gallery.turn();
   }

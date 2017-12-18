@@ -124,8 +124,8 @@ section.map-input {
     position: absolute;
     top: 10px;
     left: 10px;
-    // width: calc(100%-20px);
-    width: calc(80% - 20px);
+    width: calc(100% - 20px);
+    // width: calc(80% - 20px);
     box-shadow: 1px 1px 8px #a7a7a7;
     border: 1px solid #cccccc;
     border-radius: 10px;
@@ -165,27 +165,28 @@ section.map-input {
       // border-left: 0;
       border: 0;
       font-size: 2rem;
-      padding: 0 10px;
+      // padding: 0 10px;
       border-bottom-right-radius: 10px;
       border-top-right-radius: 10px;
+      padding: 0 $btn-height 0 10px;
     }
-  }
-  .btn-selected {
-    // width: calc(100%-20px);
-    width: calc(20% - 20px);
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    height: $btn-height;
-    line-height: $btn-height;
-    background-color: $purplishRed;
-    border: 1px solid $purplishRed;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 1.5rem;
-    text-align: center;
-    box-shadow: 2px 2px 5px #a7a7a7;
-    cursor: pointer;
+    .btn-selected {
+      // width: calc(100%-20px);
+      // width: $btn-height;
+      position: absolute;
+      top: 0;
+      right: 10px;
+      height: $btn-height;
+      line-height: $btn-height;
+      // background-color: $purplishRed;
+      // border: 1px solid $purplishRed;
+      // border-radius: 10px;
+      color: $purplishRed;
+      font-size: 2.7rem;
+      text-align: center;
+      // box-shadow: 2px 2px 5px #a7a7a7;
+      cursor: pointer;
+    }
   }
   .btn-back {
     $backHeight: 35px;

@@ -126,7 +126,7 @@ section.map-input .btn-group {
   position: absolute;
   top: 10px;
   left: 10px;
-  width: calc(80% - 20px);
+  width: calc(100% - 20px);
   box-shadow: 1px 1px 8px #a7a7a7;
   border: 1px solid #cccccc;
   border-radius: 10px;
@@ -166,25 +166,20 @@ section.map-input .btn-group .view-input {
   line-height: 4rem;
   border: 0;
   font-size: 2rem;
-  padding: 0 10px;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
+  padding: 0 4rem 0 10px;
 }
 
-section.map-input .btn-selected {
-  width: calc(20% - 20px);
+section.map-input .btn-group .btn-selected {
   position: absolute;
-  top: 10px;
+  top: 0;
   right: 10px;
   height: 4rem;
   line-height: 4rem;
-  background-color: #af301b;
-  border: 1px solid #af301b;
-  border-radius: 10px;
-  color: #fff;
-  font-size: 1.5rem;
+  color: #af301b;
+  font-size: 2.7rem;
   text-align: center;
-  box-shadow: 2px 2px 5px #a7a7a7;
   cursor: pointer;
 }
 
