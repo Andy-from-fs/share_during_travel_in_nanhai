@@ -32,6 +32,7 @@ var sortable = new Sortable(document.getElementById("picsList"), {
 //         </li>'
 // );
 
+//图片上传
 var imgCount = 0,
   imgLimit = 3;
 $("#fileupload").fileupload({
@@ -253,6 +254,8 @@ var formList = {
   $("body").on("click", ".btn-location", mapSelector.turn);
 })();
 
+
+//点击大图
 var gallery = {
   isShow: false,
   url: "",
