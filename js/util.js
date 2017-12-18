@@ -38,7 +38,7 @@ function tomedia(src,quality) {
     return (
       "http://we7-1253788256.image.myqcloud.com" +
       imgurl +
-      "?imageMogr2/auto-orient/strip/thumbnail/300x/quality/"+quality+"!"
+      "?imageMogr2/auto-orient/strip/thumbnail/"+thumbnail+"/quality/"+quality+"!"
     );
   }
 }
