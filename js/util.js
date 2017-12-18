@@ -11,7 +11,7 @@
 })(jQuery);
 
 //获取图片完整路径
-function tomedia(src,quality) {
+function tomedia(src,thumbnail,quality) {
   if (typeof src != "string") return "";
   if (src.indexOf("http://") == 0 || src.indexOf("https://") == 0) {
     return src;
