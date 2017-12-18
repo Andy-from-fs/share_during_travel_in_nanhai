@@ -207,3 +207,30 @@ section.map-input .btn-back {
 .picker .picker-panel .picker-choose .confirm {
   color: #af301b !important;
 }
+
+.gallery {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.gallery > img {
+  object-fit: contain;
+}
+
+.gallery .btn-del {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4rem;
+  text-align: center;
+  line-height: 4rem;
+  background-color: #282828;
+  color: white;
+  font-size: 2rem;
+}
