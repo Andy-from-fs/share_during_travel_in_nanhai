@@ -145,6 +145,9 @@ section.map-input {
       font-size: 1.5rem;
       position: relative;
       cursor: pointer;
+      .icon-triangle-down{
+        margin-left: 10px;
+      }
       &::after {
         content: "";
         width: 1px;

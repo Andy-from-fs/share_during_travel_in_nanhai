@@ -148,6 +148,10 @@ section.map-input .btn-group .region-select {
   cursor: pointer;
 }
 
+section.map-input .btn-group .region-select .icon-triangle-down {
+  margin-left: 10px;
+}
+
 section.map-input .btn-group .region-select::after {
   content: "";
   width: 1px;
