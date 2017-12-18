@@ -96,7 +96,7 @@ var formList = {
 (function() {
   function initMapSelector() {
     var map = new BMap.Map("map");
-    var point = new BMap.Point(116.331398, 39.897445);
+    var point = new BMap.Point(113.149756,23.035399);
     map.centerAndZoom(point, 16);
     var navigation = new BMap.NavigationControl({
       anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
@@ -115,11 +115,11 @@ var formList = {
           var mk = new BMap.Marker(r.point);
           map.addOverlay(mk);
           map.panTo(r.point);
-          swal(
-            "定位成功",
-            "你的位置:" + r.address.province + " " + r.address.city,
-            "success"
-          );
+          // swal(
+          //   "定位成功",
+          //   "你的位置:" + r.address.province + " " + r.address.city,
+          //   "success"
+          // );
 
           // console.log("您的位置：" + r.point.lng + "," + r.point.lat);
         } else {
