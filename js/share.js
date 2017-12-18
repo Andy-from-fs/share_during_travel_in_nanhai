@@ -46,7 +46,7 @@ $("#fileupload").fileupload({
   done: function(e, result) {
     // console.log(result);
     function imgLoaded() {
-      console.log('loading finish');
+      // console.log("loading finish");
       $.loading.off();
       $.toptip("成功上传图片");
     }
@@ -67,19 +67,20 @@ $("#fileupload").fileupload({
           $(newImg)
             .insertAfter(btnAdd)
             .on("click", gallery.turn)
-            .children('img')
+            .children("img")
             .on("load", imgLoaded)
             .on("error", imgLoaded);
+          formList.imgUrlList = refreshList();
         }, 500);
       } else {
         $(newImg)
           .insertBefore(btnAdd)
           .on("click", gallery.turn)
-            .children('img')
-            .on("load", imgLoaded)
-            .on("error", imgLoaded);
+          .children("img")
+          .on("load", imgLoaded)
+          .on("error", imgLoaded);
+        formList.imgUrlList = refreshList();
       }
-      formList.imgUrlList = refreshList();
     } else {
       $.toptip("图片上传失败，请检查网络~", 2000, "warning");
     }
@@ -99,8 +100,26 @@ var formList = {
 (function() {
   function initMapSelector() {
     var map = new BMap.Map("map");
-    var point = new BMap.Point(113.149756,23.035399);
+    var point = new BMap.Point(113.149756, 23.035399);
     map.centerAndZoom(point, 16);
+
+    //覆盖物添加
+    var markers = [];
+    $.each(views, function(indexInArray, valueOfElement) {
+      var lng = valueOfElement.lngLat.split(",")[0];
+      var lat = valueOfElement.lngLat.split(",")[1];
+      markers[indexInArray] = new BMap.Marker(new BMap.Point(lng, lat));
+      markers[indexInArray].addEventListener(
+        "click",
+        function(e) {
+          mapSelector.insertData(valueOfElement.region,valueOfElement.view).setDataToView().turn();
+        },
+        false
+      );
+      map.addOverlay(markers[indexInArray]); //增加点
+    });
+
+    //浏览器定位
     var navigation = new BMap.NavigationControl({
       anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
       // offset:new BMap.Size(0,0),
@@ -225,13 +244,20 @@ var formList = {
         mapSelector.isShow = false;
       }
     },
+    insertData:function(region,view){
+      formList.region=region;
+      formList.view=view;
+      return mapSelector;
+    },
     getData: function() {
-      formList.region = $("#region-name").html();
-      formList.view = $('input[name="view-name"]').val();
+      mapSelector.insertData($("#region-name").html(),$('input[name="view-name"]').val());
       // console.log(formList);
     },
-    setDataToView:function(){
-      $('.location-wrapper span:not(".icon-location")').html(formList.region+" "+formList.view);
+    setDataToView: function() {
+      $('.location-wrapper span:not(".icon-location")').html(
+        formList.region + " " + formList.view
+      ).css('color','rgb(40,40,40)');
+      return mapSelector;
     }
   };
 
@@ -299,8 +325,10 @@ var createGallery = $.singleton(function() {
   </div>';
   var element = $(html).appendTo("body");
   function delImg() {
+    // console.log(formList.imgUrlList.length);
     if (formList.imgUrlList.length === 3) {
       $("#picsList li.images[data-url='" + gallery.url + "']").remove();
+      // console.log(btnAdd);
       btnAdd.fadeIn();
     } else {
       $("#picsList li.images").remove("[data-url='" + gallery.url + "']");
@@ -312,12 +340,13 @@ var createGallery = $.singleton(function() {
       );
     }
     // console.log(formList);
-    gallery.turn();
   }
   $("body")
     .on("click", "#gallery .btn-del", delImg)
+    .on("click", "#gallery .btn-del", gallery.turn)
     .on("click", "#gallery img", gallery.turn);
   return element;
 });
 
+// console.log(views);
 // $.toptip("成功上传图片");
