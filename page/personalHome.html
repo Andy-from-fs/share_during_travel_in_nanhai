@@ -40,122 +40,130 @@ $yzend=$temParams["captcha"];
 
 $this->getUserInfo();
 ?>
-<!DOCTYPE html>
-<html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
 
-<head>
-  <meta name="viewport" content="width=device-width,
+  <head>
+    <meta name="viewport" content="width=device-width,
     initial-scale=1,
     maximum-scale=1,
     minimum-scale=1,
     user-scalable=no">
-  <script>
-    ! function (n, e) {
-      var t = n.documentElement,
-        i = "orientationchange" in window ?
-        "orientationchange" : "resize",
-        d = function () {
-          var n = t.clientWidth;
-          n > 640 && (n = 640), n && (t.style.fontSize = 8 * (n / 320) + "px")
+    <script>
+      ! function (n, e) {
+        var t = n.documentElement,
+          i = "orientationchange" in window ?
+          "orientationchange" : "resize",
+          d = function () {
+            var n = t.clientWidth;
+            n > 640 && (n = 640), n && (t.style.fontSize = 8 * (n / 320) + "px")
 
-        };
-      n.addEventListener && (e.addEventListener(i, d, !1), n.addEventListener("DOMContentLoaded", d, !1))
-    }(document, window);
-  </script>
-  <!--meta-->
-  <meta charset="UTF-8">
-  <!-- 优先使用 IE 最新版本和 Chrome: -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <!-- 网页作者： -->
-  <meta name="author" content="designed by Vivi;css+html by AND,2017-11.foshan,MI.8723" />
-  <!-- 搜索引擎抓取： -->
-  <meta name="robots" content="index,follow" />
-  <!-- iOS 设备 添加到主屏后的标题（iOS 6 新增）： -->
-  <meta name="apple-mobile-web-app-title" content="开发手足口病家庭监护平台">
-  <!-- 删除默认的苹果工具栏和菜单栏 -->
-  <meta name="apple-touch-fullscreen" content="yes">
-  <!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏： -->
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari）： -->
-  <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">
-  <!-- 设置苹果工具栏颜色： -->
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  <!-- 忽略页面中的数字识别为电话，忽略email识别： -->
-  <meta name="format-detection" content="telphone=no, email=no" />
-  <!-- 启用360浏览器的极速模式(webkit)： -->
-  <meta name="renderer" content="webkit">
-  <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓： -->
-  <meta name="HandheldFriendly" content="true">
-  <!-- 微软的老式浏览器 -->
-  <meta name="MobileOptimized" content="320">
-  <!-- uc强制竖屏 -->
-  <meta name="screen-orientation" content="portrait">
-  <!-- UC应用模式 -->
-  <meta name="browsermode" content="application">
-  <!-- UC强制全屏 -->
-  <meta name="full-screen" content="yes">
-  <!-- QQ强制竖屏 -->
-  <meta name="x5-orientation" content="portrait">
-  <!-- QQ强制全屏 -->
-  <meta name="x5-fullscreen" content="true">
-  <!-- windows phone 点击无高光 -->
-  <meta name="msapplication-tap-highlight" content="no">
+          };
+        n.addEventListener && (e.addEventListener(i, d, !1), n.addEventListener("DOMContentLoaded", d, !1))
+      }(document, window);
+    </script>
+    <!--meta-->
+    <meta charset="UTF-8">
+    <!-- 优先使用 IE 最新版本和 Chrome: -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- 网页作者： -->
+    <meta name="author" content="designed by Vivi;css+html by AND,2017-11.foshan,MI.8723" />
+    <!-- 搜索引擎抓取： -->
+    <meta name="robots" content="index,follow" />
+    <!-- iOS 设备 添加到主屏后的标题（iOS 6 新增）： -->
+    <meta name="apple-mobile-web-app-title" content="开发手足口病家庭监护平台">
+    <!-- 删除默认的苹果工具栏和菜单栏 -->
+    <meta name="apple-touch-fullscreen" content="yes">
+    <!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏： -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari）： -->
+    <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">
+    <!-- 设置苹果工具栏颜色： -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- 忽略页面中的数字识别为电话，忽略email识别： -->
+    <meta name="format-detection" content="telphone=no, email=no" />
+    <!-- 启用360浏览器的极速模式(webkit)： -->
+    <meta name="renderer" content="webkit">
+    <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓： -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- 微软的老式浏览器 -->
+    <meta name="MobileOptimized" content="320">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
 
-  <title>个人主页--{php echo $temParams['title']}</title>
-  <meta name="description" content="{php echo $temParams['description']}" />
-  <meta name="keywords" content="{php echo $temParams['title']}" />
-  <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/css/reset.min.css">
-  <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/css/icomoon/style.css">
-  <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/css/personalHome/style.css">
-  <link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css">
-  <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/loading.css">
-  <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/weui-toptip.css">
-  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-</head>
+    <title>个人主页--{php echo $temParams['title']}</title>
+    <meta name="description" content="{php echo $temParams['description']}" />
+    <meta name="keywords" content="{php echo $temParams['title']}" />
+    <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/css/reset.min.css">
+    <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/css/icomoon/style.css">
+    <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/css/personalHome/style.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css">
+    <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/loading.css">
+    <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/weui-toptip.css">
+    <link href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+    <style>
+      .sweet-alert .sa-input-error {
+        top: 24px;
+      }
+    </style>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  </head>
 
-<body>
-  <div id="btn-setting">
-    <span class="icon-gear"></span>
-  </div>
-
-  <header>
-    <div class="icon">
-      <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test-avatar.jpg" id="avatar">
-      <span id="username">用户名</span>
+  <body>
+    <div id="btn-setting">
+      <span class="icon-gear"></span>
     </div>
-    <div class="sum">
-      <div class="photo item">
-        <span class="num">180</span>
-        <span>照片</span>
-      </div>
-      <div class="like item">
-        <span class="num">20</span>
-        <span>点赞</span>
-      </div>
-    </div>
-  </header>
 
-  <div class="content">
-    <div class="item">
-      <div class="circle green"></div>
-      <div class="date">
-        <span>04</span><span>/12</span>
-        <div class="situlation">已审核</div>
+    <header>
+      <div class="icon">
+        <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test-avatar.jpg" id="avatar">
+        <span id="username">用户名</span>
       </div>
-      <div class="images">
-        <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
-        <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
-        <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+      <div class="sum">
+        <div class="photo item">
+          <span class="num">180</span>
+          <span>照片</span>
+        </div>
+        <div class="like item">
+          <span class="num">20</span>
+          <span>点赞</span>
+        </div>
       </div>
-      <div class="btn-group">
-        <span class="icon-heart">点赞</span>
-        <span class="icon-trashcan">删除</span>
+    </header>
+
+    <div class="content">
+      <div class="item">
+        <div class="circle green"></div>
+        <div class="date">
+          <span>04</span>
+          <span>/12</span>
+          <div class="situlation">已审核</div>
+        </div>
+        <div class="images">
+          <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+          <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+          <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+        </div>
+        <div class="btn-group">
+          <span class="icon-heart">点赞</span>
+          <span class="icon-trashcan">删除</span>
+        </div>
       </div>
-    </div>
-    <div class="item">
+      <div class="item">
         <div class="circle turquoiseBlue"></div>
         <div class="date">
-          <span>04</span><span>/12</span>
+          <span>04</span>
+          <span>/12</span>
           <div class="situlation noPass">未审核</div>
         </div>
         <div class="images">
@@ -169,27 +177,33 @@ $this->getUserInfo();
         </div>
       </div>
       <div class="item">
-          <div class="circle violet"></div>
-          <div class="date">
-            <span>04</span><span>/12</span>
-            <div class="situlation">已审核</div>
-          </div>
-          <div class="images">
-            <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
-            <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
-            <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
-          </div>
-          <div class="btn-group">
-            <span class="icon-heart">点赞</span>
-            <span class="icon-trashcan">删除</span>
-          </div>
+        <div class="circle violet"></div>
+        <div class="date">
+          <span>04</span>
+          <span>/12</span>
+          <div class="situlation">已审核</div>
         </div>
-  </div>
-</body>
+        <div class="images">
+          <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+          <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+          <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+        </div>
+        <div class="btn-group">
+          <span class="icon-heart">点赞</span>
+          <span class="icon-trashcan">删除</span>
+        </div>
+      </div>
+    </div>
 
-<script>
-  function fixImagesHeight(){
-    $('.images img').height($(this).width());
-  }
-</script>
-</html>
+  </body>
+
+  <script>
+    function fixImagesHeight() {
+      $('.images img').height($(this).width());
+    }
+  </script>
+  <script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+  <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/util.js"></script>
+  <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/personalHome.js"></script>
+
+  </html>

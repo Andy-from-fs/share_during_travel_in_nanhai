@@ -197,3 +197,63 @@ header .sum .item .num {
 .noPass {
   color: #e95151 !important;
 }
+
+#setting {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+}
+
+#setting .wrapper {
+  background-color: white;
+  padding: 0 10px;
+}
+
+#setting .wrapper .item {
+  display: flex;
+  cursor: pointer;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dddddd;
+  padding: 15px 0;
+}
+
+#setting .wrapper .item span:last-of-type {
+  font-size: 1.9rem;
+  color: #999;
+}
+
+#setting .wrapper .item span:first-of-type {
+  font-size: 2.1rem;
+  color: #666666;
+}
+
+#setting .wrapper .item img {
+  border-radius: 50%;
+}
+
+#setting .btn {
+  cursor: pointer;
+  margin: 10px 1.5rem;
+  height: 3.5rem;
+  font-size: 2rem;
+  color: white;
+  border-radius: 10px;
+  line-height: 3.5rem;
+  text-align: center;
+}
+
+#setting .btn-submit {
+  border: 1px solid #00d205;
+  background-color: #00d205;
+}
+
+#setting .btn-back {
+  border: 1px solid #e95151;
+  background-color: #e95151;
+}
