@@ -112,6 +112,8 @@ var formList = {
       markers[indexInArray].addEventListener(
         "click",
         function(e) {
+          // console.log(e);
+          map.centerAndZoom(e.currentTarget.point,17);
           mapSelector.insertData(valueOfElement.region,valueOfElement.view).setDataToView().turn();
         },
         false
