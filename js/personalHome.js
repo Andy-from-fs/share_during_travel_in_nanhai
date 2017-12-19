@@ -97,3 +97,10 @@
 
   $("body").on("click", "#btn-setting", setting.turn);
 })();
+
+//进入细览
+$("body").on("click", ".images", function() {
+  // console.log("click");
+  //输入id
+  $.detail.turn(0);
+});

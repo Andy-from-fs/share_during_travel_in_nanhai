@@ -254,7 +254,7 @@ var ruleSingle = function() {
 // swal("Here's the title!", "...and here's the text!");
 
 $("body").on("click", ".show-list .view", function() {
-  console.log("click");
+  // console.log("click");
   $.detail.turn($(this).attr("viewId"));
 });
 
