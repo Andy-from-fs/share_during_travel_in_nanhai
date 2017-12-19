@@ -42,3 +42,6 @@ function tomedia(src,thumbnail,quality) {
     );
   }
 }
+
+//电话正则
+var checkPhoneReg = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
