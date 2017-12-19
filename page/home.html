@@ -154,6 +154,33 @@ $yzend=$temParams["captcha"];
               </div>
             </div>
           </div>
+          <!-- <div class="view" viewId='3'>
+            <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg" width="100%">
+            <div class="info">
+              <div class="location">地点</div>
+              <div class="like-time">
+                <div class="time">11-12</div>
+                <div class="like">
+                  <span class="like-num">1234</span>
+                  <span class="icon-heart"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="view" viewId='4'>
+            <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test2.jpg">
+            <div class="info">
+              <div class="location">地点</div>
+              <div class="like-time">
+                <div class="time">11-12</div>
+                <div class="like">
+                  <span class="like-num">1234</span>
+                  <span class="icon-heart"></span>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          
         </div>
         <div class="_right col">
           <div class="view" viewId='3'>
@@ -183,6 +210,34 @@ $yzend=$temParams["captcha"];
               </div>
             </div>
           </div>
+          <!-- <div class="view" viewId='3'>
+            <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test3.jpg" width="100%">
+            <div class="info">
+              <div class="location">地点</div>
+              <div class="like-time">
+                <div class="time">11-12</div>
+                <div class="like">
+                  <span class="like-num">1234</span>
+                  <span class="icon-heart"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="view" viewId='4'>
+            <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test5.jpg" width="100%">
+            <div class="info">
+              <div class="location">地点</div>
+              <div class="like-time">
+                <div class="time">12-24</div>
+                <div class="like">
+                  <span class="like-num">1234</span>
+                  <span class="icon-heart"></span>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          
         </div>
       </div>
     </div>
@@ -240,6 +295,26 @@ $yzend=$temParams["captcha"];
     <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/util.js"></script>
     <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/detail.js"></script>
     <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/home.js"></script>
+
+    <!-- <script>
+      //上拉加载
+      $(window).scroll(function () {
+        // console.log('scroll');
+        var winScrollTop = $(window).scrollTop();
+        var percent = winScrollTop / ($("body").outerHeight() - $(window).height());
+        // console.log(winScrollTop);
+        // console.log($("body").outerHeight());
+
+        if (percent > 0.9) {
+          //book play
+          // console.log('book play')
+          // _bookPlay();
+          console.log('加载更多');
+          $('.show-list ._left').append($('.show-list ._left').children().clone(true));
+          $('.show-list ._right').append($('.show-list ._left').children().clone(true));
+        }
+      });
+    </script> -->
   </body>
 
   </html>
