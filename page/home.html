@@ -37,6 +37,8 @@ if($time>$starttime){$start=true;}else{$start=false;}
 
 //验证码开关
 $yzend=$temParams["captcha"]; 
+
+$this->getUserInfo();
 ?>
   <!DOCTYPE html>
   <html lang="en">
@@ -106,7 +108,7 @@ $yzend=$temParams["captcha"];
     <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/css/reset.min.css">
     <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/css/icomoon/style.css">
     <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/css/home/style.css">
-    <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/css/detail/style.css">
+    <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/css/detail/style.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.5.2/animate.cs">
     <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/loading.css">
   </head>

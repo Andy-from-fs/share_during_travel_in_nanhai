@@ -1,25 +1,67 @@
+<?php
+global $_GPC;
+$rid = $_GPC['rid'] + 0;
+$openid = $this->getOpenid();
+
+//$fans=$this->checkIsFans();
+//$fans=$this->checkTemp($rid);
+$fans=1;
+
+load()->model('newtc');
+$temset = new newtc();
+$temParams = $temset->getParams($rid);
+// var_dump($temParams);
+
+load()->model('newshare');
+$shareset = new newshare();
+$shareParams = $shareset->getParams($rid);
+//var_dump($shareParams);
+
+
+load()->model('newvote');
+$voteset = new newvote();
+$voteParams = $voteset->getParams($rid);
+//var_dump($voteParams);
+
+$time = time();
+$endtime=strtotime($voteParams['endtime']);
+if($time<$endtime){$end=false;}else{$end=true;} 
+//var_dump($end);  
+$starttime = strtotime($voteParams['starttime']);    
+if($time>$starttime){$start=true;}else{$start=false;}
+//var_dump($start);
+
+//load()->model('newpersonlog');
+//$personlog  = new newpersonlog();
+// $infodone = $personlog->checkDengji($rid,$openid);
+
+//验证码开关
+$yzend=$temParams["captcha"]; 
+
+$this->getUserInfo();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta name="viewport"content="width=device-width,
+  <meta name="viewport" content="width=device-width,
     initial-scale=1,
     maximum-scale=1,
     minimum-scale=1,
     user-scalable=no">
-<script>
-!function(n, e){
-var t = n.documentElement,
-    i ="orientationchange"in window ?
-"orientationchange":"resize",
-d=function(){
-var n = t.clientWidth;
-      n >640&&(n =640), n &&(t.style.fontSize =8*(n /320)+"px")
+  <script>
+    ! function (n, e) {
+      var t = n.documentElement,
+        i = "orientationchange" in window ?
+        "orientationchange" : "resize",
+        d = function () {
+          var n = t.clientWidth;
+          n > 640 && (n = 640), n && (t.style.fontSize = 8 * (n / 320) + "px")
 
-};
-  n.addEventListener &&(e.addEventListener(i, d,!1), n.addEventListener("DOMContentLoaded", d,!1))
-}(document, window);
-</script>
+        };
+      n.addEventListener && (e.addEventListener(i, d, !1), n.addEventListener("DOMContentLoaded", d, !1))
+    }(document, window);
+  </script>
   <!--meta-->
   <meta charset="UTF-8">
   <!-- 优先使用 IE 最新版本和 Chrome: -->
@@ -59,13 +101,95 @@ var n = t.clientWidth;
   <!-- windows phone 点击无高光 -->
   <meta name="msapplication-tap-highlight" content="no">
 
-  <title>{php echo $temParams['title']}</title>
+  <title>个人主页--{php echo $temParams['title']}</title>
   <meta name="description" content="{php echo $temParams['description']}" />
   <meta name="keywords" content="{php echo $temParams['title']}" />
+  <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/css/reset.min.css">
+  <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/css/icomoon/style.css">
+  <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/css/personalHome/style.css">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css">
+  <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/loading.css">
+  <link rel="stylesheet" href="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/weui-toptip.css">
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
+  <div id="btn-setting">
+    <span class="icon-gear"></span>
+  </div>
 
+  <header>
+    <div class="icon">
+      <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test-avatar.jpg" id="avatar">
+      <span id="username">用户名</span>
+    </div>
+    <div class="sum">
+      <div class="photo item">
+        <span class="num">180</span>
+        <span>照片</span>
+      </div>
+      <div class="like item">
+        <span class="num">20</span>
+        <span>点赞</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="item">
+      <div class="circle green"></div>
+      <div class="date">
+        <span>04</span><span>/12</span>
+        <div class="situlation">已审核</div>
+      </div>
+      <div class="images">
+        <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+        <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+        <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+      </div>
+      <div class="btn-group">
+        <span class="icon-heart">点赞</span>
+        <span class="icon-trashcan">删除</span>
+      </div>
+    </div>
+    <div class="item">
+        <div class="circle turquoiseBlue"></div>
+        <div class="date">
+          <span>04</span><span>/12</span>
+          <div class="situlation noPass">未审核</div>
+        </div>
+        <div class="images">
+          <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+          <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+          <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+        </div>
+        <div class="btn-group">
+          <span class="icon-heart">点赞</span>
+          <span class="icon-trashcan">删除</span>
+        </div>
+      </div>
+      <div class="item">
+          <div class="circle violet"></div>
+          <div class="date">
+            <span>04</span><span>/12</span>
+            <div class="situlation">已审核</div>
+          </div>
+          <div class="images">
+            <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+            <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+            <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test1.jpg">
+          </div>
+          <div class="btn-group">
+            <span class="icon-heart">点赞</span>
+            <span class="icon-trashcan">删除</span>
+          </div>
+        </div>
+  </div>
 </body>
 
+<script>
+  function fixImagesHeight(){
+    $('.images img').height($(this).width());
+  }
+</script>
 </html>

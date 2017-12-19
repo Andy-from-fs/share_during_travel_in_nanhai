@@ -441,10 +441,9 @@ function checkIsRegister(noCallBack) {
       } else if (response.statusCode === "300") {
         console.log("未注册");
         noCallBack.call(this);
-        register.on();
       }
     }
   });
 }
 checkIsRegister(register.on);
-register.on();
+// register.on();
