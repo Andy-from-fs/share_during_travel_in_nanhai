@@ -1,0 +1,27 @@
+.weui-toptips {
+  z-index: 100;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  text-align: center;
+  color: #fff;
+  font: 1.3rem;
+  line-height: 1.5rem;
+  padding:5px 0;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.weui-toptips_visible {
+  opacity: 1;
+}
+.bg-success{
+  background-color: #4cd964;
+}
+.bg-danger{
+  background-color: #f6383a;
+}
+.bg-warning{
+  background-color: #ffd800;
+  color: #333;
+}

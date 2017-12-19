@@ -113,8 +113,11 @@ var formList = {
         "click",
         function(e) {
           // console.log(e);
-          map.centerAndZoom(e.currentTarget.point,17);
-          mapSelector.insertData(valueOfElement.region,valueOfElement.view).setDataToView().turn();
+          map.centerAndZoom(e.currentTarget.point, 17);
+          mapSelector
+            .insertData(valueOfElement.region, valueOfElement.view)
+            .setDataToView()
+            .turn();
         },
         false
       );
@@ -246,19 +249,22 @@ var formList = {
         mapSelector.isShow = false;
       }
     },
-    insertData:function(region,view){
-      formList.region=region;
-      formList.view=view;
+    insertData: function(region, view) {
+      formList.region = region;
+      formList.view = view;
       return mapSelector;
     },
     getData: function() {
-      mapSelector.insertData($("#region-name").html(),$('input[name="view-name"]').val());
+      mapSelector.insertData(
+        $("#region-name").html(),
+        $('input[name="view-name"]').val()
+      );
       // console.log(formList);
     },
     setDataToView: function() {
-      $('.location-wrapper span:not(".icon-location")').html(
-        formList.region + " " + formList.view
-      ).css('color','rgb(40,40,40)');
+      $('.location-wrapper span:not(".icon-location")')
+        .html(formList.region + " " + formList.view)
+        .css("color", "rgb(40,40,40)");
       return mapSelector;
     }
   };
@@ -352,3 +358,93 @@ var createGallery = $.singleton(function() {
 
 // console.log(views);
 // $.toptip("成功上传图片");
+
+//注册页面
+var createRegister = $.singleton(function() {
+  var html =
+    '<div id="register" class="slideInLeft animated">\
+      <div class="title">用户信息登记</div>\
+      <div class="content-container">\
+        <div class="input-wrapper">\
+          <label for="name">姓名/昵称</label>\
+          <input type="text" name="name">\
+          <span class="hint">输入正确</span>\
+        </div>\
+        <div class="input-wrapper">\
+          <label for="phone">手机号码</label>\
+          <input type="text" name="phone">\
+          <span class="hint">请输入有效的手机号码</span>\
+        </div>\
+        <div class="btn-register">提交</div>\
+      </div>\
+    </div>';
+  var element = $(html).appendTo("body");
+  $("#register .btn-register").on("click", function() {
+    var data = {
+      username: $('#register input[name="name"]').val(),
+      mobile: $('#register input[name="phone"]').val()
+    };
+    $.ajax({
+      type: "post",
+      url: registerApi,
+      data:{
+        username: 'haha',
+        mobile:'13250885448'
+      },
+      dataType: "json",
+      success: function(res) {
+        console.log(res);
+        if (res.statusCode === "200") {
+          swal(
+            "登记成功",
+            "你的名称:" + data.username + " 手机号码" + data.mobile,
+            "success"
+          );
+          register.off(data);
+        }
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    });
+    // console.log(data);
+  });
+  return element;
+});
+var register = {
+  on: function() {
+    console.log("on");
+    var element = createRegister();
+    $(element).css("display", "block");
+  },
+  off: function(data) {
+   
+    var element = createRegister();
+    $(element).addClass("slideOutRight");
+    setTimeout(function() {
+      $(element).detach();
+    }, 800);
+    register = null;
+    console.log("off");
+  }
+};
+
+function checkIsRegister(noCallBack) {
+  $.ajax({
+    type: "post",
+    url: getInfoApi,
+    dataType: "json",
+    success: function(response) {
+      console.log(response);
+      if (response.statusCode === "200") {
+        console.log("已经注册");
+      } else if (response.statusCode === "300") {
+        console.log("未注册");
+        noCallBack.call(this);
+        register.on();
+      }
+    }
+  });
+}
+checkIsRegister(register.on);
+register.on();
