@@ -8,7 +8,11 @@ $purplishRed: rgb(175, 48, 27);
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-  // background-color: #fff;
+  background-color: #fff;
+  .wrapper{
+    width: 100%;
+    min-height: 100%;
+  }
   .btn-back {
     position: absolute;
     top: 3%;
@@ -29,6 +33,8 @@ $purplishRed: rgb(175, 48, 27);
     width: 100%;
     padding: 0 25px;
     transition: margin-top 0.3s ease-out, height 0.3s ease-out;
+    position: relative;
+    z-index: 3;
     .avatar-name {
       flex-flow: row nowrap;
       display: flex;
@@ -82,6 +88,7 @@ $purplishRed: rgb(175, 48, 27);
     position: relative;
     max-height: 61.8%;
     background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2;
   }
   .swipe-wrap {
     // max-height: inherit;

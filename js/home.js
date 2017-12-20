@@ -34,7 +34,6 @@ $("body")
   .on("click", "#region,.top .icon-back", clickBtnRegions)
   .on("click", ".rule", clickBtnRule);
 
-
 //排行榜
 (function rankListPart() {
   var rankList = {
@@ -256,5 +255,12 @@ var ruleSingle = function() {
 $("body").on("click", ".show-list .view", function() {
   // console.log("click");
   $.detail.turn($(this).attr("viewId"));
+  setTimeout(function() {
+    var display=$(".footer").css("display");
+    $(".footer").css("display", "none");
+    var showFooter = function() {
+      $(".footer").css("display", display);
+    };
+    $("body").on("click", "#detail .btn-back", showFooter);
+  }, 800);
 });
-

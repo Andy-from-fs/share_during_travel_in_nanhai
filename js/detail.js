@@ -44,6 +44,7 @@
   var createDetail = $.singleton(function() {
     var html =
       ' <div id="detail" class="animated">\
+        <div class="content">\
         <div class="btn-back fadeIn animated">\
           <span class="icon-back"></span>\
         </div>\
@@ -75,6 +76,7 @@
             <span class="like-num">218</span>\
           </p>\
           <div class="clear"></div>\
+        </div>\
         </div>\
     </div>';
     var element = $(html).appendTo("body");

@@ -6,6 +6,12 @@
   width: 100%;
   height: 100%;
   overflow-y: scroll;
+  background-color: #fff;
+}
+
+#detail .wrapper {
+  width: 100%;
+  min-height: 100%;
 }
 
 #detail .btn-back {
@@ -28,6 +34,8 @@
   width: 100%;
   padding: 0 25px;
   transition: margin-top 0.3s ease-out, height 0.3s ease-out;
+  position: relative;
+  z-index: 3;
 }
 
 #detail .wrapper .avatar-name {
@@ -88,6 +96,7 @@
   position: relative;
   max-height: 61.8%;
   background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2;
 }
 
 #detail .swipe-wrap {
