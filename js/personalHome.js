@@ -6,6 +6,9 @@
       var element = createSetting();
       if (!setting.isShow) {
         //show
+        $('#setting .avatar img').attr("src", $("#avatar").attr("src"));
+        $('#setting .btn-name').html($("#username").html());
+        $('#setting .btn-phone').html(userInfo.mobile);
         $(element).css("display", "block");
         setting.isShow = true;
       } else {
@@ -73,8 +76,8 @@
             swal.showInputError("请输入新的" + text);
             return false;
           }
-          if(text==="手机号码"&&!checkPhoneReg.test(inputValue)){
-            swal.showInputError('请输入正确的手机号码');
+          if (text === "手机号码" && !checkPhoneReg.test(inputValue)) {
+            swal.showInputError("请输入正确的手机号码");
           }
           $(el)
             .children("span:last")
@@ -83,15 +86,36 @@
         }
       );
     };
-    var submitToUpdata =function(){
+    var submitToUpdata = function() {
       //确定提交后台修改
+      $.ajax({
+        type: "post",
+        url: updateUserInfoApi,
+        data: {
+          username:$('#setting .btn-name').html(),
+          mobile:$('#setting .btn-phone').html()
+        },
+        dataType: "json",
+        success: function (response) {
+          console.log(response);
+          if(response.statusCode==="200"){
+            swal({ 
+              title: "修改成功", 
+              text: "2秒后自动关闭。", 
+              timer: 2000, 
+              type:'success',
+              showConfirmButton: false 
+            });
+          }
+        }
+      });
       setting.turn();
-    }
+    };
     $("body")
       .on("click", "#setting .btn-back", setting.turn)
       .on("click", "#setting .nickName", updateBySwal)
       .on("click", "#setting .mobile", updateBySwal)
-      .on('click','#setting .btn-submit',submitToUpdata);
+      .on("click", "#setting .btn-submit", submitToUpdata);
     return element;
   });
 
@@ -104,3 +128,36 @@ $("body").on("click", ".images", function() {
   //输入id
   $.detail.turn(0);
 });
+
+
+//获取用户信息
+var userInfo;
+var setData = function(data) {
+  $(".sum .photo .num").html(data.photo ? data.photo : "∞");
+  $(".sum .like .num").html(data.like);
+  $("#username").html(data.username);
+  $("#avatar").attr(
+    "src",
+    data.avatar ? data.avatar : $("#avatar").attr("src")
+  );
+};
+var getInfo = function() {
+  $.ajax({
+    type: "post",
+    url: getInfoApi,
+    dataType: "json",
+    success: function(response) {
+      console.log(response);
+      if (response.statusCode === "200") {
+        userInfo = response.data;
+        setData(userInfo);
+      }
+    }
+  });
+};
+
+getInfo();
+
+
+//获取个人分享
+

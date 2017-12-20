@@ -152,6 +152,7 @@ header .sum .item .num {
 .content .item .images img {
   width: 30%;
   margin: 0 5% 0 0;
+  object-fit: cover;
 }
 
 .content .item .images img:last-of-type {
