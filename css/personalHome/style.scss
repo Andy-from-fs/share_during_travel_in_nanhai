@@ -66,8 +66,7 @@ header {
   }
 }
 #avatar {
-  width: 6rem;
-  height: 6rem;
+  width: 25%;
   border-radius: 50%;
 }
 #username {
@@ -139,8 +138,9 @@ header {
       display: flex;
       justify-content: flex-start;
       align-items: center;
+      width: 95%;
       img{
-        width: 37%;
+        width: 30%;
         margin: 0 5% 0 0;
         &:last-of-type{
           margin: 0;
@@ -150,22 +150,24 @@ header {
     .btn-group{
       text-align: right;
       .icon-heart{
-        padding: 4px 10px 3px 10px;
-        font-size: 1.8rem;
+        padding: 6px 10px 3px 10px;
+        font-size: 1.5rem;
         color: #e95151;
         border: 1px solid #e95151;
         line-height: 2.1rem;
+        height: 2.1rem;
         border-radius: 1rem;
         &::before{
           font-size: 2rem;
         }
       }
       .icon-trashcan{
-        padding: 4px 10px 3px 10px;
-        font-size: 1.8rem;
+        padding: 6px 10px 3px 10px;
+        font-size: 1.5rem;
         color: #777;
         border: 1px solid #777;
         line-height: 2.1rem;
+        height: 2.1rem;
         border-radius: 1rem;
         margin: 0 20px 0 5px;
         &::before{
