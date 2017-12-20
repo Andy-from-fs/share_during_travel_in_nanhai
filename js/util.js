@@ -11,7 +11,18 @@
 })(jQuery);
 
 //获取图片完整路径
-function tomedia(src,thumbnail,quality) {
+function tomedia(src, thumbnail, quality) {
+  if (typeof thumbnail !== "string") {
+    thumbnail = "300x";
+  }
+  if (
+    (typeof quality != "Number" && typeof quality != "string") ||
+    parseInt(quality) > 100
+  ) {
+    quality = 60;
+  }
+  // console.log(thumbnail);
+  // console.log(quality);
   if (typeof src != "string") return "";
   if (src.indexOf("http://") == 0 || src.indexOf("https://") == 0) {
     return src;
@@ -38,10 +49,29 @@ function tomedia(src,thumbnail,quality) {
     return (
       "http://we7-1253788256.image.myqcloud.com" +
       imgurl +
-      "?imageMogr2/auto-orient/strip/thumbnail/"+thumbnail+"/quality/"+quality+"!"
+      "?imageMogr2/auto-orient/strip/thumbnail/" +
+      thumbnail +
+      "/quality/" +
+      quality +
+      "!"
     );
   }
 }
 
 //电话正则
 var checkPhoneReg = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+
+//拆分时间,返回json-obj
+function splitTimeStr(timeStr) {
+  var data_time = timeStr.split(" "),
+    data = data_time[0].split("-"),
+    time = data_time[1].split(":");
+  return {
+    origin: timeStr,
+    data: data_time[0],
+    time: data_time[1],
+    year: data[0],
+    month: data[1],
+    day: data[2]
+  };
+}

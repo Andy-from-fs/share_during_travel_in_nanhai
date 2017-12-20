@@ -91,17 +91,17 @@ header .sum .item .num {
   background-color: #4bbccd !important;
 }
 
-.content {
+#share-content {
   margin: 10px 0;
 }
 
-.content .item {
+#share-content .item {
   width: 100%;
   position: relative;
   padding: 0 0 0 3.5rem;
 }
 
-.content .item .circle {
+#share-content .item .circle {
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -110,7 +110,7 @@ header .sum .item .num {
   left: 2rem;
 }
 
-.content .item::before {
+#share-content .item::before {
   content: '';
   width: 1px;
   height: 100%;
@@ -120,19 +120,19 @@ header .sum .item .num {
   background-color: #c6c6c6;
 }
 
-.content .item .date {
+#share-content .item .date {
   padding: 10px 0 0 0;
 }
 
-.content .item .date span {
+#share-content .item .date span {
   font-size: 4rem;
 }
 
-.content .item .date span:last-of-type {
+#share-content .item .date span:last-of-type {
   font-size: 2rem;
 }
 
-.content .item .situlation {
+#share-content .item .situlation {
   font-size: 1.8rem;
   line-height: 3.2rem;
   float: right;
@@ -140,7 +140,7 @@ header .sum .item .num {
   margin: 0 20px 0 0;
 }
 
-.content .item .images {
+#share-content .item .images {
   padding: 0 0 10px 0;
   flex-flow: row nowrap;
   display: flex;
@@ -149,21 +149,21 @@ header .sum .item .num {
   width: 95%;
 }
 
-.content .item .images img {
+#share-content .item .images img {
   width: 30%;
   margin: 0 5% 0 0;
   object-fit: cover;
 }
 
-.content .item .images img:last-of-type {
+#share-content .item .images img:last-of-type {
   margin: 0;
 }
 
-.content .item .btn-group {
+#share-content .item .btn-group {
   text-align: right;
 }
 
-.content .item .btn-group .icon-heart {
+#share-content .item .btn-group .icon-heart {
   padding: 6px 10px 3px 10px;
   font-size: 1.5rem;
   color: #e95151;
@@ -173,11 +173,11 @@ header .sum .item .num {
   border-radius: 1rem;
 }
 
-.content .item .btn-group .icon-heart::before {
+#share-content .item .btn-group .icon-heart::before {
   font-size: 2rem;
 }
 
-.content .item .btn-group .icon-trashcan {
+#share-content .item .btn-group .icon-trashcan {
   padding: 6px 10px 3px 10px;
   font-size: 1.5rem;
   color: #777;
@@ -188,7 +188,7 @@ header .sum .item .num {
   margin: 0 20px 0 5px;
 }
 
-.content .item .btn-group .icon-trashcan::before {
+#share-content .item .btn-group .icon-trashcan::before {
   font-size: 2rem;
 }
 
@@ -259,4 +259,22 @@ header .sum .item .num {
 #setting .btn-back {
   border: 1px solid #e95151;
   background-color: #e95151;
+}
+
+.swal-footer {
+  text-align: center;
+}
+
+.swal-button {
+  background-color: #af301b;
+}
+
+.swal-button:active {
+  background-color: #af301b;
+}
+
+@media (max-width: 500px) {
+  .swal-modal {
+    width: calc(100% - 70px);
+  }
 }

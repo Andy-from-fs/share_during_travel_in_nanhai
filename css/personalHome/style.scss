@@ -92,7 +92,7 @@ header {
   background-color: #4bbccd!important;
 }
 
-.content{
+#share-content{
   margin: 10px 0 ;
   .item{
     width: 100%;
@@ -238,5 +238,20 @@ header {
   .btn-back{
     border: 1px solid $heartPink;
     background-color: $heartPink;
+  }
+}
+
+.swal-footer {
+  text-align: center;
+}
+.swal-button {
+  background-color: $purplishRed;
+}
+.swal-button:active {
+  background-color: $purplishRed;
+}
+@media (max-width: 500px) {
+  .swal-modal {
+    width: calc(100% - 70px);
   }
 }
