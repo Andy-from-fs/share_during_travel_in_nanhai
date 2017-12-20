@@ -38,7 +38,9 @@ if($time>$starttime){$start=true;}else{$start=false;}
 //验证码开关
 $yzend=$temParams["captcha"]; 
 
-$this->getUserInfo();
+//获取用户信息
+$userInfo = $this->getUserInfo();
+//var_dump($userInfo);
 ?>
   <!DOCTYPE html>
   <html lang="en">
