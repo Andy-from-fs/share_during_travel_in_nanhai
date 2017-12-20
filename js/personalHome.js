@@ -221,14 +221,16 @@ function getShareList() {
         })
         fixImagesHeight();
         //删除
-        $('body').on('click', '#share-content .icon-trashcan', delHandler);
+        $('body').on('click', '#share-content .icon-trashcan', delHandler)
+        //点赞
+        .on('click', '#share-content .icon-heart', clickLike);
       } else {
         swal({
           title: '获取你的稿件失败',
           text: '请检查网络连接情况',
           type: 'error',
           confirmButtonColor: "#af301b"
-        })
+        });
       }
     }
   })
@@ -270,9 +272,9 @@ function del(id) {
               type: 'success'
             });
             $('#share-content .item[shareid="' + id + '"]').addClass('animated fadeOut');
-            setTimeout(function(){
+            setTimeout(function () {
               $('#share-content .item[shareid="' + id + '"]').remove();
-            },800);
+            }, 800);
           } else {
             swal({
               title: "删除失败",
@@ -297,4 +299,25 @@ $('body').on('click', '.images', function () {
     }
   })
   $.detail.turn(enterArr);
+});
+
+//获取点赞记录
+var likeList;
+$.ajax({
+  type: "post",
+  url: checkLikeApi,
+  dataType: "json",
+  success: function (response) {
+    console.log(response);
+    if (response.statusCode === "200") {
+      likeList = response.data;
+    } else if (response.msg !== '没有记录') {
+      swal({
+        title: '获取点赞记录失败',
+        text: response.msg,
+        type: 'error',
+        confirmButtonColor: "#af301b"
+      })
+    }
+  }
 });

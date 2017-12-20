@@ -1,10 +1,33 @@
 // 点赞方法
-function clickLike(){
-  
+function clickLike() {
+  var id = $(this).attr('shareid');
+  var el=$(this);
+  $.ajax({
+    type: "post",
+    url: likeApi,
+    data: {
+      share_id: id
+    },
+    dataType: "json",
+    success: function (response) {
+      console.log(response);
+      if(response.statusCode==="200"){
+        $(el).addClass('like-on');
+      }else{
+        swal({
+          title: '点赞失败失败',
+          text: response.msg,
+          type: 'error',
+          confirmButtonColor: "#af301b"
+        });
+      }
+    }
+  });
 }
 
 // 细览页
 (function detailPart($) {
+  var imgIsSame = false;
   var sum = 3
   var changeContent = function (data) {
     if (detail.id !== data.id) {
@@ -24,11 +47,12 @@ function clickLike(){
       // $('#detail .name').html()
       $('#detail .location span:last').html(data.street + ' ' + data.address)
       $('#detail p.content').html(data.remark)
-      $('#detail .like').attr('shareId', data.id)
+      $('#detail .like').attr('shareid', data.id)
     }
   }
 
   var swipeInit = function () {
+    imgIsSame = true;
     window.swipe = $('#swiper').Swipe({
         startSlide: 0,
         auto: 3000,
@@ -38,14 +62,16 @@ function clickLike(){
         disableScroll: true,
         stopPropagation: true,
         callback: function (index, element) {
-          var dist = $(window).height() * 0.618 - $(element).height()
-          $('#swiper .index').css({
-            'margin-bottom': dist + 'px'
-          })
-          $('#detail .wrapper').css({
-            'margin-top': -1 * dist + 'px',
-            height: 'calc(38.2% + ' + dist + 'px)'
-          })
+          if (!imgIsSame) {
+            var dist = $(window).height() * 0.618 - $(element).height()
+            $('#swiper .index').css({
+              'margin-bottom': dist + 'px'
+            })
+            $('#detail .wrapper').css({
+              'margin-top': -1 * dist + 'px',
+              'min-height': ($(window).height() - $(element).height()) + 'px'
+            })
+          }
         },
         transitionEnd: function (index, element) {
           // console.log(index)
@@ -57,18 +83,23 @@ function clickLike(){
       if ($(element).height() > 0.618 * $(window).height()) {
         $(element).height(0.618 * $(window).height())
       }
+      if ($(element).height() !== $('#swiper').height()) {
+        imgIsSame = false;
+      }
     })
     // console.log(window.swipe.slide())
-
-    var ele = '#swiper img[data-index="' + window.swipe.getPos() + '"]'
-    var dist = $(window).height() * 0.618 - $(ele).height()
-    $('#swiper .index').css({
-      'margin-bottom': dist + 'px'
-    })
     $('#detail .wrapper').css({
-      'margin-top': -1 * dist + 'px',
-      height: 'calc(38.2% + ' + dist + 'px)'
-    })
+      'min-height': ($(window).height() - $('#swiper img[data-index="0"]').height()) + 'px'
+    });
+    if (!imgIsSame) {
+      var dist = $(window).height() * 0.618 - $('#swiper img[data-index="0"]').height()
+      $('#swiper .index').css({
+        'margin-bottom': dist + 'px'
+      })
+      $('#detail .wrapper').css({
+        'margin-top': -1 * dist + 'px',
+      })
+    }
   }
 
   var detail = {
@@ -118,7 +149,7 @@ function clickLike(){
           <p class="content">\
             本次新装的岗亭外观为了契合千灯湖的整体气质，使用了与千灯湖周边建筑相同的朱红色，让小巧的岗亭与千灯湖和谐地融合在一起。同时，为了使岗亭更加实用，在原来的结构基础上，把玻璃窗的位置换成开合式的铁盖。\
           </p>\
-          <p class="like _right">\
+          <p class="like _right" shareid="">\
             <span class="icon-heart"></span>\
             <span>赞·</span>\
             <span class="like-num">218</span>\
@@ -128,8 +159,9 @@ function clickLike(){
         </div>\
     </div>'
     var element = $(html).appendTo('body');
-    $('body').on('click', '#detail .btn-back', detail.turn);
+    $('body').on('click', '#detail .btn-back', detail.turn).on('click', '#detail .like', clickLike);
     return element
   })
+
   $.detail = detail
 })(jQuery)

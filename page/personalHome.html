@@ -175,6 +175,7 @@ $userinfo = mc_oauth_userinfo();
     var getMyselfShareApi="{php echo $this->createMobileUrl('other',array('otherdo'=>'get_share','rid'=>$rid,'myself'=>'1'));}";
     var likeApi="{php echo $this->createMobileUrl('other',array('otherdo'=>'add_star','rid'=>$rid));}";
     var delApi="{php echo $this->createMobileUrl('other',array('otherdo'=>'del_share','rid'=>$rid));}";
+    var checkLikeApi="{php echo $this->createMobileUrl('other',array('otherdo'=>'get_star_record','rid'=>$rid));}";
   </script>
   <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/simple-swiper.min.js"></script>
   <script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
