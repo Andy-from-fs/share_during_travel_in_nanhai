@@ -39,7 +39,7 @@ if($time>$starttime){$start=true;}else{$start=false;}
 $yzend=$temParams["captcha"]; 
 
 //获取用户信息
-$userInfo = $this->getUserInfo();
+$userinfo = mc_oauth_userinfo();
 //var_dump($userInfo);
 ?>
   <!DOCTYPE html>
