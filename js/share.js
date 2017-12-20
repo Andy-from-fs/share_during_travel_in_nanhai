@@ -387,9 +387,9 @@ var createRegister = $.singleton(function() {
     $.ajax({
       type: "post",
       url: registerApi,
-      data:{
-        username: 'haha',
-        mobile:'13250885448'
+      data: {
+        username: "haha",
+        mobile: "13250885448"
       },
       dataType: "json",
       success: function(res) {
@@ -418,7 +418,6 @@ var register = {
     $(element).css("display", "block");
   },
   off: function(data) {
-   
     var element = createRegister();
     $(element).addClass("slideOutRight");
     setTimeout(function() {
@@ -447,3 +446,46 @@ function checkIsRegister(noCallBack) {
 }
 checkIsRegister(register.on);
 // register.on();
+
+function submit() {
+  formList.content = $('textarea[name="words"]').val();
+  console.log(formList);
+  console.log(formList.imgUrlList.join(","));
+  $.ajax({
+    type: "post",
+    url: addShareApi,
+    data: {
+      remark: formList.content,
+      image: formList.imgUrlList.join(","),
+      address: formList.view,
+      street: formList.region
+    },
+    dataType: "json",
+    success: function(response) {
+      console.log(response);
+      if (response.msg === "添加成功") {
+        swal(
+          {
+            title: "分享成功",
+            text: "2秒后自动跳转至个人主页。",
+            timer: 2000,
+            showConfirmButton: false,
+            type: "success"
+          },
+          function() {
+            window.location.href = userHerf;
+          }
+        );
+      } else {
+        swal({
+          title: "添加失败",
+          text: response.msg,
+          timer: 2000,
+          showConfirmButton: false,
+          type: "error"
+        });
+      }
+    }
+  });
+}
+$("body").on("click", ".btn-submit", submit);

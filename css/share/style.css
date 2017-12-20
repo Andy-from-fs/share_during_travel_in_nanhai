@@ -92,6 +92,7 @@ button.btn-submit {
   height: 100%;
   border: none;
   opacity: 0;
+  cursor: pointer;
 }
 
 .location-wrapper {
