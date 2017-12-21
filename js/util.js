@@ -1,17 +1,26 @@
-//惰性单例模式
 (function($) {
   $.extend({
+    //惰性单例模式
     singleton: function(fn) {
       var result;
       return function() {
         return result || (result = fn.apply(this, arguments));
       };
+    },
+    //节流函数
+    throttle : function(fn, delay){
+      var timer = null;
+      return function(){
+        var context = this, args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+          fn.apply(context, args);
+        }, delay);
+      };
     }
   });
-})(jQuery);
-
-(function($) {
   $.fn.extend({
+    //点赞后
     disHasLike: function() {
       $(this)
         .addClass("has-like like-on")
