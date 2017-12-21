@@ -380,3 +380,31 @@
 		-moz-transform: rotate(900deg);
 	}
 }
+
+
+#big-loading{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+
+#big-loading .wrapper{
+  position: absolute;
+  top: 40%;
+  left: 34%;
+  width: 32%;
+  height: 4rem;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#big-loading-word{
+  color: #999999;
+  font-weight: bold;
+}

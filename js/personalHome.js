@@ -258,7 +258,14 @@ function del(id) {
       confirmButtonColor: "#af301b"
     },
     function () {
+      if(!$.loading.isShow){
       $.ajax({
+        beforeSend: function(XHR) {
+          $.loading.turn('正在删除');
+        },
+        complete: function(XMLHttpRequest, textStatus) {
+          $.loading.turn();
+        },
         type: "get",
         url: delApi,
         data: {
@@ -290,7 +297,7 @@ function del(id) {
             });
           }
         }
-      });
+      });}
     });
 }
 // 进入细览

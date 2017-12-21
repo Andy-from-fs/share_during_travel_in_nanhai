@@ -39,10 +39,17 @@ $("body")
 (function rankListPart() {
   var refresh = function() {
     $("#rankList .list .item").remove();
+    if(!$.loading.isShow){
     $.ajax({
       type: "post",
       url: getSortApi,
       dataType: "json",
+      beforeSend: function(XHR) {
+        $.loading.turn('加载中');
+      },
+      complete: function(XMLHttpRequest, textStatus) {
+        $.loading.turn();
+      },
       success: function(response) {
         console.log(response);
         if (response.statusCode === "200") {
@@ -97,7 +104,7 @@ $("body")
           });
         }
       }
-    });
+    });}
   };
   var rankList = {
     data: [],
@@ -420,7 +427,14 @@ var createRegister = $.singleton(function() {
       username: $('#register input[name="name"]').val(),
       mobile: $('#register input[name="phone"]').val()
     };
+    if(!$.loading.isShow){
     $.ajax({
+      beforeSend:function(xhr){
+        $.loading.turn('提交中');
+      },
+      complete:function(){
+        $.loading.turn();
+      },
       type: "post",
       url: registerApi,
       data: {
@@ -449,7 +463,7 @@ var createRegister = $.singleton(function() {
       error: function(error) {
         console.log(error);
       }
-    });
+    });}
     // console.log(data);
   });
   $("#register .icon-back").on("click", function() {

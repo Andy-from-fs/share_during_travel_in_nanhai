@@ -3,7 +3,7 @@
 //     icon: "success",
 //   });
 // }
-$.loading.turn();
+// $.loading.turn();
 $(".img-list").height(($(window).width() - 30) * 0.3);
 $(".img-list .word").css("line-height", ($(window).width() - 30) * 0.3 + "px");
 
@@ -452,43 +452,51 @@ function submit() {
   formList.content = $('textarea[name="words"]').val();
   console.log(formList);
   console.log(formList.imgUrlList.join(","));
-  $.ajax({
-    type: "post",
-    url: addShareApi,
-    data: {
-      remark: formList.content,
-      image: formList.imgUrlList.join(","),
-      address: formList.view,
-      street: formList.region
-    },
-    dataType: "json",
-    success: function(response) {
-      console.log(response);
-      if (response.msg === "添加成功") {
-        swal(
-          {
-            title: "分享成功",
-            text: "2秒后自动跳转至个人主页。",
+  if (!$.loading.isShow) {
+    $.ajax({
+      type: "post",
+      url: addShareApi,
+      beforeSend: function(XHR) {
+        $.loading.turn("正在努力投稿中", true);
+      },
+      complete: function(XMLHttpRequest, textStatus) {
+        $.loading.turn();
+      },
+      data: {
+        remark: formList.content,
+        image: formList.imgUrlList.join(","),
+        address: formList.view,
+        street: formList.region
+      },
+      dataType: "json",
+      success: function(response) {
+        console.log(response);
+        if (response.msg === "添加成功") {
+          swal(
+            {
+              title: "分享成功",
+              text: "2秒后自动跳转至个人主页。",
+              timer: 2000,
+              showCancelButton: true,
+              confirmButtonColor: "#af301b",
+              cancelButtonText: "留在本页",
+              type: "success"
+            },
+            function() {
+              window.location.href = userHerf;
+            }
+          );
+        } else {
+          swal({
+            title: "添加失败",
+            text: response.msg,
             timer: 2000,
-            showCancelButton: true,
-            confirmButtonColor: "#af301b",
-            cancelButtonText:'留在本页',
-            type: "success"
-          },
-          function() {
-            window.location.href = userHerf;
-          }
-        );
-      } else {
-        swal({
-          title: "添加失败",
-          text: response.msg,
-          timer: 2000,
-          showConfirmButton: false,
-          type: "error"
-        });
+            showConfirmButton: false,
+            type: "error"
+          });
+        }
       }
-    }
-  });
+    });
+  }
 }
 $("body").on("click", ".btn-submit", submit);
