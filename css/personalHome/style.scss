@@ -241,17 +241,17 @@ header {
   }
 }
 
-.swal-footer {
-  text-align: center;
-}
-.swal-button {
-  background-color: $purplishRed;
-}
-.swal-button:active {
-  background-color: $purplishRed;
-}
-@media (max-width: 500px) {
-  .swal-modal {
-    width: calc(100% - 70px);
-  }
-}
+// .swal-footer {
+//   text-align: center;
+// }
+// .swal-button {
+//   background-color: $purplishRed;
+// }
+// .swal-button:active {
+//   background-color: $purplishRed;
+// }
+// @media (max-width: 500px) {
+//   .swal-modal {
+//     width: calc(100% - 70px);
+//   }
+// }

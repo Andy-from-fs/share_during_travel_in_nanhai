@@ -1,3 +1,7 @@
+#street {
+  display: none;
+}
+
 .show-list {
   padding: 5px 10px 30px 10px;
 }

@@ -9,7 +9,9 @@ $gray: rgb(102, 102, 102);
   cursor: pointer;
 }
 
-
+#street{
+  display: none;
+}
 
 .show-list {
   padding: 5px 10px 30px 10px;
@@ -160,7 +162,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    @include clickEventInIOS;;
+    @include clickEventInIOS;
     > img {
       height: 2.2rem;
     }

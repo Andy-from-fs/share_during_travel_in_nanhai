@@ -51,7 +51,10 @@ function clickLike(text) {
       });
       $.each(likeList, function(indexInArray, valueOfElement) {
         if (valueOfElement === data.id) {
+          console.log(valueOfElement);
+          console.log(data.id);
           $("#detail .like").disHasLike("font");
+          // break;
         }
       });
       setTimeout(function() {

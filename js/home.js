@@ -252,11 +252,11 @@ var ruleSingle = function() {
 
 // swal("Here's the title!", "...and here's the text!");
 
-$("body").on("click", ".show-list .view", function() {
+$("body").on("click", "#all .view", function() {
   // console.log("click");
   var enterArr,
     id = $(this).attr("shareid");
-  $.each(shareList, function(indexInArray, valueOfElement) {
+  $.each(all.shareList, function(indexInArray, valueOfElement) {
     if (valueOfElement.id == id) {
       enterArr = valueOfElement;
     }
@@ -275,10 +275,12 @@ $("body").on("click", ".show-list .view", function() {
 });
 
 //分享内容获取
-var psize = 10,
-  page = 0,
-  shareList = [],
-  isEnd = false;
+var all = {
+  psize: 10,
+  page: 0,
+  shareList: [],
+  isEnd: false
+};
 var getShare = function(data) {
   $.ajax({
     type: "post",
@@ -289,10 +291,18 @@ var getShare = function(data) {
       console.log(response);
       if (response.statusCode === "200") {
         //检查是否到底
-        if (response.data.length < psize) {
+        if (response.data.length < all.psize) {
           shareEnd("all");
+          all.isEnd = true;
         }
-
+        insertShare(response, "#all", all.shareList);
+      } else if (response.msg === "没有记录") {
+        shareEnd("all");
+      }
+    }
+  });
+};
+function insertShare(response, wrapperSelector, shareList) {
         $.each(response.data, function(indexInArray, valueOfElement) {
           shareList.push(valueOfElement);
           //检查点赞 insert
@@ -327,50 +337,53 @@ var getShare = function(data) {
          </div>\
        </div>';
           var wayClass = (indexInArray + 1) % 2 === 1 ? "_left" : "_right";
-          $(html).appendTo("#all ." + wayClass);
+    $(html).appendTo(wrapperSelector + " ." + wayClass);
         });
-        $("#all .like").on("click", function(e) {
-          clickLike.call(this,"font");
-          $(this).children('.like-num').html(parseInt($(this).children('.like-num').html())+1);
+  $(wrapperSelector + " .like").on("click", function(e) {
+    clickLike.call(this, "font");
+    $(this)
+      .children(".like-num")
+      .html(
+        parseInt(
+          $(this)
+            .children(".like-num")
+            .html()
+        ) + 1
+      );
           e.preventDefault();
           e.stopPropagation();
         });
         $.each(likeList, function(indexInArray, valueOfElement) {
-          $('#all .like[shareid="' + valueOfElement + '"]').disHasLike();
+    $(
+      wrapperSelector + ' .like[shareid="' + valueOfElement + '"]'
+    ).disHasLike();
         });
-      } else if (response.msg === "没有记录") {
-        shareEnd("all");
       }
-    }
-  });
-};
+
 checkLike(getShare, [
   {
-    psize: psize,
-    page: ++page
+    psize: all.psize,
+    page: ++all.page
   }
 ]);
 
 //上拉加载
-$(window).scroll(
-  $.throttle(function() {
+var loadMoreInAll = $.throttle(function() {
     var winScrollTop = $(window).scrollTop();
     var percent = winScrollTop / ($("body").outerHeight() - $(window).height());
-    if (percent > 0.7 && !isEnd) {
+  if (percent > 0.7 && !all.isEnd) {
       console.log("加载更多");
       getShare({
-        psize: psize,
-        page: ++page
+      psize: all.psize,
+      page: ++all.page
       });
     }
-  }, 300)
-);
+}, 300);
+$(window).scroll(loadMoreInAll);
 
 //到底处理
 function shareEnd(wrapperText) {
-  isEnd = true;
   $("#" + wrapperText + " .situation").html("到底了~");
-  console.log(isEnd);
 }
 
 //获取点赞记录

@@ -117,11 +117,20 @@ $userinfo = mc_oauth_userinfo();
   </head>
 
   <body>
-    <div class="container show-list" >
+    <div class="container show-list">
       <div class="wrapper" id="all">
         <div class="_left col">
           
         </div>
+        <div class="_right col">
+        </div>
+        <div class="clear"></div>
+        <div class="situation">加载中…</div>
+      </div>
+      <div class="wrapper" id="street">
+        <div class="_left col">
+
+    </div>
         <div class="_right col">
         </div>
         <div class="clear"></div>
@@ -173,9 +182,10 @@ $userinfo = mc_oauth_userinfo();
       var personalHomeUrl =
         "{php echo $this->createMobileUrl('indexnew',array(tp=>'nhly/nanhai-yinji/page/personalHome'))}&rid=<?php echo $_REQUEST['rid']; ?>";
       var gameRuleContent = '<?php echo htmlspecialchars_decode($temParams["intro"]); ?>';
-      var getShareApi="{php echo $this->createMobileUrl('other',array('otherdo'=>'get_share','rid'=>$rid));}";
-      var likeApi="{php echo $this->createMobileUrl('other',array('otherdo'=>'add_star','rid'=>$rid));}";
-      var checkLikeApi="{php echo $this->createMobileUrl('other',array('otherdo'=>'get_star_record','rid'=>$rid));}";
+      var getShareApi = "{php echo $this->createMobileUrl('other',array('otherdo'=>'get_share','rid'=>$rid));}";
+      var likeApi = "{php echo $this->createMobileUrl('other',array('otherdo'=>'add_star','rid'=>$rid));}";
+      var checkLikeApi = "{php echo $this->createMobileUrl('other',array('otherdo'=>'get_star_record','rid'=>$rid));}";
+      var getInfoApi = "{php echo $this->createMobileUrl('other',array('otherdo'=>'get_info','rid'=>$rid));}";
     </script>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/vconsole.min.js" remote="yes" ignoreapd="1"></script>
@@ -186,25 +196,6 @@ $userinfo = mc_oauth_userinfo();
     <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/detail.js"></script>
     <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/home.js"></script>
 
-    <script>
-      //上拉加载
-      // $(window).scroll(function () {
-      //   // console.log('scroll');
-      //   var winScrollTop = $(window).scrollTop();
-      //   var percent = winScrollTop / ($("body").outerHeight() - $(window).height());
-      //   // console.log(winScrollTop);
-      //   // console.log($("body").outerHeight());
-
-      //   if (percent > 0.9) {
-      //     //book play
-      //     // console.log('book play')
-      //     // _bookPlay();
-      //     console.log('加载更多');
-      //     $('.show-list ._left').append($('.show-list ._left').children().clone(true));
-      //     $('.show-list ._right').append($('.show-list ._left').children().clone(true));
-      //   }
-      // });
-    </script>
   </body>
 
   </html>
