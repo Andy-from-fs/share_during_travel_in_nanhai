@@ -211,10 +211,10 @@ function getShareList() {
           <div class="btn-group">\
           <span class="icon-heart" shareid="' +
             valueOfElement.id +
-            '">点赞</span>\
+            '"></span>\
           <span class="icon-trashcan" shareid="' +
             valueOfElement.id +
-            '">删除</span>\
+            '"></span>\
           </div>\
           </div>'
           $(html).appendTo('#share-content')
@@ -224,6 +224,9 @@ function getShareList() {
         $('body').on('click', '#share-content .icon-trashcan', delHandler)
         //点赞
         .on('click', '#share-content .icon-heart', clickLike);
+        $.each(likeList, function (indexInArray, valueOfElement) { 
+          $('#share-content .icon-heart[shareid="'+valueOfElement+'"]').disHasLike();
+        });
       } else {
         swal({
           title: '获取你的稿件失败',
@@ -235,7 +238,7 @@ function getShareList() {
     }
   })
 }
-getShareList();
+checkLike(getShareList);
 
 //删除
 function delHandler() {
@@ -303,21 +306,24 @@ $('body').on('click', '.images', function () {
 
 //获取点赞记录
 var likeList;
-$.ajax({
-  type: "post",
-  url: checkLikeApi,
-  dataType: "json",
-  success: function (response) {
-    console.log(response);
-    if (response.statusCode === "200") {
-      likeList = response.data;
-    } else if (response.msg !== '没有记录') {
-      swal({
-        title: '获取点赞记录失败',
-        text: response.msg,
-        type: 'error',
-        confirmButtonColor: "#af301b"
-      })
+function checkLike(callback){
+  $.ajax({
+    type: "post",
+    url: checkLikeApi,
+    dataType: "json",
+    success: function (response) {
+      console.log(response);
+      if (response.statusCode === "200") {
+        likeList = response.data;
+        callback();
+      } else if (response.msg !== '没有记录') {
+        swal({
+          title: '获取点赞记录失败',
+          text: response.msg+',请检查网络。',
+          type: 'error',
+          confirmButtonColor: "#af301b"
+        })
+      }
     }
-  }
-});
+  });
+}

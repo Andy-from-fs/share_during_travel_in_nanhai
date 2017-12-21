@@ -373,21 +373,3 @@ body {
 .icon-user {
   cursor: pointer;
 }
-
-.swal-footer {
-  text-align: center;
-}
-
-.swal-button {
-  background-color: #af301b;
-}
-
-.swal-button:active {
-  background-color: #af301b;
-}
-
-@media (max-width: 500px) {
-  .swal-modal {
-    width: calc(100% - 70px);
-  }
-}

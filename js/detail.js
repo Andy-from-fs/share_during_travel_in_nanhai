@@ -12,7 +12,7 @@ function clickLike() {
     success: function (response) {
       console.log(response);
       if(response.statusCode==="200"){
-        $(el).addClass('like-on');
+        $(el).disHasLike();
       }else{
         swal({
           title: '点赞失败失败',

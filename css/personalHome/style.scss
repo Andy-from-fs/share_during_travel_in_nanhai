@@ -153,8 +153,8 @@ header {
       .icon-heart{
         padding: 6px 10px 3px 10px;
         font-size: 1.5rem;
-        color: #e95151;
-        border: 1px solid #e95151;
+        color: $gray;
+        border: 1px solid $gray;
         line-height: 2.1rem;
         height: 2.1rem;
         border-radius: 1rem;
@@ -179,9 +179,9 @@ header {
   }
 }
 
-.hasLike{
-  color: $gray!important;
-  border: 1ps solid $gray!important;
+.has-like{
+  color: $heartPink!important;
+  border: 1ps solid $heartPink!important;
 }
 .noPass{
   color: $heartPink!important;

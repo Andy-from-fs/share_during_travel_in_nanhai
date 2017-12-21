@@ -166,8 +166,8 @@ header .sum .item .num {
 #share-content .item .btn-group .icon-heart {
   padding: 6px 10px 3px 10px;
   font-size: 1.5rem;
-  color: #e95151;
-  border: 1px solid #e95151;
+  color: #666666;
+  border: 1px solid #666666;
   line-height: 2.1rem;
   height: 2.1rem;
   border-radius: 1rem;
@@ -192,9 +192,9 @@ header .sum .item .num {
   font-size: 2rem;
 }
 
-.hasLike {
-  color: #666666 !important;
-  border: 1ps solid #666666 !important;
+.has-like {
+  color: #e95151 !important;
+  border: 1ps solid #e95151 !important;
 }
 
 .noPass {

@@ -10,6 +10,16 @@
   });
 })(jQuery);
 
+(function($) {
+  $.fn.extend({
+    disHasLike: function() {
+      $(this)
+        .addClass("has-like like-on")
+        .attr("disabled", true);
+    }
+  });
+})(jQuery);
+
 //获取图片完整路径
 function tomedia(src, thumbnail, quality) {
   if (typeof thumbnail !== "string") {
