@@ -34,6 +34,7 @@ function clickLike(text) {
   var imgIsSame = false;
   var sum = 3;
   var changeContent = function(data) {
+    console.log(data);
     if (detail.id !== data.id) {
       detail.id = data.id;
       var imgWarp = $("#swiper .swipe-wrap").empty();
@@ -51,8 +52,6 @@ function clickLike(text) {
       });
       $.each(likeList, function(indexInArray, valueOfElement) {
         if (valueOfElement === data.id) {
-          console.log(valueOfElement);
-          console.log(data.id);
           $("#detail .like").disHasLike("font");
           // break;
         }
@@ -65,6 +64,8 @@ function clickLike(text) {
       $("#detail .location span:last").html(data.street + " " + data.address);
       $("#detail p.content").html(data.remark);
       $("#detail .like").attr("shareid", data.id);
+      $("#detail .name").html(data.username);
+      $("#detail .avatar").attr('src',data.avatar);
     }
   };
 
