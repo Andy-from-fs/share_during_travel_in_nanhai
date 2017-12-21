@@ -172,6 +172,8 @@ getInfo()
 var shareList;
 
 function getShareList() {
+  console.log('获取个人分享');
+  
   page++
   $.ajax({
     type: 'post',
@@ -223,14 +225,14 @@ function getShareList() {
         //删除
         $('body').on('click', '#share-content .icon-trashcan', delHandler)
         //点赞
-        .on('click', '#share-content .icon-heart', clickLike);
+        $('#share-content .icon-heart').on('click', clickLike);
         $.each(likeList, function (indexInArray, valueOfElement) { 
           $('#share-content .icon-heart[shareid="'+valueOfElement+'"]').disHasLike();
         });
       } else {
         swal({
           title: '获取你的稿件失败',
-          text: '请检查网络连接情况',
+          text: response.msg+'，请检查网络连接情况。',
           type: 'error',
           confirmButtonColor: "#af301b"
         });
@@ -305,7 +307,7 @@ $('body').on('click', '.images', function () {
 });
 
 //获取点赞记录
-var likeList;
+var likeList=[];
 function checkLike(callback){
   $.ajax({
     type: "post",
@@ -323,6 +325,8 @@ function checkLike(callback){
           type: 'error',
           confirmButtonColor: "#af301b"
         })
+      } else{
+        callback();
       }
     }
   });

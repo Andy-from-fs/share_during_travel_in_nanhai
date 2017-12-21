@@ -469,7 +469,9 @@ function submit() {
             title: "分享成功",
             text: "2秒后自动跳转至个人主页。",
             timer: 2000,
-            showConfirmButton: false,
+            showCancelButton: true,
+            confirmButtonColor: "#af301b",
+            cancelButtonText:'留在本页',
             type: "success"
           },
           function() {

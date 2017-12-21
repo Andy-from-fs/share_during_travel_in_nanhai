@@ -254,9 +254,18 @@ var ruleSingle = function() {
 
 $("body").on("click", ".show-list .view", function() {
   // console.log("click");
-  $.detail.turn($(this).attr("viewId"));
+  var enterArr,
+    id = $(this).attr("shareid");
+  $.each(shareList, function(indexInArray, valueOfElement) {
+    if (valueOfElement.id == id) {
+      enterArr = valueOfElement;
+    }
+  });
+  console.log(enterArr);
+
+  $.detail.turn(enterArr);
   setTimeout(function() {
-    var display=$(".footer").css("display");
+    var display = $(".footer").css("display");
     $(".footer").css("display", "none");
     var showFooter = function() {
       $(".footer").css("display", display);
@@ -264,3 +273,127 @@ $("body").on("click", ".show-list .view", function() {
     $("body").on("click", "#detail .btn-back", showFooter);
   }, 800);
 });
+
+//分享内容获取
+var psize = 10,
+  page = 0,
+  shareList = [],
+  isEnd = false;
+var getShare = function(data) {
+  $.ajax({
+    type: "post",
+    url: getShareApi,
+    data: data,
+    dataType: "json",
+    success: function(response) {
+      console.log(response);
+      if (response.statusCode === "200") {
+        //检查是否到底
+        if (response.data.length < psize) {
+          shareEnd("all");
+        }
+
+        $.each(response.data, function(indexInArray, valueOfElement) {
+          shareList.push(valueOfElement);
+          //检查点赞 insert
+
+          var timeObj = splitTimeStr(valueOfElement.createtime);
+          var html =
+            '<div class="view" shareid="' +
+            valueOfElement.id +
+            '">\
+         <img src="' +
+            tomedia(valueOfElement.image.split(",")[0]) +
+            '" width="100%">\
+         <div class="info">\
+           <div class="location">' +
+            valueOfElement.address +
+            '</div>\
+           <div class="like-time">\
+             <div class="time">' +
+            timeObj.month +
+            "-" +
+            timeObj.day +
+            '</div>\
+             <div class="like" shareid="' +
+            valueOfElement.id +
+            '">\
+               <span class="like-num">' +
+            valueOfElement.star +
+            '</span>\
+               <span class="icon-heart"></span>\
+             </div>\
+           </div>\
+         </div>\
+       </div>';
+          var wayClass = (indexInArray + 1) % 2 === 1 ? "_left" : "_right";
+          $(html).appendTo("#all ." + wayClass);
+        });
+        $("#all .like").on("click", function(e) {
+          clickLike("font");
+          e.preventDefault();
+          e.stopPropagation();
+        });
+        $.each(likeList, function(indexInArray, valueOfElement) {
+          $('#all .like[shareid="' + valueOfElement + '"]').disHasLike();
+        });
+      } else if (response.msg === "没有记录") {
+        shareEnd("all");
+      }
+    }
+  });
+};
+checkLike(getShare, [
+  {
+    psize: psize,
+    page: ++page
+  }
+]);
+
+//上拉加载
+$(window).scroll(
+  $.throttle(function() {
+    var winScrollTop = $(window).scrollTop();
+    var percent = winScrollTop / ($("body").outerHeight() - $(window).height());
+    if (percent > 0.7 && !isEnd) {
+      console.log("加载更多");
+      getShare({
+        psize: psize,
+        page: ++page
+      });
+    }
+  }, 300)
+);
+
+//到底处理
+function shareEnd(wrapperText) {
+  isEnd = true;
+  $("#" + wrapperText + " .situation").html("到底了~");
+  console.log(isEnd);
+}
+
+//获取点赞记录
+var likeList = [];
+function checkLike(callback, args) {
+  $.ajax({
+    type: "post",
+    url: checkLikeApi,
+    dataType: "json",
+    success: function(response) {
+      console.log(response);
+      if (response.statusCode === "200") {
+        likeList = response.data;
+        callback.apply(this, args);
+      } else if (response.msg !== "没有记录") {
+        swal({
+          title: "获取点赞记录失败",
+          text: response.msg + ",请检查网络。",
+          type: "error",
+          confirmButtonColor: "#af301b"
+        });
+      } else {
+        callback.apply(this, args);
+      }
+    }
+  });
+}

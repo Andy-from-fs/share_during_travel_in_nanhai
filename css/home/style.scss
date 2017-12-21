@@ -12,15 +12,21 @@ $gray: rgb(102, 102, 102);
 
 
 .show-list {
-  padding: 5px 10px;
+  padding: 5px 10px 30px 10px;
   .wrapper {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-    align-items: flex-start;
+    // display: flex;
+    // flex-flow: row nowrap;
+    // justify-content: space-around;
+    // align-items: flex-start;
+  }
+  .situation{
+    text-align: center;
+    font-size: 1.5rem;
+    color: #666;
   }
   .col {
-    flex: 1;
+    // flex: 1;
+    width: 48%;
   }
   ._left {
     margin-right: 5px;
@@ -53,7 +59,13 @@ $gray: rgb(102, 102, 102);
       position: absolute;
       bottom: 0;
       .location {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .like{
+        cursor: pointer;
       }
       .like-time {
         font-size: 1.2rem;
@@ -354,4 +366,7 @@ body {
   @include clickEventInIOS;
 }
 
+.like-on{
+  color: $heartPink!important;
+}
 

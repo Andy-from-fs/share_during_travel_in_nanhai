@@ -8,12 +8,13 @@
       };
     },
     //节流函数
-    throttle : function(fn, delay){
+    throttle: function(fn, delay) {
       var timer = null;
-      return function(){
-        var context = this, args = arguments;
+      return function() {
+        var context = this,
+          args = arguments;
         clearTimeout(timer);
-        timer = setTimeout(function(){
+        timer = setTimeout(function() {
           fn.apply(context, args);
         }, delay);
       };
@@ -21,10 +22,13 @@
   });
   $.fn.extend({
     //点赞后
-    disHasLike: function() {
+    disHasLike: function(text) {
       $(this)
         .addClass("has-like like-on")
-        .attr("disabled", true);
+        .off("click");
+      if(text==='font'){
+        $(this).removeClass("has-like");
+      }
     }
   });
 })(jQuery);

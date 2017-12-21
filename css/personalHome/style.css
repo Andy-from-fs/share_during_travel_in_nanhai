@@ -194,7 +194,7 @@ header .sum .item .num {
 
 .has-like {
   color: #e95151 !important;
-  border: 1ps solid #e95151 !important;
+  border: 1px solid #e95151 !important;
 }
 
 .noPass {

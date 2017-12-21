@@ -1,7 +1,7 @@
 // 点赞方法
-function clickLike() {
-  var id = $(this).attr('shareid');
-  var el=$(this);
+function clickLike(text) {
+  var id = $(this).attr("shareid");
+  var el = $(this);
   $.ajax({
     type: "post",
     url: likeApi,
@@ -9,15 +9,19 @@ function clickLike() {
       share_id: id
     },
     dataType: "json",
-    success: function (response) {
+    success: function(response) {
       console.log(response);
-      if(response.statusCode==="200"){
-        $(el).disHasLike();
-      }else{
+      if (response.statusCode === "200") {
+        if(typeof(text)==="string"){
+          $(el).disHasLike(text);
+        }else{
+          $(el).disHasLike();
+        }
+      } else {
         swal({
-          title: '点赞失败失败',
+          title: "点赞失败失败",
           text: response.msg,
-          type: 'error',
+          type: "error",
           confirmButtonColor: "#af301b"
         });
       }
@@ -28,32 +32,43 @@ function clickLike() {
 // 细览页
 (function detailPart($) {
   var imgIsSame = false;
-  var sum = 3
-  var changeContent = function (data) {
+  var sum = 3;
+  var changeContent = function(data) {
     if (detail.id !== data.id) {
       detail.id = data.id;
-      var imgWarp = $('#swiper .swipe-wrap').empty()
-      window.swipe = null
-      sum = 0
-      $.each(data.image.split(','), function (indexInArray, valueOfElement) {
-        var html = '<img src="' + tomedia(valueOfElement, '100p') + '" imgUrl="' + valueOfElement + '">'
-        $(html).appendTo(imgWarp)
-        sum++
-      })
-      setTimeout(function () {
-        swipeInit()
-      }, 800)
+      var imgWarp = $("#swiper .swipe-wrap").empty();
+      window.swipe = null;
+      sum = 0;
+      $.each(data.image.split(","), function(indexInArray, valueOfElement) {
+        var html =
+          '<img src="' +
+          tomedia(valueOfElement, "100p") +
+          '" imgUrl="' +
+          valueOfElement +
+          '">';
+        $(html).appendTo(imgWarp);
+        sum++;
+      });
+      $.each(likeList, function(indexInArray, valueOfElement) {
+        if (valueOfElement === data.id) {
+          $("#detail .like").disHasLike("font");
+        }
+      });
+      setTimeout(function() {
+        swipeInit();
+      }, 800);
       // $('#detail .avatar').attr('src',tomedia())
       // $('#detail .name').html()
-      $('#detail .location span:last').html(data.street + ' ' + data.address)
-      $('#detail p.content').html(data.remark)
-      $('#detail .like').attr('shareid', data.id)
+      $("#detail .location span:last").html(data.street + " " + data.address);
+      $("#detail p.content").html(data.remark);
+      $("#detail .like").attr("shareid", data.id);
     }
-  }
+  };
 
-  var swipeInit = function () {
+  var swipeInit = function() {
     imgIsSame = true;
-    window.swipe = $('#swiper').Swipe({
+    window.swipe = $("#swiper")
+      .Swipe({
         startSlide: 0,
         auto: 3000,
         draggable: false,
@@ -61,69 +76,80 @@ function clickLike() {
         continuous: true,
         disableScroll: true,
         stopPropagation: true,
-        callback: function (index, element) {
+        callback: function(index, element) {
           if (!imgIsSame) {
-            var dist = $(window).height() * 0.618 - $(element).height()
-            $('#swiper .index').css({
-              'margin-bottom': dist + 'px'
-            })
-            $('#detail .wrapper').css({
-              'margin-top': -1 * dist + 'px',
-              'min-height': ($(window).height() - $(element).height()) + 'px'
-            })
+            console.log("fix");
+            var dist = $("#swiper").height() - $(element).height();
+            $("#swiper .index").css({
+              "margin-bottom": dist + "px"
+            });
+            $("#detail .wrapper").css({
+              "margin-top": -1 * dist + "px",
+              "min-height": window.screen.height - $(element).height() + "px"
+            });
           }
         },
-        transitionEnd: function (index, element) {
+        transitionEnd: function(index, element) {
           // console.log(index)
-          $('#swiper .index .num').html(index + 1 + '/' + sum)
+          $("#swiper .index .num").html(index + 1 + "/" + sum);
         }
       })
-      .data('Swipe')
-    $('#swiper img').each(function (index, element) {
-      if ($(element).height() > 0.618 * $(window).height()) {
-        $(element).height(0.618 * $(window).height())
+      .data("Swipe");
+    $("#swiper img").each(function(index, element) {
+      if ($(element).height() > 0.618 * window.screen.height) {
+        $(element).height(0.618 * window.screen.height);
       }
-      if ($(element).height() !== $('#swiper').height()) {
-        imgIsSame = false;
+      if ($("#swiper img").length > 1) {
+        if ($(element).height() !== $("#swiper").height()) {
+          imgIsSame = false;
+        }
       }
-    })
+    });
     // console.log(window.swipe.slide())
-    $('#detail .wrapper').css({
-      'min-height': ($(window).height() - $('#swiper img[data-index="0"]').height()) + 'px'
+    // if (
+    //   $('#swiper img[data-index="0"]').height() >
+    //   window.screen.height * 0.618
+    // )
+    $("#detail .wrapper").css({
+      "min-height":
+        window.screen.height - $('#swiper img[data-index="0"]').height() + "px"
     });
     if (!imgIsSame) {
-      var dist = $(window).height() * 0.618 - $('#swiper img[data-index="0"]').height()
-      $('#swiper .index').css({
-        'margin-bottom': dist + 'px'
-      })
-      $('#detail .wrapper').css({
-        'margin-top': -1 * dist + 'px',
-      })
+      console.log("initfix");
+
+      var dist =
+        $("#swiper").height() - $('#swiper img[data-index="0"]').height();
+      $("#swiper .index").css({
+        "margin-bottom": dist + "px"
+      });
+      $("#detail .wrapper").css({
+        "margin-top": -1 * dist + "px"
+      });
     }
-  }
+  };
 
   var detail = {
     id: null,
     isShow: false,
-    turn: function (data) {
-      var element = createDetail()
+    turn: function(data) {
+      var element = createDetail();
       if (!detail.isShow) {
         // show
-        changeContent(data)
-        $(element).css('display', 'block')
-        detail.isShow = true
+        changeContent(data);
+        $(element).css("display", "block");
+        detail.isShow = true;
       } else {
         // hide
-        $(element).addClass('fadeOut')
-        setTimeout(function () {
-          $(element).removeClass('fadeOut')
-          $(element).css('display', 'none')
-        }, 800)
-        detail.isShow = false
+        $(element).addClass("fadeOut");
+        setTimeout(function() {
+          $(element).removeClass("fadeOut");
+          $(element).css("display", "none");
+        }, 800);
+        detail.isShow = false;
       }
     }
-  }
-  var createDetail = $.singleton(function () {
+  };
+  var createDetail = $.singleton(function() {
     var html =
       ' <div id="detail" class="animated">\
         <div class="content">\
@@ -157,11 +183,12 @@ function clickLike() {
           <div class="clear"></div>\
         </div>\
         </div>\
-    </div>'
-    var element = $(html).appendTo('body');
-    $('body').on('click', '#detail .btn-back', detail.turn).on('click', '#detail .like', clickLike);
-    return element
-  })
+    </div>';
+    var element = $(html).appendTo("body");
+    $("body").on("click", "#detail .btn-back", detail.turn);
+    $("#detail .like").on("click", clickLike);
+    return element;
+  });
 
-  $.detail = detail
-})(jQuery)
+  $.detail = detail;
+})(jQuery);
