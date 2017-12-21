@@ -505,15 +505,15 @@ checkIsRegister(
 );
 
 //筛选
-(function(){
+(function() {
   var street = {
-    name:'',
+    name: "",
     psize: 10,
     page: 0,
     shareList: [],
-    isEnd: false,
+    isEnd: false
   };
-  var getShareInStreet = function(data,callBack) {
+  var getShareInStreet = function(data, callBack) {
     $.ajax({
       type: "post",
       url: getShareApi,
@@ -526,7 +526,7 @@ checkIsRegister(
           if (response.data.length < street.psize) {
             shareEnd("street");
             street.isEnd = true;
-            if(typeof(callBack)==='function'){
+            if (typeof callBack === "function") {
               callBack();
             }
           }
@@ -534,7 +534,7 @@ checkIsRegister(
         } else if (response.msg === "没有记录") {
           shareEnd("street");
           street.isEnd = true;
-          if(typeof(callBack)==='function'){
+          if (typeof callBack === "function") {
             callBack();
           }
         }
@@ -546,30 +546,42 @@ checkIsRegister(
     var percent = winScrollTop / ($("body").outerHeight() - $(window).height());
     if (percent > 0.7 && !street.isEnd) {
       console.log("加载更多");
-      getShare({
-        psize: street.psize,
-        page: ++street.page,
-        street:street.name
-      },function(){
-        $('#all').fadeOut();
-      $('#street').delay(500).fadeIn();
-      });
+      getShare(
+        {
+          psize: street.psize,
+          page: ++street.page,
+          street: street.name
+        },
+        function() {
+          $("#all").fadeOut();
+          $("#street")
+            .delay(500)
+            .fadeIn();
+        }
+      );
     }
-  }, 300); 
-  $('.region-bar .region-item').on('click',function(){
-    var type=$(this).html();
-    if(type==="全部"){
-      $(window).off('scroll').scroll(loadMoreInAll);
-      $('#street').fadeOut();
-      $('#all').delay(500).fadeIn();
-    }else{
-      street.name=type;
-      $(window).off('scroll').scroll(loadMoreInStreet);
+  }, 300);
+  $(".region-bar .region-item").on("click", function() {
+    var type = $(this).html();
+    if (type === "全部") {
+      $(window)
+        .off("scroll")
+        .scroll(loadMoreInAll);
+      $("#street").fadeOut();
+      $("#all")
+        .delay(500)
+        .fadeIn();
+    } else {
+      street.name = type;
+      $('#street .col').empty();
+      $(window)
+        .off("scroll")
+        .scroll(loadMoreInStreet);
       console.log(type);
       getShareInStreet({
         psize: street.psize,
         page: street.page,
-        street:street.name
+        street: street.name
       });
     }
   });
@@ -583,7 +595,7 @@ checkIsRegister(
       }
     });
     console.log(enterArr);
-  
+
     $.detail.turn(enterArr);
     setTimeout(function() {
       var display = $(".footer").css("display");
@@ -594,4 +606,4 @@ checkIsRegister(
       $("body").on("click", "#detail .btn-back", showFooter);
     }, 800);
   });
-})()
+})();
