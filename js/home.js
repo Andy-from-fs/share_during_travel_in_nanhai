@@ -513,7 +513,7 @@ checkIsRegister(
     shareList: [],
     isEnd: false,
   };
-  var getShareInStreet = function(data) {
+  var getShareInStreet = function(data,callBack) {
     $.ajax({
       type: "post",
       url: getShareApi,
@@ -526,11 +526,17 @@ checkIsRegister(
           if (response.data.length < street.psize) {
             shareEnd("street");
             street.isEnd = true;
+            if(typeof(callBack)==='function'){
+              callBack();
+            }
           }
           insertShare(response, "#street", street.shareList);
         } else if (response.msg === "没有记录") {
           shareEnd("street");
           street.isEnd = true;
+          if(typeof(callBack)==='function'){
+            callBack();
+          }
         }
       }
     });
@@ -544,6 +550,9 @@ checkIsRegister(
         psize: street.psize,
         page: ++street.page,
         street:street.name
+      },function(){
+        $('#all').fadeOut();
+      $('#street').delay(500).fadeIn();
       });
     }
   }, 300); 
@@ -562,7 +571,6 @@ checkIsRegister(
         page: street.page,
         street:street.name
       });
-      $(window)
     }
   });
   $("body").on("click", "#street .view", function() {
