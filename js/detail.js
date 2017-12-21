@@ -2,9 +2,16 @@
 function clickLike(text) {
   var id = $(this).attr("shareid");
   var el = $(this);
+  if(!$.loading.isShow){
   $.ajax({
     type: "post",
     url: likeApi,
+    beforeSend: function(XHR) {
+      $.loading.turn('点赞通信中');
+    },
+    complete: function(XMLHttpRequest, textStatus) {
+      $.loading.turn();
+    },
     data: {
       share_id: id
     },
@@ -26,7 +33,7 @@ function clickLike(text) {
         });
       }
     }
-  });
+  });}
 }
 
 // 细览页
@@ -74,7 +81,7 @@ function clickLike(text) {
     window.swipe = $("#swiper")
       .Swipe({
         startSlide: 0,
-        auto: 3000,
+        // auto: 3000,
         draggable: false,
         autoRestart: false,
         continuous: true,

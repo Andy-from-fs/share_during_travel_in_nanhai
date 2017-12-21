@@ -134,7 +134,6 @@ body {
 }
 
 .footer {
-  height: 5rem;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;

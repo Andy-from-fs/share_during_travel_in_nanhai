@@ -3,6 +3,7 @@
 //     icon: "success",
 //   });
 // }
+$.loading.turn();
 $(".img-list").height(($(window).width() - 30) * 0.3);
 $(".img-list .word").css("line-height", ($(window).width() - 30) * 0.3 + "px");
 

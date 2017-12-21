@@ -3,6 +3,7 @@ $(".region-bar .top .icon-user").css(
   "line-height",
   $(".region-bar").height() + "px"
 );
+$('.footer').height($('.footer .rule span').height()+$('.footer .rule img').height()+'px')
 
 var isBarSwitch = false,
   _rule,
@@ -588,6 +589,7 @@ checkIsRegister(
         }
       );
     }
+    clickBtnRegions();
   });
   $("body").on("click", "#street .view", function() {
     // console.log("click");
