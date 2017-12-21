@@ -330,7 +330,8 @@ var getShare = function(data) {
           $(html).appendTo("#all ." + wayClass);
         });
         $("#all .like").on("click", function(e) {
-          clickLike("font");
+          clickLike.call(this,"font");
+          $(this).children('.like-num').html(parseInt($(this).children('.like-num').html())+1);
           e.preventDefault();
           e.stopPropagation();
         });
