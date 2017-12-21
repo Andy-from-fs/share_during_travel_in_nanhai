@@ -526,11 +526,12 @@ checkIsRegister(
           if (response.data.length < street.psize) {
             shareEnd("street");
             street.isEnd = true;
-            if (typeof callBack === "function") {
-              callBack();
-            }
           }
           insertShare(response, "#street", street.shareList);
+          if (typeof callBack === "function") {
+            console.log(typeof callBack);
+            callBack();
+          }
         } else if (response.msg === "没有记录") {
           shareEnd("street");
           street.isEnd = true;
@@ -546,23 +547,16 @@ checkIsRegister(
     var percent = winScrollTop / ($("body").outerHeight() - $(window).height());
     if (percent > 0.7 && !street.isEnd) {
       console.log("加载更多");
-      getShare(
-        {
-          psize: street.psize,
-          page: ++street.page,
-          street: street.name
-        },
-        function() {
-          $("#all").fadeOut();
-          $("#street")
-            .delay(500)
-            .fadeIn();
-        }
-      );
+      getShareInStreet({
+        psize: street.psize,
+        page: ++street.page,
+        street: street.name
+      });
     }
   }, 300);
   $(".region-bar .region-item").on("click", function() {
     var type = $(this).html();
+    $("#region").html(type);
     if (type === "全部") {
       $(window)
         .off("scroll")
@@ -573,16 +567,26 @@ checkIsRegister(
         .fadeIn();
     } else {
       street.name = type;
-      $('#street .col').empty();
+      $("#street .col").empty();
       $(window)
         .off("scroll")
         .scroll(loadMoreInStreet);
       console.log(type);
-      getShareInStreet({
-        psize: street.psize,
-        page: street.page,
-        street: street.name
-      });
+      getShareInStreet(
+        {
+          psize: street.psize,
+          page: street.page,
+          street: street.name
+        },
+        function() {
+          console.log("show");
+
+          $("#all").fadeOut();
+          $("#street")
+            .delay(500)
+            .fadeIn();
+        }
+      );
     }
   });
   $("body").on("click", "#street .view", function() {
