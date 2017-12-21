@@ -142,8 +142,8 @@ $userinfo = mc_oauth_userinfo();
       <div class="top btn">
         <span id="region">全部</span>
         <span class="icon-back"></span>
-        <a href="{php echo $this->createMobileUrl('indexnew',array(tp=>'nhly/nanhai-yinji/page/personalHome'))}&rid=<?php echo $_REQUEST['rid']; ?>"
-          class="icon-user"></a>
+        <div  href="{php echo $this->createMobileUrl('indexnew',array(tp=>'nhly/nanhai-yinji/page/personalHome'))}&rid=<?php echo $_REQUEST['rid']; ?>"
+          class="btn icon-user" id="btn-my"></div>
       </div>
       <div class="region-container">
         <div class="region-wrapper">
@@ -165,11 +165,11 @@ $userinfo = mc_oauth_userinfo();
         <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/page.png">
         <span class="word">游戏规则</span>
       </div>
-      <div class="share btn">
-        <a class="circle" href="{php echo $this->createMobileUrl('indexnew',array(tp=>'nhly/nanhai-yinji/page/share'))}&rid=<?php echo $_REQUEST['rid']; ?>">
+      <div class="share btn" id="btn-share" href="{php echo $this->createMobileUrl('indexnew',array(tp=>'nhly/nanhai-yinji/page/share'))}&rid=<?php echo $_REQUEST['rid']; ?>">
+        <div class="circle" >
           <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/camera.png">
-        </a>
-        <a class="word" href="{php echo $this->createMobileUrl('indexnew',array(tp=>'nhly/nanhai-yinji/page/share'))}&rid=<?php echo $_REQUEST['rid']; ?>">分享</a>
+        </div>
+        <div class="word">分享</div>
       </div>
       <div class="rankList btn">
         <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/rank-list.png">
@@ -187,6 +187,7 @@ $userinfo = mc_oauth_userinfo();
       var checkLikeApi = "{php echo $this->createMobileUrl('other',array('otherdo'=>'get_star_record','rid'=>$rid));}";
       var getInfoApi = "{php echo $this->createMobileUrl('other',array('otherdo'=>'get_info','rid'=>$rid));}";
       var getSortApi = "{php echo $this->createMobileUrl('other',array('otherdo'=>'get_sort','rid'=>$rid));}";
+      var registerApi = "{php echo $this->createMobileUrl('other',array('otherdo'=>'add_info','rid'=>$rid));}";
     </script>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/vconsole.min.js" remote="yes" ignoreapd="1"></script>

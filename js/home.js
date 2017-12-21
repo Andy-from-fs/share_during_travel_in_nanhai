@@ -395,3 +395,113 @@ function checkLike(callback, args) {
     }
   });
 }
+
+//注册页面
+var createRegister = $.singleton(function() {
+  var html =
+    '<div id="register" class="fadeIn animated">\
+      <div class="title"><span class="_left icon-back"></span>用户信息登记</span>\
+      <div class="content-container">\
+        <div class="input-wrapper">\
+          <label for="name">姓名/昵称</label>\
+          <input type="text" name="name">\
+          <span class="hint">输入正确</span>\
+        </div>\
+        <div class="input-wrapper">\
+          <label for="phone">手机号码</label>\
+          <input type="text" name="phone">\
+          <span class="hint">请输入有效的手机号码</span>\
+        </div>\
+        <div class="btn-register">提交</div>\
+      </div>\
+    </div>';
+  var element = $(html).appendTo("body");
+  $("#register .btn-register").on("click", function() {
+    var data = {
+      username: $('#register input[name="name"]').val(),
+      mobile: $('#register input[name="phone"]').val()
+    };
+    $.ajax({
+      type: "post",
+      url: registerApi,
+      data: {
+        username: "haha",
+        mobile: "13250885448"
+      },
+      dataType: "json",
+      success: function(res) {
+        console.log(res);
+        if (res.statusCode === "200") {
+          swal(
+            {
+              title: "登记成功",
+              text: "你的名称:" + data.username + " 手机号码" + data.mobile,
+              type: "success",
+              confirmButtonColor: "#af301b"
+            },
+            function() {
+              // console.log(register.href);
+              window.location.href = register.href;
+            }
+          );
+          register.off(data);
+        }
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    });
+    // console.log(data);
+  });
+  $("#register .icon-back").on("click", function() {
+    register.off();
+  });
+  return element;
+});
+var register = {
+  on: function() {
+    console.log("on");
+    var element = createRegister();
+    $(element).css("display", "block");
+  },
+  off: function(data) {
+    var element = createRegister();
+    $(element).addClass("slideOutRight");
+    setTimeout(function() {
+      $(element).removeClass("slideOutRight");
+      $(element).css("display", "none");
+    }, 800);
+  },
+  href: ""
+};
+
+function checkIsRegister(noCallBack, yesCallback) {
+  $.ajax({
+    type: "post",
+    url: getInfoApi,
+    dataType: "json",
+    success: function(response) {
+      console.log(response);
+      if (response.statusCode === "200") {
+        console.log("已经注册");
+        yesCallback.call(this);
+      } else if (response.statusCode === "300") {
+        console.log("未注册");
+        noCallBack.call(this);
+      }
+    }
+  });
+}
+checkIsRegister(
+  function() {
+    $("body").on("click", "#btn-my,#btn-share", function() {
+      register.href = $(this).attr("href");
+      register.on();
+    });
+  },
+  function() {
+    $("body").on("click", "#btn-my,#btn-share", function() {
+      window.location.href = $(this).attr("href");
+    });
+  }
+);
