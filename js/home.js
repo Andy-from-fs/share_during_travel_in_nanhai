@@ -36,11 +36,75 @@ $("body")
 
 //排行榜
 (function rankListPart() {
+  var refresh = function() {
+    $("#rankList .list .item").remove();
+    $.ajax({
+      type: "post",
+      url: getSortApi,
+      dataType: "json",
+      success: function(response) {
+        console.log(response);
+        if (response.statusCode === "200") {
+          function setItem(selector, valueOfElement) {
+            if (valueOfElement.avatar !== "") {
+              $(selector + " .avatarImg").attr("src", valueOfElement.avatar);
+            }
+            $(selector + " .name").html(valueOfElement.username);
+            $(selector + " .like-num").html(valueOfElement.star);
+          }
+          rankList.data = response.data;
+          $.each(rankList.data, function(indexInArray, valueOfElement) {
+            // if(valueOfElement.avatar&&valueOfElement.avatar===""){
+            //   valueOfElement.avatar="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test-avatar.jpg";
+            // }
+            if (indexInArray === 0) {
+              setItem("#rankList .first", valueOfElement);
+            } else if (indexInArray === 1) {
+              setItem("#rankList .second", valueOfElement);
+            } else if (indexInArray === 2) {
+              setItem("#rankList .third", valueOfElement);
+            } else {
+              if (indexInArray < 10) {
+                var html =
+                  '<div class="item">\
+                    <span class="num">' +
+                  (parseInt(indexInArray) + 1) +
+                  '</span>\
+                    <div class="avatar-word">\
+                      <div class="avatar">\
+                        <img src="' +
+                  valueOfElement.avatar +
+                  '" class="avatarImg">\
+                      </div>\
+                      <div class="word">\
+                        <div class="name">' +
+                  valueOfElement.username +
+                  '</div>\
+                        <div class="like-wrapper">\
+                          <span class="icon-heart"></span>\
+                          <span class="like-num">' +
+                  valueOfElement.star +
+                  "</span>\
+                          <span>赞</span>\
+                        </div>\
+                      </div>\
+                    </div>\
+                  </div>";
+                $(html).appendTo("#rankList .list");
+              }
+            }
+          });
+        }
+      }
+    });
+  };
   var rankList = {
+    data: [],
     isShow: false,
     turn: function() {
       var element = createRankList();
       if (!rankList.isShow) {
+        refresh();
         //show
         $(element).css("display", "block");
         rankList.isShow = true;
@@ -104,86 +168,6 @@ $("body")
                 <div class="avatar">\
                   <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test-avatar.jpg" class="avatarImg">\
                   <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/third.png" class="mask">\
-                </div>\
-                <div class="word">\
-                  <div class="name">测试test测设test</div>\
-                  <div class="like-wrapper">\
-                    <span class="icon-heart"></span>\
-                    <span class="like-num">218000</span>\
-                    <span>赞</span>\
-                  </div>\
-                </div>\
-              </div>\
-            </div>\
-            <div class="item">\
-              <span class="num">4</span>\
-              <div class="avatar-word">\
-                <div class="avatar">\
-                  <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test-avatar.jpg" class="avatarImg">\
-                </div>\
-                <div class="word">\
-                  <div class="name">测试test测设test</div>\
-                  <div class="like-wrapper">\
-                    <span class="icon-heart"></span>\
-                    <span class="like-num">218000</span>\
-                    <span>赞</span>\
-                  </div>\
-                </div>\
-              </div>\
-            </div>\
-            <div class="item">\
-              <span class="num">5</span>\
-              <div class="avatar-word">\
-                <div class="avatar">\
-                  <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test-avatar.jpg" class="avatarImg">\
-                </div>\
-                <div class="word">\
-                  <div class="name">测试test测设test</div>\
-                  <div class="like-wrapper">\
-                    <span class="icon-heart"></span>\
-                    <span class="like-num">218000</span>\
-                    <span>赞</span>\
-                  </div>\
-                </div>\
-              </div>\
-            </div>\
-            <div class="item">\
-              <span class="num">6</span>\
-              <div class="avatar-word">\
-                <div class="avatar">\
-                  <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test-avatar.jpg" class="avatarImg">\
-                </div>\
-                <div class="word">\
-                  <div class="name">测试test测设test</div>\
-                  <div class="like-wrapper">\
-                    <span class="icon-heart"></span>\
-                    <span class="like-num">218000</span>\
-                    <span>赞</span>\
-                  </div>\
-                </div>\
-              </div>\
-            </div>\
-            <div class="item">\
-              <span class="num">7</span>\
-              <div class="avatar-word">\
-                <div class="avatar">\
-                  <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test-avatar.jpg" class="avatarImg">\
-                </div>\
-                <div class="word">\
-                  <div class="name">测试test测设test</div>\
-                  <div class="like-wrapper">\
-                    <span class="icon-heart"></span>\
-                    <span class="like-num">218000</span>\
-                    <span>赞</span>\
-                  </div>\
-                </div>\
-              </div>\
-            </div>\
-            <div class="item">\
-              <span class="num">8</span>\
-              <div class="avatar-word">\
-                <div class="avatar">\
-                  <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test-avatar.jpg" class="avatarImg">\
                 </div>\
                 <div class="word">\
                   <div class="name">测试test测设test</div>\
@@ -303,42 +287,42 @@ var getShare = function(data) {
   });
 };
 function insertShare(response, wrapperSelector, shareList) {
-        $.each(response.data, function(indexInArray, valueOfElement) {
-          shareList.push(valueOfElement);
-          //检查点赞 insert
+  $.each(response.data, function(indexInArray, valueOfElement) {
+    shareList.push(valueOfElement);
+    //检查点赞 insert
 
-          var timeObj = splitTimeStr(valueOfElement.createtime);
-          var html =
-            '<div class="view" shareid="' +
-            valueOfElement.id +
-            '">\
+    var timeObj = splitTimeStr(valueOfElement.createtime);
+    var html =
+      '<div class="view" shareid="' +
+      valueOfElement.id +
+      '">\
          <img src="' +
-            tomedia(valueOfElement.image.split(",")[0]) +
-            '" width="100%">\
+      tomedia(valueOfElement.image.split(",")[0]) +
+      '" width="100%">\
          <div class="info">\
            <div class="location">' +
-            valueOfElement.address +
-            '</div>\
+      valueOfElement.address +
+      '</div>\
            <div class="like-time">\
              <div class="time">' +
-            timeObj.month +
-            "-" +
-            timeObj.day +
-            '</div>\
+      timeObj.month +
+      "-" +
+      timeObj.day +
+      '</div>\
              <div class="like" shareid="' +
-            valueOfElement.id +
-            '">\
+      valueOfElement.id +
+      '">\
                <span class="like-num">' +
-            valueOfElement.star +
-            '</span>\
+      valueOfElement.star +
+      '</span>\
                <span class="icon-heart"></span>\
              </div>\
            </div>\
          </div>\
        </div>';
-          var wayClass = (indexInArray + 1) % 2 === 1 ? "_left" : "_right";
+    var wayClass = (indexInArray + 1) % 2 === 1 ? "_left" : "_right";
     $(html).appendTo(wrapperSelector + " ." + wayClass);
-        });
+  });
   $(wrapperSelector + " .like").on("click", function(e) {
     clickLike.call(this, "font");
     $(this)
@@ -350,15 +334,15 @@ function insertShare(response, wrapperSelector, shareList) {
             .html()
         ) + 1
       );
-          e.preventDefault();
-          e.stopPropagation();
-        });
-        $.each(likeList, function(indexInArray, valueOfElement) {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+  $.each(likeList, function(indexInArray, valueOfElement) {
     $(
       wrapperSelector + ' .like[shareid="' + valueOfElement + '"]'
     ).disHasLike();
-        });
-      }
+  });
+}
 
 checkLike(getShare, [
   {
@@ -369,15 +353,15 @@ checkLike(getShare, [
 
 //上拉加载
 var loadMoreInAll = $.throttle(function() {
-    var winScrollTop = $(window).scrollTop();
-    var percent = winScrollTop / ($("body").outerHeight() - $(window).height());
+  var winScrollTop = $(window).scrollTop();
+  var percent = winScrollTop / ($("body").outerHeight() - $(window).height());
   if (percent > 0.7 && !all.isEnd) {
-      console.log("加载更多");
-      getShare({
+    console.log("加载更多");
+    getShare({
       psize: all.psize,
       page: ++all.page
-      });
-    }
+    });
+  }
 }, 300);
 $(window).scroll(loadMoreInAll);
 
