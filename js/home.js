@@ -564,5 +564,26 @@ checkIsRegister(
       });
       $(window)
     }
-  })
+  });
+  $("body").on("click", "#street .view", function() {
+    // console.log("click");
+    var enterArr,
+      id = $(this).attr("shareid");
+    $.each(street.shareList, function(indexInArray, valueOfElement) {
+      if (valueOfElement.id == id) {
+        enterArr = valueOfElement;
+      }
+    });
+    console.log(enterArr);
+  
+    $.detail.turn(enterArr);
+    setTimeout(function() {
+      var display = $(".footer").css("display");
+      $(".footer").css("display", "none");
+      var showFooter = function() {
+        $(".footer").css("display", display);
+      };
+      $("body").on("click", "#detail .btn-back", showFooter);
+    }, 800);
+  });
 })()
