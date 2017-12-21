@@ -197,9 +197,6 @@ var ruleSingle = function() {
         <div class="btn-group">\
           <span class="icon-back"></span>\
           <span>活动规则</span>\
-          <a href="' +
-      personalHomeUrl +
-      '" class="icon-user"></a>\
         </div>\
         <div class="words">\
         </div>\
@@ -282,6 +279,7 @@ var getShare = function(data) {
         insertShare(response, "#all", all.shareList);
       } else if (response.msg === "没有记录") {
         shareEnd("all");
+        all.isEnd = true;
       }
     }
   });
@@ -505,3 +503,66 @@ checkIsRegister(
     });
   }
 );
+
+//筛选
+(function(){
+  var street = {
+    name:'',
+    psize: 10,
+    page: 0,
+    shareList: [],
+    isEnd: false,
+  };
+  var getShareInStreet = function(data) {
+    $.ajax({
+      type: "post",
+      url: getShareApi,
+      data: data,
+      dataType: "json",
+      success: function(response) {
+        console.log(response);
+        if (response.statusCode === "200") {
+          //检查是否到底
+          if (response.data.length < street.psize) {
+            shareEnd("street");
+            street.isEnd = true;
+          }
+          insertShare(response, "#street", street.shareList);
+        } else if (response.msg === "没有记录") {
+          shareEnd("street");
+          street.isEnd = true;
+        }
+      }
+    });
+  };
+  var loadMoreInStreet = $.throttle(function() {
+    var winScrollTop = $(window).scrollTop();
+    var percent = winScrollTop / ($("body").outerHeight() - $(window).height());
+    if (percent > 0.7 && !street.isEnd) {
+      console.log("加载更多");
+      getShare({
+        psize: street.psize,
+        page: ++street.page,
+        street:street.name
+      });
+    }
+  }, 300); 
+  $('.region-bar .region-item').on('click',function(){
+    var type=$(this).html();
+    if(type==="全部"){
+      $(window).off('scroll').scroll(loadMoreInAll);
+      $('#street').fadeOut();
+      $('#all').delay(500).fadeIn();
+    }else{
+      street.name=type;
+      $(window).off('scroll').scroll(loadMoreInStreet);
+      console.log(type);
+      getShareInStreet({
+        psize: street.psize,
+        page: street.page,
+        street:street.name
+      });
+      $(window)
+    }
+  })
+})()
