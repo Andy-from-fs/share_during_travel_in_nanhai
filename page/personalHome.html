@@ -185,4 +185,21 @@ $userinfo = mc_oauth_userinfo();
   <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/personalHome.js"></script>
   <script src="http://www.foshannews.net/js/vconsole.min.js" remote="yes" ignoreapd="1"></script>
 
+  <!--微信分享配置-->
+  <script src="../app/resource/js/we_bdtj.js"></script>
+  {php register_jssdk()}
+  <script>
+    wx.ready(function () {
+      sharedata = {
+        title: '{php echo $shareParams["sharetitle"]}',
+        desc: '{php echo $shareParams["sharedesc"]}',
+        link: '{php echo $_W["siteurl"]}',
+        imgUrl: 'http://we.citygf.com/new/attachment/{php echo $shareParams["shareimg"]}',
+        success: function () {},
+        cancel: function () {}
+      };
+      wx.onMenuShareAppMessage(sharedata);
+      wx.onMenuShareTimeline(sharedata);
+    });
+  </script>
   </html>
