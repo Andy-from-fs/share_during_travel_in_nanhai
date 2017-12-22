@@ -437,10 +437,7 @@ var createRegister = $.singleton(function() {
       },
       type: "post",
       url: registerApi,
-      data: {
-        username: "haha",
-        mobile: "13250885448"
-      },
+      data: data,
       dataType: "json",
       success: function(res) {
         console.log(res);
