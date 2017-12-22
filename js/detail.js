@@ -189,40 +189,6 @@ function clickLike(text) {
       }
     });
 
-    // $("#swiper img").each(function(index, element) {
-    //   if ($(element).height() > 0.618 * window.screen.height) {
-    //     $(element).height(0.618 * window.screen.height);
-    //   }
-    //   if ($("#swiper img").length > 1) {
-    //     if ($(element).height() !== $("#swiper").height()) {
-    //       imgIsSame = false;
-    //     }
-    //   }
-    // });
-
-    // console.log(window.swipe.slide())
-    // if (
-    //   $('#swiper img[data-index="0"]').height() >
-    //   window.screen.height * 0.618
-    // )
-
-    // $("#detail .wrapper").css({
-    //   "min-height":
-    //     window.screen.height - $('#swiper img[data-index="0"]').height() + "px"
-    // });
-
-    // if (!imgIsSame) {
-    //   console.log("initfix");
-
-    //   var dist =
-    //     $("#swiper").height() - $('#swiper img[data-index="0"]').height();
-    //   $("#swiper .index").css({
-    //     "margin-bottom": dist + "px"
-    //   });
-    //   $("#detail .wrapper").css({
-    //     "margin-top": -1 * dist + "px"
-    //   });
-    // }
   };
 
   var detail = {
