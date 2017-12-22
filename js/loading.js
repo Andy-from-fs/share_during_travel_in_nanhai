@@ -124,7 +124,7 @@
         </div>\
       <!-- big-loading end -->';
       var result = $(html).appendTo("body");
-      function preventVerticalDraft(node) {
+      function preventEvent(node) {
         $(node).on("touchstart", function() {
           $(node).on("touchmove", function(e) {
             var touch = e.originalEvent.targetTouches[0];
@@ -140,7 +140,7 @@
           .on("touchend", function() {
             $(node).off("touchmove");
           })
-          .on("click", function() {
+          .on("click", function(e) {
             e.stopPropagation();
             e.preventDefault();
           });
@@ -148,7 +148,7 @@
       }
       this.ele = $("#big-loading");
       this.word = $("#big-loading-word");
-      preventVerticalDraft($(this.ele));
+      preventEvent($(this.ele));
       return result;
     });
   }

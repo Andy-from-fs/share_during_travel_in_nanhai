@@ -98,3 +98,15 @@ function splitTimeStr(timeStr) {
     day: data[2]
   };
 }
+
+Array.prototype.max = function() { 
+  var max = this[0];
+  var len = this.length; 
+  for (var i = 1; i < len; i++){ 
+  if (this[i] > max) { 
+  max = this[i]; 
+  } 
+  } 
+  return max;
+  }
+  
