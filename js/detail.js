@@ -68,7 +68,7 @@ function clickLike(text) {
         }
       });
       setTimeout(function() {
-        checkImgHasLoad("#swiper img", swipeInit);
+        checkImgHasLoad("#swiper img", swiper_init_or_updata);
       }, 800);
       // $('#detail .avatar').attr('src',tomedia())
       // $('#detail .name').html()
@@ -126,11 +126,7 @@ function clickLike(text) {
   };
 
   function margin_wrapper_to_right_position() {
-    console.log(margin_top_dist);
-    console.log(mySwiper.realIndex);
-    console.log(wrapper_min_height);
     var move_top_dist = margin_top_dist[mySwiper.realIndex];
-    console.log(move_top_dist);
     $("#detail .wrapper").css({
       "min-height": wrapper_min_height + move_top_dist + "px",
       "margin-top": -1 * move_top_dist + "px"
@@ -166,7 +162,7 @@ function clickLike(text) {
     $("#detail .wrapper").css("min-height", wrapper_min_height + "px");
   }
 
-  var swipeInit = function() {
+  var swiper_init_or_updata = function() {
     // old swiper------------------------------
     margin_top_dist = [];
     if (!mySwiper) {
