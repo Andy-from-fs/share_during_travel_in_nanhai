@@ -9,7 +9,7 @@ $purplishRed: rgb(175, 48, 27);
   height: 100%;
   overflow-y: scroll;
   background-color: rgba(0, 0, 0, 0.7);
-  .wrapper{
+  .wrapper {
     width: 100%;
     min-height: 100%;
   }
@@ -32,7 +32,7 @@ $purplishRed: rgb(175, 48, 27);
     background-color: #fff;
     width: 100%;
     padding: 0 25px 20px 25px;
-    transition: margin-top 0.3s ease-out, height 0.3s ease-out;
+    transition: margin-top 0.3s ease-out, height 0.3s ease-out,min-height 0.3s ease-out;
     position: relative;
     z-index: 3;
     .avatar-name {
@@ -82,38 +82,50 @@ $purplishRed: rgb(175, 48, 27);
     }
   }
   // 轮播
-  .swipe {
+  #swiper {
     width: 100%;
     overflow: hidden;
-    visibility: hidden;
+    // visibility: hidden;
     position: relative;
     max-height: 61.8%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 2;
   }
-  .swipe-wrap {
-    // max-height: inherit;
-    overflow: hidden;
-    position: relative;
-  }
-  .swipe-wrap > img {
-    // max-height: 61.8%;
-    float: left;
-    width: 100%;
-    position: relative;
+  // .swiper-wrapper {
+  //   // max-height: inherit;
+  //   overflow: hidden;
+  //   position: relative;
+  // }
+  // .swiper-wrapper  {}
+  .swiper-wrapper img {
+    max-height: 61.8%;
     object-fit: contain;
+    object-position: top;
   }
-  .index {
-    position: absolute;
-    bottom: 3%;
-    right: 5%;
-    color: #fff;
-    font-size: 1.8rem;
-    letter-spacing: 0.15rem;
-    transition: margin-bottom 0.3s ease-out;
-  }
+  // .index {
+  //   position: absolute;
+  //   bottom: 3%;
+  //   right: 5%;
+  //   color: #fff;
+  //   font-size: 1.8rem;
+  //   letter-spacing: 0.15rem;
+  //   transition: margin-bottom 0.3s ease-out;
+  //   z-index: 50;
+  // }
 }
 
 .like-on {
   color: $heartPink !important;
+}
+
+.swiper-pagination-bullet {
+  background: #fff;
+  opacity: 1;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: $heartPink;
+}
+.swiper-pagination{
+  transition: bottom .3s ease-out;
 }

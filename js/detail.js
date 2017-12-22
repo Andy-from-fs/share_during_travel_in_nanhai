@@ -39,13 +39,16 @@ function clickLike(text) {
 
 // 细览页
 (function detailPart($) {
-  var imgIsSame = false;
-  var sum = 1;
+  var imgIsSame = false,
+    sum = 1,
+    mySwiper,
+    margin_top_dist = [],
+    wrapper_min_height = 0;
   var changeContent = function(data) {
     console.log(data);
     if (detail.id !== data.id) {
       detail.id = data.id;
-      var imgWarp = $("#swiper .swipe-wrap").empty();
+      var imgWarp = $("#swiper .swiper-wrapper").empty();
       window.swipe = null;
       sum = 0;
       $.each(data.image.split(","), function(indexInArray, valueOfElement) {
@@ -54,7 +57,7 @@ function clickLike(text) {
           tomedia(valueOfElement, "70p", 50) +
           '" imgUrl="' +
           valueOfElement +
-          '">';
+          '" class="swiper-slide">';
         $(html).appendTo(imgWarp);
         sum++;
       });
@@ -81,21 +84,23 @@ function clickLike(text) {
   };
 
   var checkImgHasLoad = function(imgSelector, callBack) {
-    $.when($(imgSelector).map(function(i, e) {
-            var dfd = $.Deferred();
-            if (e.complete) {
+    $.when(
+      $(imgSelector)
+        .map(function(i, e) {
+          var dfd = $.Deferred();
+          if (e.complete) {
+            console.log(`图片${i}加载完成`);
+            dfd.resolve();
+          } else {
+            e.onload = function() {
               console.log(`图片${i}加载完成`);
               dfd.resolve();
-            } else {
-              e.onload = function() {
-                console.log(`图片${i}加载完成`);
-                dfd.resolve();
-              };
-            }
-            return dfd;
-          })
-          .toArray()
-      ).done(callBack);
+            };
+          }
+          return dfd;
+        })
+        .toArray()
+    ).done(callBack);
   };
 
   var fixImgtoSame = function() {
@@ -124,40 +129,65 @@ function clickLike(text) {
     }
   };
 
+  function margin_wrapper_to_right_position() {
+    var move_top_dist = margin_top_dist[mySwiper.realIndex];
+    $("#detail .wrapper").css({
+      "min-height": wrapper_min_height + move_top_dist + "px",
+      "margin-top": -1 * move_top_dist + "px"
+    });
+    $(".swiper-pagination").css({
+      "bottom": 10+ move_top_dist + "px"
+    });
+  }
+
   var swipeInit = function() {
     // imgIsSame = true;
-    fixImgtoSame();
-    window.swipe = $("#swiper")
-      .Swipe({
-        startSlide: 0,
-        // auto: 3000,
-        draggable: false,
-        autoRestart: false,
-        continuous: true,
-        disableScroll: true,
-        stopPropagation: true,
-        callback: function(index, element) {
-          // if (!imgIsSame) {
-          //   console.log("fix");
-          //   var dist = $("#swiper").height() - $(element).height();
-          //   $("#swiper .index").css({
-          //     "margin-bottom": dist + "px"
-          //   });
-          //   $("#detail .wrapper").css({
-          //     "margin-top": -1 * dist + "px",
-          //     "min-height": window.screen.height - $(element).height() + "px"
-          //   });
-          // }
-          $("#swiper .index .num").html(index + 1 + "/" + sum);
+    // fixImgtoSame();
+    // old swiper------------------------------
+    mySwiper = null;
+    margin_top_dist = [];
+    mySwiper = new Swiper(".swiper-container", {
+      loop: false,
+      // init:false,
+      // height: maxH,
+      // pagination: ".swiper-pagination",
+      observer: true,
+      pagination: {
+        el: ".swiper-pagination"
+      },
+      on: {
+        init: function() {
+          console.log("inited");
+          var imgH = [],
+            winH = $(window).height(),
+            contentH = $("#detail .wrapper").height();
+          $("#swiper img").each(function(index, element) {
+            imgH.push($(this).height());
+          });
+          var maxH = imgH.max();
+          if (maxH > winH * 0.618) {
+            maxH = winH * 0.618;
+          }
+          $("#swiper img").each(function(index, element) {
+            var dist = maxH - $(element).height();
+            if (dist > 0) {
+              margin_top_dist.push(dist);
+            } else {
+              margin_top_dist.push(0);
+            }
+            $(element).height(maxH);
+          });
+          wrapper_min_height = winH - maxH;
+          $("#detail .wrapper").css("min-height", wrapper_min_height + "px");
+          setTimeout(function() {
+            $.bigLoading.turn();
+          }, 500);
         },
-        transitionEnd: function(index, element) {
-          // console.log(index)
+        slideChangeTransitionStart: function() {
+          margin_wrapper_to_right_position();
         }
-      })
-      .data("Swipe");
-    setTimeout(function() {
-      $.bigLoading.turn();
-    }, 500);
+      }
+    });
 
     // $("#swiper img").each(function(index, element) {
     //   if ($(element).height() > 0.618 * window.screen.height) {
@@ -207,7 +237,10 @@ function clickLike(text) {
           changeContent(data);
           $(element).css("display", "block");
           detail.isShow = true;
-        }, 500);
+          setTimeout(function(){
+            margin_wrapper_to_right_position();
+          },800)
+        }, 800);
       } else {
         // hide
         $(element).addClass("fadeOut");
@@ -226,12 +259,10 @@ function clickLike(text) {
         <div class="btn-back fadeIn animated">\
           <span class="icon-back"></span>\
         </div>\
-        <div id="swiper" class="swipe slideInDown animated">\
-          <div class="swipe-wrap">\
+        <div id="swiper" class="swiper-container slideInDown animated">\
+          <div class="swiper-wrapper">\
           </div>\
-          <div class="index">\
-            <span class="num">1/3</span>\
-          </div>\
+          <div class="swiper-pagination"></div>\
         </div>\
         <div class="wrapper slideInUp animated">\
           <div class="avatar-name">\

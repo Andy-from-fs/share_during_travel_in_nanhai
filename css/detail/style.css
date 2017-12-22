@@ -33,7 +33,7 @@
   background-color: #fff;
   width: 100%;
   padding: 0 25px 20px 25px;
-  transition: margin-top 0.3s ease-out, height 0.3s ease-out;
+  transition: margin-top 0.3s ease-out, height 0.3s ease-out,min-height 0.3s ease-out;
   position: relative;
   z-index: 3;
 }
@@ -90,38 +90,35 @@
   font-size: 1.7rem;
 }
 
-#detail .swipe {
+#detail #swiper {
   width: 100%;
   overflow: hidden;
-  visibility: hidden;
   position: relative;
   max-height: 61.8%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 2;
 }
 
-#detail .swipe-wrap {
-  overflow: hidden;
-  position: relative;
-}
-
-#detail .swipe-wrap > img {
-  float: left;
-  width: 100%;
-  position: relative;
+#detail .swiper-wrapper img {
+  max-height: 61.8%;
   object-fit: contain;
-}
-
-#detail .index {
-  position: absolute;
-  bottom: 3%;
-  right: 5%;
-  color: #fff;
-  font-size: 1.8rem;
-  letter-spacing: 0.15rem;
-  transition: margin-bottom 0.3s ease-out;
+  object-position: top;
 }
 
 .like-on {
   color: #e95151 !important;
+}
+
+.swiper-pagination-bullet {
+  background: #fff;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #e95151;
+}
+
+.swiper-pagination {
+  transition: bottom .3s ease-out;
 }
