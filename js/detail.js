@@ -68,7 +68,7 @@ function clickLike(text) {
         }
       });
       setTimeout(function() {
-        checkImgHasLoad("#swiper img", swiper_init_or_updata);
+        check_img_has_loaded("#swiper img", swiper_init_or_updata);
       }, 800);
       // $('#detail .avatar').attr('src',tomedia())
       // $('#detail .name').html()
@@ -83,7 +83,7 @@ function clickLike(text) {
     }
   };
 
-  var checkImgHasLoad = function(imgSelector, callBack) {
+  var check_img_has_loaded = function(imgSelector, callBack) {
     $.when.apply(null, $(imgSelector).map(function(i, e) {
       var dfd = $.Deferred();
       if (e.complete) {
