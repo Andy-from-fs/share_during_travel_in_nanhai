@@ -99,32 +99,6 @@ function clickLike(text) {
     }).toArray()).done(callBack);
   };
 
-  var fixImgtoSame = function() {
-    var imgH = [],
-      winH = $(window).height(),
-      contentH = $("#detail .wrapper").height();
-    $("#swiper img").each(function(index, element) {
-      imgH.push($(this).height());
-    });
-    var maxH = imgH.max();
-    if (maxH > winH * 0.5) {
-      $("#swiper img").each(function(index, element) {
-        $(this).height(winH * 0.5);
-        $("#detail .wrapper").css({
-          "min-height": winH * 0.5 + "px"
-        });
-      });
-    } else {
-      $("#swiper img").each(function(index, element) {
-        $(this).height(maxH);
-      });
-      var dist = winH - maxH - contentH;
-      if (dist > 0) {
-        $("#detail .wrapper").height(contentH + $("#detail .wrapper").height());
-      }
-    }
-  };
-
   function margin_wrapper_to_right_position() {
     var move_top_dist = margin_top_dist[mySwiper.realIndex];
     $("#detail .wrapper").css({
