@@ -68,7 +68,7 @@ function clickLike(text) {
         }
       });
       setTimeout(function() {
-        checkImgHasLoad("#swiper img", swipeInit());
+        checkImgHasLoad("#swiper img", swipeInit);
       }, 800);
       // $('#detail .avatar').attr('src',tomedia())
       // $('#detail .name').html()
@@ -84,23 +84,19 @@ function clickLike(text) {
   };
 
   var checkImgHasLoad = function(imgSelector, callBack) {
-    $.when(
-      $(imgSelector)
-        .map(function(i, e) {
-          var dfd = $.Deferred();
-          if (e.complete) {
-            console.log(`图片${i}加载完成`);
-            dfd.resolve();
-          } else {
-            e.onload = function() {
-              console.log(`图片${i}加载完成`);
-              dfd.resolve();
-            };
-          }
-          return dfd;
-        })
-        .toArray()
-    ).done(callBack);
+    $.when.apply(null, $(imgSelector).map(function(i, e) {
+      var dfd = $.Deferred();
+      if (e.complete) {
+        console.log(`图片${i}加载完成`);
+        dfd.resolve()
+      }else{
+        e.onload = function() {
+        console.log(`图片${i}加载完成`);
+        dfd.resolve()
+        }
+      }
+      return dfd;
+    }).toArray()).done(callBack);
   };
 
   var fixImgtoSame = function() {
@@ -130,65 +126,78 @@ function clickLike(text) {
   };
 
   function margin_wrapper_to_right_position() {
+    console.log(margin_top_dist);
+    console.log(mySwiper.realIndex);
+    console.log(wrapper_min_height);
     var move_top_dist = margin_top_dist[mySwiper.realIndex];
+    console.log(move_top_dist);
     $("#detail .wrapper").css({
       "min-height": wrapper_min_height + move_top_dist + "px",
       "margin-top": -1 * move_top_dist + "px"
     });
     $(".swiper-pagination").css({
-      "bottom": 10+ move_top_dist + "px"
+      bottom: 10 + move_top_dist + "px"
     });
   }
 
-  var swipeInit = function() {
-    // imgIsSame = true;
-    // fixImgtoSame();
-    // old swiper------------------------------
-    mySwiper = null;
-    margin_top_dist = [];
-    mySwiper = new Swiper(".swiper-container", {
-      loop: false,
-      // init:false,
-      // height: maxH,
-      // pagination: ".swiper-pagination",
-      observer: true,
-      pagination: {
-        el: ".swiper-pagination"
-      },
-      on: {
-        init: function() {
-          console.log("inited");
-          var imgH = [],
-            winH = $(window).height(),
-            contentH = $("#detail .wrapper").height();
-          $("#swiper img").each(function(index, element) {
-            imgH.push($(this).height());
-          });
-          var maxH = imgH.max();
-          if (maxH > winH * 0.618) {
-            maxH = winH * 0.618;
-          }
-          $("#swiper img").each(function(index, element) {
-            var dist = maxH - $(element).height();
-            if (dist > 0) {
-              margin_top_dist.push(dist);
-            } else {
-              margin_top_dist.push(0);
-            }
-            $(element).height(maxH);
-          });
-          wrapper_min_height = winH - maxH;
-          $("#detail .wrapper").css("min-height", wrapper_min_height + "px");
-          setTimeout(function() {
-            $.bigLoading.turn();
-          }, 500);
-        },
-        slideChangeTransitionStart: function() {
-          margin_wrapper_to_right_position();
-        }
-      }
+  function unify_img_size() {
+    // console.log("inited");
+    var imgH = [],
+      winH = $(window).height(),
+      contentH = $("#detail .wrapper").height();
+    $("#swiper img").each(function(index, element) {
+      imgH.push($(this).height());
     });
+    var maxH = imgH.max();
+    if (maxH > winH * 0.618) {
+      maxH = winH * 0.618;
+    }
+    $("#swiper img").each(function(index, element) {
+      var dist = maxH - $(element).height();
+      console.log($(element).height());
+      if (dist > 0) {
+        margin_top_dist.push(dist);
+      } else {
+        margin_top_dist.push(0);
+      }
+      $(element).height(maxH);
+    });
+    wrapper_min_height = winH - maxH;
+    $("#detail .wrapper").css("min-height", wrapper_min_height + "px");
+  }
 
+  var swipeInit = function() {
+    // old swiper------------------------------
+    margin_top_dist = [];
+    if (!mySwiper) {
+      mySwiper = new Swiper(".swiper-container", {
+        loop: false,
+        observer: true,
+        pagination: {
+          el: ".swiper-pagination"
+        },
+        on: {
+          init: function() {
+            console.log("inited");
+            unify_img_size();
+            setTimeout(function() {
+              $.bigLoading.turn();
+            }, 500);
+          },
+          slideChange: function() {
+            margin_wrapper_to_right_position();
+          }
+        }
+      });
+    } else {
+      console.log('update');
+      mySwiper.update();
+      mySwiper.slideTo(0);
+      unify_img_size();
+      setTimeout(function() {
+        $.bigLoading.turn();
+      }, 500);
+    }
   };
 
   var detail = {
@@ -203,9 +212,9 @@ function clickLike(text) {
           changeContent(data);
           $(element).css("display", "block");
           detail.isShow = true;
-          setTimeout(function(){
+          setTimeout(function() {
             margin_wrapper_to_right_position();
-          },800)
+          }, 800);
         }, 800);
       } else {
         // hide

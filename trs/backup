@@ -90,3 +90,18 @@
     // }else{
     //   mySwiper.init();
     // }
+
+
+function margin_wrapper_to_right_position() {
+    var move_top_dist = margin_top_dist[mySwiper.realIndex];
+    $("#detail .wrapper").css({
+      "min-height": wrapper_min_height + move_top_dist + "px",
+      "margin-top": -1 * move_top_dist + "px"
+    });
+    $(".swiper-pagination").css({
+      "bottom": 10+ move_top_dist + "px"
+    });
+  }
+
+  // imgIsSame = true;
+    // fixImgtoSame();
