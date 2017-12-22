@@ -144,6 +144,7 @@ $userinfo = mc_oauth_userinfo();
       var userHerf =
         "{php echo $this->createMobileUrl('indexnew',array(tp=>'nhly/nanhai-yinji/page/personalHome'))}&rid=<?php echo $_REQUEST['rid']; ?>";
     </script>
+    <script src="https://cdn.bootcss.com/hammer-time/1.1.0/hammer-time.min.js"></script>
     <script src="http://www.foshannews.net/zt/2017zt/wx/nhly_yinji/output/index.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/vconsole.min.js" remote="yes" ignoreapd="1"></script>
@@ -160,23 +161,23 @@ $userinfo = mc_oauth_userinfo();
     "></script>
     <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/share.js"></script>
 
-     <!--微信分享配置-->
-     <script src="../app/resource/js/we_bdtj.js"></script>
-     {php register_jssdk()}
-     <script>
-       wx.ready(function () {
-         sharedata = {
-           title: '{php echo $shareParams["sharetitle"]}',
-           desc: '{php echo $shareParams["sharedesc"]}',
-           link: '{php echo $_W["siteurl"]}',
-           imgUrl: 'http://we.citygf.com/new/attachment/{php echo $shareParams["shareimg"]}',
-           success: function () {},
-           cancel: function () {}
-         };
-         wx.onMenuShareAppMessage(sharedata);
-         wx.onMenuShareTimeline(sharedata);
-       });
-     </script>
+    <!--微信分享配置-->
+    <script src="../app/resource/js/we_bdtj.js"></script>
+    {php register_jssdk()}
+    <script>
+      wx.ready(function () {
+        sharedata = {
+          title: '{php echo $shareParams["sharetitle"]}',
+          desc: '{php echo $shareParams["sharedesc"]}',
+          link: '{php echo $_W["siteurl"]}',
+          imgUrl: 'http://we.citygf.com/new/attachment/{php echo $shareParams["shareimg"]}',
+          success: function () {},
+          cancel: function () {}
+        };
+        wx.onMenuShareAppMessage(sharedata);
+        wx.onMenuShareTimeline(sharedata);
+      });
+    </script>
 
 
   </body>
