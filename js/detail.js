@@ -40,7 +40,7 @@ function clickLike(text) {
 // 细览页
 (function detailPart($) {
   var imgIsSame = false;
-  var sum = 3;
+  var sum = 1;
   var changeContent = function(data) {
     console.log(data);
     if (detail.id !== data.id) {
@@ -69,6 +69,7 @@ function clickLike(text) {
       }, 800);
       // $('#detail .avatar').attr('src',tomedia())
       // $('#detail .name').html()
+      $("#swiper .index .num").html(1 + "/" + sum);
       $("#detail .location span:last").html(data.street + " " + data.address);
       $("#detail p.content").html(data.remark);
       $("#detail .like").attr("shareid", data.id);
@@ -80,11 +81,7 @@ function clickLike(text) {
   };
 
   var checkImgHasLoad = function(imgSelector, callBack) {
-    $.when
-      .apply(
-        null,
-        $(imgSelector)
-          .map(function(i, e) {
+    $.when($(imgSelector).map(function(i, e) {
             var dfd = $.Deferred();
             if (e.complete) {
               console.log(`图片${i}加载完成`);
@@ -98,8 +95,7 @@ function clickLike(text) {
             return dfd;
           })
           .toArray()
-      )
-      .done(callBack);
+      ).done(callBack);
   };
 
   var fixImgtoSame = function() {
@@ -152,10 +148,10 @@ function clickLike(text) {
           //     "min-height": window.screen.height - $(element).height() + "px"
           //   });
           // }
+          $("#swiper .index .num").html(index + 1 + "/" + sum);
         },
         transitionEnd: function(index, element) {
           // console.log(index)
-          $("#swiper .index .num").html(index + 1 + "/" + sum);
         }
       })
       .data("Swipe");
