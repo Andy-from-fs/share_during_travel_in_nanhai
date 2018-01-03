@@ -122,3 +122,35 @@
 .swiper-pagination {
   transition: bottom .3s ease-out;
 }
+
+.gallery {
+  animation-duration: 0.5s !important;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.gallery > img {
+  object-fit: contain;
+  cursor: pointer;
+  animation-duration: 0.5s !important;
+}
+
+.gallery .btn-del {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4rem;
+  text-align: center;
+  line-height: 4rem;
+  background-color: #282828;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}

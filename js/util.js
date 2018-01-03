@@ -26,9 +26,28 @@
       $(this)
         .addClass("has-like like-on")
         .off("click");
-      if(text==='font'){
+      if (text === "font") {
         $(this).removeClass("has-like");
       }
+      return $(this);
+    },
+    //屏蔽上下滑动节点上下滑动事件
+    preventVerticalDraft: function() {
+      $(this).on("touchstart", function() {
+        $(this).on("touchmove", function(e) {
+          var touch = e.originalEvent.targetTouches[0];
+          var y = touch.pageY;
+          var x = touch.pageX;
+          if (x > 0 || y > 0) {
+            e.stopPropagation();
+            e.preventDefault();
+          }
+        });
+      });
+      $(this).on("touchend", function() {
+        $(this).off("touchmove");
+      });
+      return $(this);
     }
   });
 })(jQuery);
@@ -99,14 +118,13 @@ function splitTimeStr(timeStr) {
   };
 }
 
-Array.prototype.max = function() { 
+Array.prototype.max = function() {
   var max = this[0];
-  var len = this.length; 
-  for (var i = 1; i < len; i++){ 
-  if (this[i] > max) { 
-  max = this[i]; 
-  } 
-  } 
-  return max;
+  var len = this.length;
+  for (var i = 1; i < len; i++) {
+    if (this[i] > max) {
+      max = this[i];
+    }
   }
-  
+  return max;
+};

@@ -55,7 +55,7 @@ function clickLike(text) {
         var html =
           '<img src="' +
           tomedia(valueOfElement, "70p", 50) +
-          '" imgUrl="' +
+          '" data-img-url="' +
           valueOfElement +
           '" class="swiper-slide">';
         $(html).appendTo(imgWarp);
@@ -84,19 +84,26 @@ function clickLike(text) {
   };
 
   var check_img_has_loaded = function(imgSelector, callBack) {
-    $.when.apply(null, $(imgSelector).map(function(i, e) {
-      var dfd = $.Deferred();
-      if (e.complete) {
-        console.log(`图片${i}加载完成`);
-        dfd.resolve()
-      }else{
-        e.onload = function() {
-        console.log(`图片${i}加载完成`);
-        dfd.resolve()
-        }
-      }
-      return dfd;
-    }).toArray()).done(callBack);
+    $.when
+      .apply(
+        null,
+        $(imgSelector)
+          .map(function(i, e) {
+            var dfd = $.Deferred();
+            if (e.complete) {
+              console.log(`图片${i}加载完成`);
+              dfd.resolve();
+            } else {
+              e.onload = function() {
+                console.log(`图片${i}加载完成`);
+                dfd.resolve();
+              };
+            }
+            return dfd;
+          })
+          .toArray()
+      )
+      .done(callBack);
   };
 
   function margin_wrapper_to_right_position() {
@@ -147,6 +154,9 @@ function clickLike(text) {
           el: ".swiper-pagination"
         },
         on: {
+          tap: function(event) {
+            gallery.turn($(event.path[0]).data("img-url"));
+          },
           init: function() {
             console.log("inited");
             unify_img_size();
@@ -160,7 +170,7 @@ function clickLike(text) {
         }
       });
     } else {
-      console.log('update');
+      console.log("update");
       mySwiper.update();
       mySwiper.slideTo(0);
       unify_img_size();
@@ -233,6 +243,61 @@ function clickLike(text) {
     var element = $(html).appendTo("body");
     $("body").on("click", "#detail .btn-back", detail.turn);
     $("#detail .like").on("click", clickLike);
+    $("#detail").preventVerticalDraft();
+    return element;
+  });
+
+  //点击大图
+  var gallery = {
+    isShow: false,
+    url: "",
+    turn: function(url) {
+      var element = createGallery();
+      gallery.url = url;
+      if (!gallery.isShow) {
+        //show
+        $(element).css("display", "block");
+        gallery.isShow = true;
+        $(element)
+          .children("img")
+          .attr("src", tomedia(url, "100p", 100));
+      } else {
+        //hide
+        $(element).addClass("fadeOut");
+        setTimeout(function() {
+          $(element)
+            .removeClass("fadeOut")
+            .css("display", "none");
+        }, 400);
+        gallery.isShow = false;
+      }
+    }
+  };
+  var createGallery = $.singleton(function() {
+    var html =
+      '<div class="gallery fadeIn animated" id="gallery">\
+    <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test2.jpg" width="100%" height="100%" class="zoomIn animated">\
+  </div>';
+    var element = $(html).appendTo("body");
+    function delImg() {
+      // console.log(formList.imgUrlList.length);
+      if (formList.imgUrlList.length === 3) {
+        $("#picsList li.images[data-url='" + gallery.url + "']").remove();
+        // console.log(btnAdd);
+        btnAdd.fadeIn();
+      } else {
+        $("#picsList li.images").remove("[data-url='" + gallery.url + "']");
+        formList.imgUrlList.splice(
+          formList.imgUrlList.findIndex(function(val) {
+            return val === gallery.url;
+          }),
+          1
+        );
+      }
+      // console.log(formList);
+    }
+    $("body").on("click", "#gallery img", gallery.turn);
+    // $("#gallery").preventVerticalDraft();
     return element;
   });
 

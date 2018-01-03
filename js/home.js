@@ -3,7 +3,9 @@ $(".region-bar .top .icon-user").css(
   "line-height",
   $(".region-bar").height() + "px"
 );
-$('.footer').height($('.footer .rule span').height()+$('.footer .rule img').height()+'px')
+$(".footer").height(
+  $(".footer .rule span").height() + $(".footer .rule img").height() + "px"
+);
 
 var isBarSwitch = false,
   _rule,
@@ -34,77 +36,86 @@ function clickBtnRegions() {
 $("body")
   .on("click", "#region,.top .icon-back", clickBtnRegions)
   .on("click", ".rule", clickBtnRule);
-
+// var hammertime = new Hammer(document.querySelector(".rule"), {
+//   recognizers: [
+//     // RecognizerClass, [options], [recognizeWith, ...], [requireFailure, ...]
+//     [Hammer.Tap]
+//   ]
+// });
+// hammertime.on("tap", function(ev) {
+//   clickBtnRule();
+// });
 //排行榜
 (function rankListPart() {
   var refresh = function() {
     $("#rankList .list .item").remove();
-    if(!$.loading.isShow){
-    $.ajax({
-      type: "post",
-      url: getSortApi,
-      dataType: "json",
-      beforeSend: function(XHR) {
-        $.loading.turn('加载中');
-      },
-      complete: function(XMLHttpRequest, textStatus) {
-        $.loading.turn();
-      },
-      success: function(response) {
-        console.log(response);
-        if (response.statusCode === "200") {
-          function setItem(selector, valueOfElement) {
-            if (valueOfElement.avatar !== "") {
-              $(selector + " .avatarImg").attr("src", valueOfElement.avatar);
+    if (!$.loading.isShow) {
+      $.ajax({
+        type: "post",
+        url: getSortApi,
+        dataType: "json",
+        beforeSend: function(XHR) {
+          $.loading.turn("加载中");
+        },
+        complete: function(XMLHttpRequest, textStatus) {
+          $.loading.turn();
+        },
+        success: function(response) {
+          console.log(response);
+          if (response.statusCode === "200") {
+            function setItem(selector, valueOfElement) {
+              if (valueOfElement.avatar !== "") {
+                $(selector + " .avatarImg").attr("src", valueOfElement.avatar);
+              }
+              $(selector + " .name").html(valueOfElement.username);
+              $(selector + " .like-num").html(valueOfElement.star);
             }
-            $(selector + " .name").html(valueOfElement.username);
-            $(selector + " .like-num").html(valueOfElement.star);
-          }
-          rankList.data = response.data;
-          $.each(rankList.data, function(indexInArray, valueOfElement) {
-            // if(valueOfElement.avatar&&valueOfElement.avatar===""){
-            //   valueOfElement.avatar="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test-avatar.jpg";
-            // }
-            if (indexInArray === 0) {
-              setItem("#rankList .first", valueOfElement);
-            } else if (indexInArray === 1) {
-              setItem("#rankList .second", valueOfElement);
-            } else if (indexInArray === 2) {
-              setItem("#rankList .third", valueOfElement);
-            } else {
-              if (indexInArray < 10) {
-                var html =
-                  '<div class="item">\
+            rankList.data = response.data;
+            $.each(rankList.data, function(indexInArray, valueOfElement) {
+              // if(valueOfElement.avatar&&valueOfElement.avatar===""){
+              //   valueOfElement.avatar="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test-avatar.jpg";
+              // }
+              if (indexInArray === 0) {
+                setItem("#rankList .first", valueOfElement);
+              } else if (indexInArray === 1) {
+                setItem("#rankList .second", valueOfElement);
+              } else if (indexInArray === 2) {
+                setItem("#rankList .third", valueOfElement);
+              } else {
+                if (indexInArray < 10) {
+                  var html =
+                    '<div class="item">\
                     <span class="num">' +
-                  (parseInt(indexInArray) + 1) +
-                  '</span>\
+                    (parseInt(indexInArray) + 1) +
+                    '</span>\
                     <div class="avatar-word">\
                       <div class="avatar">\
                         <img src="' +
-                  valueOfElement.avatar +
-                  '" class="avatarImg">\
+                    valueOfElement.avatar +
+                    '" class="avatarImg">\
                       </div>\
                       <div class="word">\
                         <div class="name">' +
-                  valueOfElement.username +
-                  '</div>\
+                    valueOfElement.username +
+                    '</div>\
                         <div class="like-wrapper">\
                           <span class="icon-heart"></span>\
                           <span class="like-num">' +
-                  valueOfElement.star +
-                  "</span>\
+                    valueOfElement.star +
+                    "</span>\
                           <span>赞</span>\
                         </div>\
                       </div>\
                     </div>\
                   </div>";
-                $(html).appendTo("#rankList .list");
+                  $(html).appendTo("#rankList .list");
+                }
               }
-            }
-          });
+            });
+          }
         }
-      }
-    });}
+      });
+    }
   };
   var rankList = {
     data: [],
@@ -427,40 +438,41 @@ var createRegister = $.singleton(function() {
       username: $('#register input[name="name"]').val(),
       mobile: $('#register input[name="phone"]').val()
     };
-    if(!$.loading.isShow){
-    $.ajax({
-      beforeSend:function(xhr){
-        $.loading.turn('提交中');
-      },
-      complete:function(){
-        $.loading.turn();
-      },
-      type: "post",
-      url: registerApi,
-      data: data,
-      dataType: "json",
-      success: function(res) {
-        console.log(res);
-        if (res.statusCode === "200") {
-          swal(
-            {
-              title: "登记成功",
-              text: "你的名称:" + data.username + " 手机号码" + data.mobile,
-              type: "success",
-              confirmButtonColor: "#af301b"
-            },
-            function() {
-              // console.log(register.href);
-              window.location.href = register.href;
-            }
-          );
-          register.off(data);
+    if (!$.loading.isShow) {
+      $.ajax({
+        beforeSend: function(xhr) {
+          $.loading.turn("提交中");
+        },
+        complete: function() {
+          $.loading.turn();
+        },
+        type: "post",
+        url: registerApi,
+        data: data,
+        dataType: "json",
+        success: function(res) {
+          console.log(res);
+          if (res.statusCode === "200") {
+            swal(
+              {
+                title: "登记成功",
+                text: "你的名称:" + data.username + " 手机号码" + data.mobile,
+                type: "success",
+                confirmButtonColor: "#af301b"
+              },
+              function() {
+                // console.log(register.href);
+                window.location.href = register.href;
+              }
+            );
+            register.off(data);
+          }
+        },
+        error: function(error) {
+          console.log(error);
         }
-      },
-      error: function(error) {
-        console.log(error);
-      }
-    });}
+      });
+    }
     // console.log(data);
   });
   $("#register .icon-back").on("click", function() {
@@ -612,7 +624,6 @@ checkIsRegister(
       }
     });
     console.log(enterArr);
-
     $.detail.turn(enterArr);
     setTimeout(function() {
       var display = $(".footer").css("display");
