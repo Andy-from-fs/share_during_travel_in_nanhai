@@ -79,7 +79,7 @@
 
 .region-bar .top {
   height: 100%;
-  background-color: #af301b;
+  background-color: #e36b6b;
   font-size: 1.7rem;
   line-height: 4rem;
   color: #fff;
@@ -107,7 +107,7 @@
 .region-bar .region-container {
   display: none;
   padding: 0 10px;
-  background-color: #af301b;
+  background-color: #e36b6b;
 }
 
 .region-bar .region-container .region-wrapper {
@@ -163,11 +163,11 @@ body {
 .footer .btn .word {
   padding: 5px 0;
   font-size: 1.2rem;
-  color: #666666;
+  color: #282828;
 }
 
 .footer .btn .circle {
-  background-color: #af301b;
+  background-color: #e95151;
   width: 4.5rem;
   height: 4.5rem;
   text-align: center;
@@ -182,7 +182,7 @@ body {
 }
 
 .select-on {
-  color: #af301b;
+  color: #e36b6b;
   background-color: #fff;
 }
 
@@ -208,11 +208,11 @@ body {
   justify-content: space-between;
   align-items: center;
   font-size: 2.5rem;
-  color: #af301b;
+  color: #e36b6b;
 }
 
 #game-rule .btn-group a {
-  color: #af301b;
+  color: #e36b6b;
   text-decoration: none;
 }
 
@@ -236,7 +236,7 @@ body {
 #rankList .btn-group {
   padding: 10px 0;
   font-size: 2.5rem;
-  color: #af301b;
+  color: #e36b6b;
 }
 
 #rankList .list {
@@ -403,7 +403,7 @@ body {
 
 #register .title {
   text-align: center;
-  color: #af301b;
+  color: #e36b6b;
   font-size: 2.5rem;
   padding: 10px;
   line-height: 3rem;
@@ -434,7 +434,7 @@ body {
 
 #register .content-container .input-wrapper label {
   width: 35%;
-  color: #af301b;
+  color: #e36b6b;
   font-size: 2rem;
 }
 

@@ -3,11 +3,11 @@
 }
 
 .swal-button {
-  background-color: #af301b;
+  background-color: #e36b6b;
 }
 
 .swal-button:active {
-  background-color: #af301b;
+  background-color: #e36b6b;
 }
 
 @media (max-width: 500px) {
@@ -33,8 +33,8 @@ body > .container {
 }
 
 button.btn-submit {
-  border: 1px solid #af301b;
-  background-color: #af301b;
+  border: 1px solid #e95151;
+  background-color: #e95151;
   width: 100%;
   color: #fff;
   padding: 10px 0;
@@ -80,8 +80,8 @@ button.btn-submit {
   line-height: 5rem;
   text-align: center;
   font-size: 2rem;
-  color: #af301b;
-  border: 1px solid #af301b;
+  color: #e36b6b;
+  border: 1px solid #e36b6b;
 }
 
 .img-list li .input-file {
@@ -183,7 +183,7 @@ section.map-input .btn-group .btn-selected {
   right: 10px;
   height: 4rem;
   line-height: 4rem;
-  color: #af301b;
+  color: #e36b6b;
   font-size: 2.7rem;
   text-align: center;
   cursor: pointer;
@@ -192,9 +192,9 @@ section.map-input .btn-group .btn-selected {
 section.map-input .btn-back {
   width: 35px;
   height: 35px;
-  background-color: #af301b;
+  background-color: #e95151;
   color: white;
-  border: 1px solid #af301b;
+  border: 1px solid #e95151;
   border-radius: 50%;
   position: absolute;
   right: 10px;
@@ -206,7 +206,7 @@ section.map-input .btn-back {
 }
 
 .picker .picker-panel .picker-choose .confirm {
-  color: #af301b !important;
+  color: #e36b6b !important;
 }
 
 .gallery {
@@ -246,11 +246,11 @@ section.map-input .btn-back {
 }
 
 .swal-button {
-  background-color: #af301b;
+  background-color: #e36b6b;
 }
 
 .swal-button:active {
-  background-color: #af301b;
+  background-color: #e36b6b;
 }
 
 @media (max-width: 500px) {

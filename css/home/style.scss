@@ -2,9 +2,10 @@ $gradientColor1: rgba(40, 40, 40, 0.9);
 $gradientColor2: rgba(40, 40, 40, 0.7);
 $gradientColor3: rgba(40, 40, 40, 0.6);
 $gradientColor4: rgba(40, 40, 40, 0);
-$purplishRed: rgb(175, 48, 27);
-$heartPink: rgb(233, 81, 81);
+$purplishRed: #e36b6b;
+$heartPink: #e95151;
 $gray: rgb(102, 102, 102);
+$word: rgb(40, 40, 40);
 @mixin clickEventInIOS {
   cursor: pointer;
 }
@@ -170,10 +171,10 @@ body {
     .word {
       padding: 5px 0;
       font-size: 1.2rem;
-      color: $gray;
+      color: $word;
     }
     .circle {
-      background-color: $purplishRed;
+      background-color: $heartPink;
       width: 4.5rem;
       height: 4.5rem;
       text-align: center;
