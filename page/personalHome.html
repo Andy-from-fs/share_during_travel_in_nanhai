@@ -171,15 +171,15 @@ $userinfo = mc_oauth_userinfo();
     function fixImagesHeight() {
       $('#share-content .images img,#avatar').height($('.images img').width());
     }
-    var getInfoApi="{php echo $this->createMobileUrl('other',array('otherdo'=>'get_info','rid'=>$rid));}";
-    var updateUserInfoApi="{php echo $this->createMobileUrl('other',array('otherdo'=>'add_info','rid'=>$rid));}";
-    var getMyselfShareApi="{php echo $this->createMobileUrl('other',array('otherdo'=>'get_share','rid'=>$rid,'myself'=>'1'));}";
-    var likeApi="{php echo $this->createMobileUrl('other',array('otherdo'=>'add_star','rid'=>$rid));}";
-    var delApi="{php echo $this->createMobileUrl('other',array('otherdo'=>'del_share','rid'=>$rid));}";
-    var checkLikeApi="{php echo $this->createMobileUrl('other',array('otherdo'=>'get_star_record','rid'=>$rid));}";
+    var getInfoApi = "{php echo $this->createMobileUrl('other',array('otherdo'=>'get_info','rid'=>$rid));}";
+    var updateUserInfoApi = "{php echo $this->createMobileUrl('other',array('otherdo'=>'add_info','rid'=>$rid));}";
+    var getMyselfShareApi =
+      "{php echo $this->createMobileUrl('other',array('otherdo'=>'get_share','rid'=>$rid,'myself'=>'1'));}";
+    var likeApi = "{php echo $this->createMobileUrl('other',array('otherdo'=>'add_star','rid'=>$rid));}";
+    var delApi = "{php echo $this->createMobileUrl('other',array('otherdo'=>'del_share','rid'=>$rid));}";
+    var checkLikeApi = "{php echo $this->createMobileUrl('other',array('otherdo'=>'get_star_record','rid'=>$rid));}";
   </script>
   <script src="https://cdn.bootcss.com/Swiper/4.0.7/js/swiper.js"></script>
-  <script src="https://cdn.bootcss.com/hammer-time/1.1.0/hammer-time.min.js"></script>
   <script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
   <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/util.js"></script>
   <script src="../addons/citygf/template/mobile/nhly/nanhai-yinji/js/loading.js"></script>
@@ -204,4 +204,7 @@ $userinfo = mc_oauth_userinfo();
       wx.onMenuShareTimeline(sharedata);
     });
   </script>
+
+  <script src="https://cdn.bootcss.com/hammer-time/1.1.0/hammer-time.min.js"></script>
+
   </html>
