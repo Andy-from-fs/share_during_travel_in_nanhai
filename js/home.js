@@ -1,8 +1,8 @@
-$(".region-bar .top").css("line-height", $(".region-bar").height() + "px");
-$(".region-bar .top .icon-user").css(
-  "line-height",
-  $(".region-bar").height() + "px"
-);
+// $(".region-bar .top").css("line-height", $(".region-bar").height() + "px");
+// $(".region-bar .top .icon-user").css(
+//   "line-height",
+//   $(".region-bar").height() + "px"
+// );
 $(".footer").height(
   $(".footer .rule span").height() + $(".footer .rule img").height() + "px"
 );

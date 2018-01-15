@@ -9,19 +9,19 @@ $gray: rgb(102, 102, 102);
   cursor: pointer;
 }
 
-#street{
+#street {
   display: none;
 }
 
 .show-list {
-  padding: 5px 10px 30px 10px;
+  padding: 10px 10px 30px 10px;
   .wrapper {
     // display: flex;
     // flex-flow: row nowrap;
     // justify-content: space-around;
     // align-items: flex-start;
   }
-  .situation{
+  .situation {
     text-align: center;
     font-size: 1.5rem;
     color: #666;
@@ -66,7 +66,7 @@ $gray: rgb(102, 102, 102);
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      .like{
+      .like {
         cursor: pointer;
       }
       .like-time {
@@ -92,12 +92,13 @@ $gray: rgb(102, 102, 102);
   width: 100%;
   top: 0;
   left: 0;
-  height: 7%;
+  height: 4rem;
   .top {
     height: 100%;
     background-color: $purplishRed;
-    color: #fff; // display: flex;
-    // flex-flow: row nowrap; // justify-content: center; // align-items: center;
+    font-size: 1.7rem;
+    line-height: 4rem;
+    color: #fff; // display: flex; // flex-flow: row nowrap; // justify-content: center; // align-items: center;
     text-align: center;
     position: relative;
     .icon-back {
@@ -113,6 +114,7 @@ $gray: rgb(102, 102, 102);
       line-height: 2.9rem;
       margin-right: 10px;
       color: white;
+      line-height: 4rem;
     }
   }
   .region-container {
@@ -126,8 +128,7 @@ $gray: rgb(102, 102, 102);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      align-content: space-around;
-      // height: 8rem;
+      align-content: space-around; // height: 8rem;
       .region-item {
         text-align: center;
         width: 21%;
@@ -144,7 +145,7 @@ $gray: rgb(102, 102, 102);
 body {
   padding-bottom: 6rem;
   // padding-top: 12rem;
-  padding-top: 14%;
+  padding-top: 4rem;
 }
 .footer {
   // height: 5rem;
@@ -186,7 +187,6 @@ body {
     }
   }
 }
-
 .select-on {
   color: $purplishRed;
   background-color: #fff;
@@ -361,18 +361,15 @@ body {
 .third {
   color: #24b8ee;
 }
-
 .icon-back,
 .icon-heart,
 .icon-user {
   @include clickEventInIOS;
 }
-
-.like-on{
-  color: $heartPink!important;
+.like-on {
+  color: $heartPink !important;
 }
-
-#register{
+#register {
   display: none;
   position: fixed;
   top: 0;
@@ -387,7 +384,7 @@ body {
     font-size: 2.5rem;
     padding: 10px;
     line-height: 3rem;
-    .icon-back{
+    .icon-back {
       font-size: 2rem;
       line-height: 3rem;
     }
@@ -445,7 +442,6 @@ body {
     }
   }
 }
-
 .error {
-  color: $heartPink!important;
+  color: $heartPink !important;
 }
