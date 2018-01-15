@@ -86,6 +86,8 @@ var formList = {
 //地图--选择地点
 (function() {
   function initMapSelector() {
+    var myIcon=new BMap.Icon('../addons/citygf/template/mobile/nhly/nanhai-yinji/img/personal-marker.png',new BMap.Size(16,20.25),{anchor:new BMap.Size(8,20.25)});
+    var siteIcon=new BMap.Icon('../addons/citygf/template/mobile/nhly/nanhai-yinji/img/site-marker.png',new BMap.Size(16,20.25),{anchor:new BMap.Size(8,20.25)});
     var map = new BMap.Map("map");
     var point = new BMap.Point(113.149756, 23.035399);
     map.centerAndZoom(point, 16);
@@ -102,7 +104,7 @@ var formList = {
     $.each(views, function(indexInArray, valueOfElement) {
       var lng = valueOfElement.lngLat.split(",")[0];
       var lat = valueOfElement.lngLat.split(",")[1];
-      markers[indexInArray] = new BMap.Marker(new BMap.Point(lng, lat));
+      markers[indexInArray] = new BMap.Marker(new BMap.Point(lng, lat),{icon:siteIcon});
       markers[indexInArray].addEventListener(
         "click",
         function(e) {
@@ -133,7 +135,7 @@ var formList = {
       function(r) {
         // console.log(r);
         if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-          var mk = new BMap.Marker(r.point);
+          var mk = new BMap.Marker(r.point,{icon:myIcon});
           map.addOverlay(mk);
           map.panTo(r.point);
           // swal(
