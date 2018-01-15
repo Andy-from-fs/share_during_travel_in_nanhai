@@ -90,6 +90,13 @@ var formList = {
     var point = new BMap.Point(113.149756, 23.035399);
     map.centerAndZoom(point, 16);
 
+    //设置范围
+    // var b = new BMap.Bounds(
+    //   new BMap.Point(112.573638, 23.580922),
+    //   new BMap.Point(113.37852, 22.735633)
+    // );
+    // BMapLib.AreaRestriction.setBounds(map, b);
+
     //覆盖物添加
     var markers = [];
     $.each(views, function(indexInArray, valueOfElement) {

@@ -102,6 +102,7 @@ button.btn-submit {
   color: #666;
   line-height: 2.1rem;
   border-top: 1px solid #999999;
+  cursor: pointer;
 }
 
 .location-wrapper .icon-location {
