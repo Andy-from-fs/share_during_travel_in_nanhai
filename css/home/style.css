@@ -41,7 +41,7 @@
 }
 
 .show-list .view .info .location {
-  font-size: 2rem;
+  font-size: 1.6rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -62,11 +62,11 @@
 }
 
 .show-list .view .info .like-time .like-num {
-  font-size: 1.65rem;
+  font-size: 1.4rem;
 }
 
 .show-list .view .info .like-time .icon-heart {
-  font-size: 1.9rem;
+  font-size: 1.6rem;
 }
 
 .region-bar {
