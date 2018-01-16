@@ -1,5 +1,5 @@
 // 点赞方法
-function clickLike(text) {
+function clickLike(text,callBack) {
   var id = $(this).attr("shareid");
   var el = $(this);
   if (!$.loading.isShow) {
@@ -24,6 +24,8 @@ function clickLike(text) {
           } else {
             $(el).disHasLike();
           }
+          if(typeof callBack==="function")
+            callBack.call(el);
         } else {
           swal({
             title: "点赞失败",

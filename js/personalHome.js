@@ -224,7 +224,7 @@ function getShareList() {
           html+='" shareid="' +
             valueOfElement.id +
             '"></span>\
-          <span class="icon-trashcan" shareid="' +
+          <span class="icon-trashcan btn" shareid="' +
             valueOfElement.id +
             '"></span>\
           </div>\

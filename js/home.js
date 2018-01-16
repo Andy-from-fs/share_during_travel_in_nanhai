@@ -310,7 +310,7 @@ function insertShare(response, wrapperSelector, shareList) {
 
     var timeObj = splitTimeStr(valueOfElement.createtime);
     var html =
-      '<div class="view" shareid="' +
+      '<div class="view btn" shareid="' +
       valueOfElement.id +
       '">\
          <img src="' +
@@ -326,7 +326,7 @@ function insertShare(response, wrapperSelector, shareList) {
       "-" +
       timeObj.day +
       '</div>\
-             <div class="like" shareid="' +
+             <div class="like btn" shareid="' +
       valueOfElement.id +
       '">\
                <span class="like-num">' +
@@ -341,16 +341,17 @@ function insertShare(response, wrapperSelector, shareList) {
     $(html).appendTo(wrapperSelector + " ." + wayClass);
   });
   $(wrapperSelector + " .like").on("click", function(e) {
-    clickLike.call(this, "font");
-    $(this)
-      .children(".like-num")
-      .html(
-        parseInt(
-          $(this)
-            .children(".like-num")
-            .html()
-        ) + 1
-      );
+    clickLike.call(this, "font", function() {
+      $(this)
+        .children(".like-num")
+        .html(
+          parseInt(
+            $(this)
+              .children(".like-num")
+              .html()
+          ) + 1
+        );
+    });
     e.preventDefault();
     e.stopPropagation();
   });
