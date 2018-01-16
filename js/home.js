@@ -214,7 +214,7 @@ var ruleSingle = function() {
     var html =
       '<div id="game-rule" class="animated slideInLeft">\
         <div class="btn-group">\
-          <span class="icon-back"></span>\
+          <span class="icon-back btn"></span>\
           <span>活动规则</span>\
         </div>\
         <div class="words">\

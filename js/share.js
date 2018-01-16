@@ -277,15 +277,15 @@ var formList = {
         <div id="map"></div>\
         <div class="btn-group">\
           <div class="region-select">\
-            <p>\
+            <p class="btn">\
               <span id="region-name">选择镇街</span>\
               <span class="icon-triangle-down"></span>\
             </p>\
           </div>\
           <input class="view-input" type="text" name="view-name">\
-          <div class="btn-selected"><span class="icon-plus"></span> </div>\
+          <div class="btn-selected btn"><span class="icon-plus"></span> </div>\
         </div>\
-        <div class="btn-back">\
+        <div class="btn-back btn">\
           <span class="icon-back"></span>\
         </div>\
       </section>',

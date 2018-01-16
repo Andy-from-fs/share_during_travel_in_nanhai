@@ -214,11 +214,11 @@ function getShareList() {
             html += '<div class="situlation">已审核</div>';
           }
           html +=
-            '</div><div class="images" shareid="' + valueOfElement.id + '">';
+            '</div><div class="images btn" shareid="' + valueOfElement.id + '">';
           $.each(imgUrlList, function(indexInArray, valueOfElement) {
             html += ' <img src="' + tomedia(imgUrlList[indexInArray]) + '">';
           });
-          html +='</div><div class="btn-group"><span class="icon-heart '
+          html +='</div><div class="btn-group"><span class="btn icon-heart '
           if(valueOfElement.status==="0")
             html +='hidden'
           html+='" shareid="' +

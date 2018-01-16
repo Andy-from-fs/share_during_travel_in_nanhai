@@ -214,7 +214,7 @@ function clickLike(text,callBack) {
     var html =
       ' <div id="detail" class="animated">\
         <div class="content">\
-        <div class="btn-back fadeIn animated">\
+        <div class="btn-back fadeIn animated btn">\
           <span class="icon-back"></span>\
         </div>\
         <div id="swiper" class="swiper-container slideInDown animated">\
@@ -225,16 +225,15 @@ function clickLike(text,callBack) {
         <div class="wrapper slideInUp animated">\
           <div class="avatar-name">\
             <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test-avatar.jpg" class="avatar">\
-            <span class="name">小明是一个常用的名字</span>\
+            <span class="name"></span>\
           </div>\
           <p class="location">\
             <span class="icon-location"></span>\
             <span></span>\
           </p>\
           <p class="content">\
-            本次新装的岗亭外观为了契合千灯湖的整体气质，使用了与千灯湖周边建筑相同的朱红色，让小巧的岗亭与千灯湖和谐地融合在一起。同时，为了使岗亭更加实用，在原来的结构基础上，把玻璃窗的位置换成开合式的铁盖。\
           </p>\
-          <p class="like _right" shareid="">\
+          <p class="like _right btn" shareid="">\
             <span class="icon-heart"></span>\
             <span>赞·</span>\
             <span class="like-num">218</span>\

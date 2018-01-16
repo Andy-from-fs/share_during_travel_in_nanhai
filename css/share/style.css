@@ -258,3 +258,11 @@ section.map-input .btn-back {
     width: calc(100% - 70px);
   }
 }
+
+.confirm {
+  cursor: pointer;
+}
+
+.cancel {
+  cursor: pointer;
+}
