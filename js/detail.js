@@ -26,7 +26,7 @@ function clickLike(text) {
           }
         } else {
           swal({
-            title: "点赞失败失败",
+            title: "点赞失败",
             text: response.msg,
             type: "error",
             confirmButtonColor: "#af301b"
@@ -78,6 +78,7 @@ function clickLike(text) {
       $("#detail .like").attr("shareid", data.id);
       $("#detail .name").html(data.username);
       $("#detail .avatar").attr("src", data.avatar);
+      $("#detail .like-num").html(data.star);
     } else {
       $.bigLoading.turn();
     }

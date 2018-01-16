@@ -3,7 +3,7 @@ $(".img-list .word").css("line-height", ($(window).width() - 30) * 0.3 + "px");
 
 function refreshList() {
   var list = [];
-  $("#picsList .images").each(function(index, element) {
+  $("#picsList .images").each(function (index, element) {
     list.push($(element).attr("data-url"));
   });
   return list;
@@ -15,7 +15,7 @@ var sortable = new Sortable(document.getElementById("picsList"), {
   // draggable: ".images",
   animation: 150,
   // Element dragging ended
-  onEnd: function(/**Event*/ evt) {
+  onEnd: function ( /**Event*/ evt) {
     // console.log(evt);
     formList.imgUrlList = refreshList();
   }
@@ -28,11 +28,11 @@ $("#fileupload").fileupload({
   url: uploadImgApi,
   autoUpload: true,
   dataType: "json",
-  add: function(e, data) {
+  add: function (e, data) {
     $.loading.on("上传中");
     data.submit();
   },
-  done: function(e, result) {
+  done: function (e, result) {
     // console.log(result);
     function imgLoaded() {
       // console.log("loading finish");
@@ -52,7 +52,7 @@ $("#fileupload").fileupload({
       // console.log(formList.imgUrlList.length);
       if (formList.imgUrlList.length >= 2) {
         $(btnAdd).fadeOut();
-        setTimeout(function() {
+        setTimeout(function () {
           $(newImg)
             .insertAfter(btnAdd)
             .on("click", gallery.turn)
@@ -84,10 +84,14 @@ var formList = {
   view: ""
 };
 //地图--选择地点
-(function() {
+(function () {
   function initMapSelector() {
-    var myIcon=new BMap.Icon('../addons/citygf/template/mobile/nhly/nanhai-yinji/img/personal-marker.png',new BMap.Size(16,20.25),{anchor:new BMap.Size(8,20.25)});
-    var siteIcon=new BMap.Icon('../addons/citygf/template/mobile/nhly/nanhai-yinji/img/site-marker.png',new BMap.Size(16,20.25),{anchor:new BMap.Size(8,20.25)});
+    var myIcon = new BMap.Icon('../addons/citygf/template/mobile/nhly/nanhai-yinji/img/personal-marker.png', new BMap.Size(16, 20.25), {
+      anchor: new BMap.Size(8, 20.25)
+    });
+    var siteIcon = new BMap.Icon('../addons/citygf/template/mobile/nhly/nanhai-yinji/img/site-marker.png', new BMap.Size(16, 20.25), {
+      anchor: new BMap.Size(8, 20.25)
+    });
     var map = new BMap.Map("map");
     var point = new BMap.Point(113.149756, 23.035399);
     map.centerAndZoom(point, 16);
@@ -101,13 +105,15 @@ var formList = {
 
     //覆盖物添加
     var markers = [];
-    $.each(views, function(indexInArray, valueOfElement) {
+    $.each(views, function (indexInArray, valueOfElement) {
       var lng = valueOfElement.lngLat.split(",")[0];
       var lat = valueOfElement.lngLat.split(",")[1];
-      markers[indexInArray] = new BMap.Marker(new BMap.Point(lng, lat),{icon:siteIcon});
+      markers[indexInArray] = new BMap.Marker(new BMap.Point(lng, lat), {
+        icon: siteIcon
+      });
       markers[indexInArray].addEventListener(
         "click",
-        function(e) {
+        function (e) {
           // console.log(e);
           map.centerAndZoom(e.currentTarget.point, 17);
           mapSelector
@@ -132,10 +138,12 @@ var formList = {
 
     var geolocation = new BMap.Geolocation();
     geolocation.getCurrentPosition(
-      function(r) {
+      function (r) {
         // console.log(r);
         if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-          var mk = new BMap.Marker(r.point,{icon:myIcon});
+          var mk = new BMap.Marker(r.point, {
+            icon: myIcon
+          });
           map.addOverlay(mk);
           map.panTo(r.point);
           // swal(
@@ -159,13 +167,14 @@ var formList = {
           //BMAP_STATUS_SERVICE_UNAVAILABLE	服务不可用。对应数值“7”。(自 1.1 新增)
           //BMAP_STATUS_TIMEOUT	超时。对应数值“8”。(自 1.1 新增)
         }
-      },
-      { enableHighAccuracy: true }
+      }, {
+        enableHighAccuracy: true
+      }
     );
 
     map.addEventListener(
       "touchstart",
-      function() {
+      function () {
         if ($(".map-input .view-input").is(":focus")) {
           $(".map-input .view-input").trigger("blur");
         }
@@ -174,8 +183,7 @@ var formList = {
     );
 
     //选择镇街框
-    var region = [
-      {
+    var region = [{
         text: "桂城",
         value: "桂城"
       },
@@ -210,7 +218,7 @@ var formList = {
       title: "选择镇街"
     });
 
-    picker.on("picker.select", function(selectedVal, selectedIndex) {
+    picker.on("picker.select", function (selectedVal, selectedIndex) {
       var selectedRegion = selectedVal[0];
       $("#region-name").html(selectedRegion);
     });
@@ -219,14 +227,14 @@ var formList = {
       .on("click", ".map-input .btn-selected", mapSelector.getData)
       .on("click", ".map-input .btn-selected", mapSelector.setDataToView)
       .on("click", ".map-input .btn-selected", mapSelector.turn)
-      .on("click", "section.map-input .region-select", function() {
+      .on("click", "section.map-input .region-select", function () {
         picker.show();
       });
   }
 
   var mapSelector = {
     isShow: false,
-    turn: function() {
+    turn: function () {
       var element = createMapSelector();
       if (!mapSelector.isShow) {
         //show
@@ -235,7 +243,7 @@ var formList = {
       } else {
         //hide
         $(element).addClass("slideOutLeft");
-        setTimeout(function() {
+        setTimeout(function () {
           $(element)
             .removeClass("slideOutLeft")
             .css("display", "none");
@@ -243,19 +251,19 @@ var formList = {
         mapSelector.isShow = false;
       }
     },
-    insertData: function(region, view) {
+    insertData: function (region, view) {
       formList.region = region;
       formList.view = view;
       return mapSelector;
     },
-    getData: function() {
+    getData: function () {
       mapSelector.insertData(
         $("#region-name").html(),
         $('input[name="view-name"]').val()
       );
       // console.log(formList);
     },
-    setDataToView: function() {
+    setDataToView: function () {
       $('.location-wrapper span:not(".icon-location")')
         .html(formList.region + " " + formList.view)
         .css("color", "rgb(40,40,40)");
@@ -263,9 +271,9 @@ var formList = {
     }
   };
 
-  var createMapSelector = $.singleton(function() {
+  var createMapSelector = $.singleton(function () {
     var html =
-        '<section class="map-input slideInLeft animated">\
+      '<section class="map-input slideInLeft animated">\
         <div id="map"></div>\
         <div class="btn-group">\
           <div class="region-select">\
@@ -294,7 +302,7 @@ var formList = {
 var gallery = {
   isShow: false,
   url: "",
-  turn: function() {
+  turn: function () {
     var element = createGallery(),
       url = $(this).attr("data-url");
     gallery.url = url;
@@ -308,7 +316,7 @@ var gallery = {
     } else {
       //hide
       $(element).addClass("fadeOut");
-      setTimeout(function() {
+      setTimeout(function () {
         $(element)
           .removeClass("fadeOut")
           .css("display", "none");
@@ -317,7 +325,7 @@ var gallery = {
     }
   }
 };
-var createGallery = $.singleton(function() {
+var createGallery = $.singleton(function () {
   var html =
     '<div class="gallery fadeIn animated" id="gallery">\
     <img src="../addons/citygf/template/mobile/nhly/nanhai-yinji/img/test2.jpg" width="100%" height="100%" class="zoomIn animated">\
@@ -326,6 +334,7 @@ var createGallery = $.singleton(function() {
     </div>\
   </div>';
   var element = $(html).appendTo("body");
+
   function delImg() {
     // console.log(formList.imgUrlList.length);
     if (formList.imgUrlList.length === 3) {
@@ -335,7 +344,7 @@ var createGallery = $.singleton(function() {
     } else {
       $("#picsList li.images").remove("[data-url='" + gallery.url + "']");
       formList.imgUrlList.splice(
-        formList.imgUrlList.findIndex(function(val) {
+        formList.imgUrlList.findIndex(function (val) {
           return val === gallery.url;
         }),
         1
@@ -358,10 +367,10 @@ function submit() {
     $.ajax({
       type: "post",
       url: addShareApi,
-      beforeSend: function(XHR) {
+      beforeSend: function (XHR) {
         $.loading.turn("正在努力投稿中", true);
       },
-      complete: function(XMLHttpRequest, textStatus) {
+      complete: function (XMLHttpRequest, textStatus) {
         $.loading.turn();
       },
       data: {
@@ -371,11 +380,10 @@ function submit() {
         street: formList.region
       },
       dataType: "json",
-      success: function(response) {
+      success: function (response) {
         console.log(response);
         if (response.msg === "添加成功") {
-          swal(
-            {
+          swal({
               title: "分享成功",
               text: "2秒后自动跳转至个人主页。",
               timer: 2000,
@@ -384,7 +392,7 @@ function submit() {
               cancelButtonText: "留在本页",
               type: "success"
             },
-            function() {
+            function () {
               window.location.href = userHerf;
             }
           );
