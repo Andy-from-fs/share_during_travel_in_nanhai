@@ -1,5 +1,5 @@
 // 点赞方法
-function clickLike(text,callBack) {
+function clickLike(text, callBack) {
   var id = $(this).attr("shareid");
   var el = $(this);
   if (!$.loading.isShow) {
@@ -24,8 +24,7 @@ function clickLike(text,callBack) {
           } else {
             $(el).disHasLike();
           }
-          if(typeof callBack==="function")
-            callBack.call(el);
+          if (typeof callBack === "function") callBack.call(el);
         } else {
           swal({
             title: "点赞失败",
@@ -37,6 +36,12 @@ function clickLike(text,callBack) {
       }
     });
   }
+}
+
+function clickLikeInDetail() {
+  clickLike.call(this,null, function() {
+    $("#detail .like-num").html(parseInt($("#detail .like-num").html()) + 1);
+  });
 }
 
 // 细览页
@@ -64,10 +69,8 @@ function clickLike(text,callBack) {
         sum++;
       });
       $.each(likeList, function(indexInArray, valueOfElement) {
-        if (valueOfElement === data.id) {
-          $("#detail .like").disHasLike("font");
-          // break;
-        }
+        if (valueOfElement === data.id) $("#detail .like").disHasLike("font");
+        else $("#detail .like").withoutLike("font", clickLikeInDetail);
       });
       setTimeout(function() {
         check_img_has_loaded("#swiper img", swiper_init_or_updata);
@@ -236,7 +239,7 @@ function clickLike(text,callBack) {
           <p class="like _right btn" shareid="">\
             <span class="icon-heart"></span>\
             <span>赞·</span>\
-            <span class="like-num">218</span>\
+            <span class="like-num">0</span>\
           </p>\
           <div class="clear"></div>\
         </div>\
@@ -244,7 +247,7 @@ function clickLike(text,callBack) {
     </div>';
     var element = $(html).appendTo("body");
     $("body").on("click", "#detail .btn-back", detail.turn);
-    $("#detail .like").on("click", clickLike);
+    $("#detail .like").on("click", clickLikeInDetail);
     $("#detail").preventVerticalDraft();
     return element;
   });

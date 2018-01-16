@@ -31,6 +31,16 @@
       }
       return $(this);
     },
+    //恢复未点赞
+    withoutLike: function(text, onclick) {
+      $(this)
+        .removeClass("has-like like-on")
+        .on("click", onclick);
+      if (text === "font") {
+        $(this).addClass("has-like");
+      }
+      return $(this);
+    },
     //屏蔽上下滑动节点上下滑动事件
     preventVerticalDraft: function() {
       $(this).on("touchstart", function() {
